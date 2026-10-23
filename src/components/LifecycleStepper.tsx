@@ -147,7 +147,7 @@ export function LifecycleStepper() {
         </div>
 
         {/* Interactive Stepper Navigation Bar: 6 stages */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 border-b border-neutral-300 pb-4">
+        <div className="mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 border-b border-neutral-300 pb-4">
           {stages.map((stage, idx) => {
             const Icon = stage.icon;
             const isActive = activeStageIndex === idx;
@@ -157,15 +157,15 @@ export function LifecycleStepper() {
                 key={stage.id}
                 type="button"
                 onClick={() => setActiveStageIndex(idx)}
-                className={`flex flex-col items-start p-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 ${
+                className={`flex flex-col items-start p-2.5 sm:p-3 text-left transition-all duration-200 cursor-pointer rounded-lg lg:rounded-none border-2 lg:border-0 lg:border-b-2 ${
                   isActive
-                    ? "border-primary bg-white shadow-xs -mb-[18px] pb-[16px]"
-                    : "border-transparent hover:bg-neutral-100/80 text-neutral-600"
+                    ? "border-primary bg-white shadow-xs lg:-mb-[18px] lg:pb-[16px]"
+                    : "border-transparent bg-neutral-100/60 lg:bg-transparent hover:bg-neutral-100 text-neutral-600"
                 }`}
               >
                 <div className="flex items-center gap-1.5 mb-1">
                   <Icon
-                    size={15}
+                    size={14}
                     className={isActive ? "text-primary" : "text-neutral-400"}
                   />
                   <span
@@ -176,7 +176,7 @@ export function LifecycleStepper() {
                     {stage.name}
                   </span>
                 </div>
-                <span className="text-[11px] font-medium truncate w-full text-neutral-500">
+                <span className="text-[10px] sm:text-[11px] font-medium truncate w-full text-neutral-500">
                   {stage.badge}
                 </span>
               </button>
@@ -185,7 +185,7 @@ export function LifecycleStepper() {
         </div>
 
         {/* Active Stage Interactive Showcase */}
-        <div className="mt-8 grid gap-8 lg:grid-cols-12 items-center bg-white border border-neutral-200 p-6 md:p-10 shadow-sm">
+        <div className="mt-6 sm:mt-8 grid gap-6 lg:gap-8 lg:grid-cols-12 items-center bg-white border border-neutral-200 p-4 sm:p-6 md:p-10 shadow-sm">
           {/* Left Column: Capability details */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div>

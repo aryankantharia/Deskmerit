@@ -125,7 +125,7 @@ export function EcosystemSection() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex items-center justify-start gap-2 sm:gap-2.5 shrink-0 mt-2 sm:mt-0">
             {/* WCAG 2.2.2 Pause/Play Button for auto-moving content */}
             <button
               type="button"

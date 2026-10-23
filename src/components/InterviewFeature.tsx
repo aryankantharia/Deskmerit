@@ -65,10 +65,10 @@ export function InterviewFeature() {
           </dl>
 
           {/* Single CTA linking to detail page as requested */}
-          <div className="mt-8">
+          <div className="mt-7 sm:mt-8">
             <Link
               to="/platform/ai-live-interview"
-              className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-xs sm:text-sm font-semibold text-ai transition-all duration-150 hover:bg-neutral-100 shadow-md hover:scale-105 cursor-pointer"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-6 text-xs sm:text-sm font-semibold text-ai transition-all duration-150 hover:bg-neutral-100 shadow-md hover:scale-105 cursor-pointer w-full sm:w-auto"
             >
               <SparklesIcon size={16} strokeWidth={2} className="text-teal-600" aria-hidden="true" />
               <span>Explore AI interview</span>
@@ -78,7 +78,7 @@ export function InterviewFeature() {
         </div>
 
         {/* Right Column: High-fidelity Authentic AI Interview Tool Mockup with Mode Switcher */}
-        <div className="lg:col-span-7 flex flex-col items-center justify-center">
+        <div className="lg:col-span-7 flex flex-col items-center justify-center w-full mt-6 lg:mt-0">
           {/* Mode Switcher Tabs */}
           <div className="w-full flex items-center justify-between gap-2 mb-3 px-1">
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
