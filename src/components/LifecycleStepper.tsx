@@ -147,7 +147,10 @@ export function LifecycleStepper() {
         </div>
 
         {/* Interactive Stepper Navigation Bar: 6 stages (identical styling across all screens) */}
-        <div className="mt-10 flex overflow-x-auto lg:grid lg:grid-cols-6 gap-2 border-b border-neutral-300 pb-4 no-scrollbar">
+        <div
+          className="mt-10 flex overflow-x-auto lg:grid lg:grid-cols-6 gap-2.5 border-b border-neutral-300 pb-4 no-scrollbar"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           {stages.map((stage, idx) => {
             const Icon = stage.icon;
             const isActive = activeStageIndex === idx;
@@ -157,26 +160,27 @@ export function LifecycleStepper() {
                 key={stage.id}
                 type="button"
                 onClick={() => setActiveStageIndex(idx)}
-                className={`flex flex-col items-start p-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 shrink-0 min-w-[130px] lg:min-w-0 ${
+                className={`flex flex-col items-start px-3.5 py-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 shrink-0 min-w-[145px] lg:min-w-0 ${
                   isActive
                     ? "border-primary bg-white shadow-xs -mb-[18px] pb-[16px]"
                     : "border-transparent hover:bg-neutral-100/80 text-neutral-600"
                 }`}
               >
-                <div className="flex items-center gap-1.5 mb-1">
+                <div className="flex items-center gap-2 mb-1.5">
                   <Icon
-                    size={15}
-                    className={isActive ? "text-primary" : "text-neutral-400"}
+                    size={18}
+                    strokeWidth={isActive ? 2.2 : 2}
+                    className={isActive ? "text-primary" : "text-neutral-500"}
                   />
                   <span
-                    className={`text-xs font-bold ${
-                      isActive ? "text-primary" : "text-neutral-800"
+                    className={`text-sm font-bold ${
+                      isActive ? "text-primary" : "text-neutral-900"
                     }`}
                   >
                     {stage.name}
                   </span>
                 </div>
-                <span className="text-[11px] font-medium truncate w-full text-neutral-500">
+                <span className="text-xs font-medium truncate w-full text-neutral-500">
                   {stage.badge}
                 </span>
               </button>
