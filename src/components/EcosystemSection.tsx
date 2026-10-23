@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ChevronLeftIcon,
-  ChevronRightIcon,
-  PauseIcon,
-  PlayIcon
+  ChevronRightIcon
 } from "lucide-react";
 import { industries } from "../data/home";
 import {
@@ -52,7 +50,6 @@ const partners: PartnerItem[] = [
 export function EcosystemSection() {
   const [tab, setTab] = useState<SolutionTabId>("industry");
   const [isHovered, setIsHovered] = useState(false);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1440
   );
@@ -97,14 +94,14 @@ export function EcosystemSection() {
     });
   };
 
-  // Continuous auto-scroll when not hovered and not paused (WCAG 2.2.2)
+  // Continuous auto-scroll when not hovered
   useEffect(() => {
-    if (isHovered || isCarouselPaused) return;
+    if (isHovered) return;
     const timer = setInterval(() => {
       scrollOneCard(1);
     }, 3800);
     return () => clearInterval(timer);
-  }, [isHovered, isCarouselPaused, rawItems.length]);
+  }, [isHovered, rawItems.length]);
 
   useEffect(() => {
     setCurrentIndex(rawItems.length);
@@ -125,18 +122,7 @@ export function EcosystemSection() {
             </p>
           </div>
 
-          <div className="flex items-center justify-start gap-2 sm:gap-2.5 shrink-0 mt-2 sm:mt-0">
-            {/* WCAG 2.2.2 Pause/Play Button for auto-moving content */}
-            <button
-              type="button"
-              onClick={() => setIsCarouselPaused((prev) => !prev)}
-              aria-label={isCarouselPaused ? "Resume auto-scroll" : "Pause auto-scroll"}
-              title={isCarouselPaused ? "Resume auto-scroll" : "Pause auto-scroll"}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-xs hover:border-primary hover:text-primary transition-colors cursor-pointer"
-            >
-              {isCarouselPaused ? <PlayIcon size={14} /> : <PauseIcon size={14} />}
-            </button>
-
+          <div className="flex items-center gap-2.5 shrink-0">
             <button
               type="button"
               onClick={() => scrollOneCard(-1)}

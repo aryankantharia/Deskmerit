@@ -65,10 +65,10 @@ export function InterviewFeature() {
           </dl>
 
           {/* Single CTA linking to detail page as requested */}
-          <div className="mt-7 sm:mt-8">
+          <div className="mt-8">
             <Link
               to="/platform/ai-live-interview"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-6 text-xs sm:text-sm font-semibold text-ai transition-all duration-150 hover:bg-neutral-100 shadow-md hover:scale-105 cursor-pointer w-full sm:w-auto"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-xs sm:text-sm font-semibold text-ai transition-all duration-150 hover:bg-neutral-100 shadow-md hover:scale-105 cursor-pointer"
             >
               <SparklesIcon size={16} strokeWidth={2} className="text-teal-600" aria-hidden="true" />
               <span>Explore AI interview</span>
