@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles, Calendar, FileCheck2 } from "lucide-react";
 export function Hero() {
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#022329] text-white border-b border-teal-900/60 flex flex-col justify-center pt-[72px] pb-12 sm:pt-[80px] sm:pb-16 lg:py-0 lg:pt-[68px] lg:h-[calc(100vh-68px)] lg:max-h-[740px] lg:min-h-[580px]"
+      className="relative isolate overflow-hidden bg-[#022329] text-white border-b border-teal-900/60 flex flex-col justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 lg:py-0 lg:pt-[68px] lg:h-[calc(100vh-68px)] lg:max-h-[740px] lg:min-h-[580px]"
       aria-labelledby="hero-title"
       style={{
         backgroundImage: "url('/hero-bg.png')",
