@@ -338,14 +338,14 @@ export function Header() {
             transition={{ duration: 0.18 }}
             className="w-full border-b border-neutral-200 bg-white p-6 shadow-2xl xl:hidden max-h-[calc(100vh-68px)] overflow-y-auto text-neutral-900"
           >
-            {/* Top Mobile Secondary Actions */}
+            {/* Top Mobile Actions */}
             <div className="pb-4 mb-4 border-b border-neutral-200 flex items-center justify-between gap-3">
               <a
-                href="/contact"
+                href="/signup"
                 onClick={() => setMobileOpen(false)}
                 className="flex-1 inline-flex h-9 items-center justify-center rounded-full border border-neutral-300 text-neutral-800 hover:bg-neutral-50 text-xs font-semibold"
               >
-                Book a demo
+                Start free trial
               </a>
               <a
                 href="https://app.sqalible.com"
@@ -432,17 +432,6 @@ export function Header() {
                   </div>
                 )
               )}
-
-              {/* Bottom Drawer Primary CTA */}
-              <div className="pt-4 border-t border-neutral-200 space-y-2">
-                <a
-                  href="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex h-11 w-full items-center justify-center rounded-full bg-primary font-semibold text-white shadow-md text-sm hover:bg-teal-700"
-                >
-                  Book a demo
-                </a>
-              </div>
             </div>
           </motion.div>
         )}
