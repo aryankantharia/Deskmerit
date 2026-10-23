@@ -291,13 +291,13 @@ export function Header() {
           </a>
         </div>
 
-        {/* Mobile Header Bar: Keep ONLY primary CTA + Hamburger Menu button */}
+        {/* Mobile Header Bar: CTA + Hamburger Menu button */}
         <div className="flex items-center gap-2 xl:hidden shrink-0">
           <a
-            href="/signup"
+            href="/contact"
             className="inline-flex h-8 items-center justify-center whitespace-nowrap rounded-full bg-primary hover:bg-teal-700 px-3.5 text-xs font-semibold text-white shadow-xs transition-colors"
           >
-            Start free trial
+            Book a demo
           </a>
 
           <button
@@ -360,34 +360,35 @@ export function Header() {
             </div>
 
             {/* Navigation Accordion */}
-            <div className="space-y-4">
+            <div className="space-y-1">
               {navItems.map((item) =>
                 item.type === "link" ? (
-                  <a
-                    key={item.key}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block rounded-none px-3 py-2 text-body1 font-semibold text-neutral-800 hover:bg-neutral-100 hover:text-primary"
-                  >
-                    {item.title}
-                  </a>
-                ) : (
-                  <div key={item.key} className="border-b border-neutral-200 pb-3">
+                  <div key={item.key} className="border-b border-neutral-200 pb-3 pt-1">
                     <div className="flex w-full items-center justify-between py-2">
-                      {/* Direct clickable link to overview */}
+                      <a
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="text-body1 font-bold text-neutral-900 hover:text-primary flex items-center"
+                      >
+                        <span>{item.title}</span>
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <div key={item.key} className="border-b border-neutral-200 pb-3 pt-1">
+                    <div className="flex w-full items-center justify-between py-2">
                       <a
                         href={item.href || "#"}
                         onClick={() => setMobileOpen(false)}
-                        className="text-body1 font-bold text-neutral-900 hover:text-primary flex items-center gap-1.5"
+                        className="text-body1 font-bold text-neutral-900 hover:text-primary flex items-center"
                       >
                         <span>{item.name}</span>
-                        <span className="text-xs text-neutral-400 font-normal">Overview ›</span>
                       </a>
                       <button
                         type="button"
                         aria-label={`Toggle ${item.name} submenus`}
                         onClick={() => setMobileSection(mobileSection === item.key ? null : item.key)}
-                        className="p-1 text-neutral-500 hover:text-neutral-900"
+                        className="p-1 text-neutral-500 hover:text-neutral-900 cursor-pointer"
                       >
                         <ChevronDownIcon
                           size={18}
@@ -435,11 +436,11 @@ export function Header() {
               {/* Bottom Drawer Primary CTA */}
               <div className="pt-4 border-t border-neutral-200 space-y-2">
                 <a
-                  href="/signup"
+                  href="/contact"
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 w-full items-center justify-center rounded-full bg-primary font-semibold text-white shadow-md text-sm hover:bg-teal-700"
                 >
-                  Start free trial
+                  Book a demo
                 </a>
               </div>
             </div>

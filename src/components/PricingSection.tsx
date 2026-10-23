@@ -20,8 +20,25 @@ import {
   PlanCell
 } from "../data/pricing";
 
+function getAutoCurrency(): CurrencyCode {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    if (tz.includes("Calcutta") || tz.includes("Kolkata") || tz.includes("India")) return "INR";
+    if (tz.includes("Dubai") || tz.includes("Muscat") || tz.includes("Abu_Dhabi") || tz.includes("UAE") || tz.includes("Asia/Dubai")) return "AED";
+    if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane") || tz.includes("Perth") || tz.includes("Australia")) return "AUD";
+
+    const locale = typeof navigator !== "undefined" ? navigator.language : "";
+    if (locale.endsWith("-IN") || locale === "hi" || locale.includes("en-IN")) return "INR";
+    if (locale.endsWith("-AE") || locale.includes("ar-AE")) return "AED";
+    if (locale.endsWith("-AU") || locale.includes("en-AU")) return "AUD";
+  } catch {
+    // fallback
+  }
+  return "USD";
+}
+
 export function PricingSection() {
-  const [currencyCode, setCurrencyCode] = useState<CurrencyCode>("INR");
+  const [currencyCode] = useState<CurrencyCode>(getAutoCurrency);
   const [billingCycle, setBillingCycle] = useState<"annual" | "monthly">("annual");
   const [interviewsCount, setInterviewsCount] = useState<number>(40);
   const [mobilePlan, setMobilePlan] = useState<"starter" | "growth" | "enterprise">("growth");
@@ -69,7 +86,7 @@ export function PricingSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         
         {/* ========================================================= */}
-        {/* TOP CONTROLS: Currency Switcher & Billing Cycle Toggle   */}
+        {/* TOP CONTROLS: Billing Cycle Toggle (Currency Auto-Adapts) */}
         {/* ========================================================= */}
         <div className="flex flex-col items-center justify-center text-center mb-10">
           <p className="pretitle text-primary">Transparent Pricing</p>
@@ -80,37 +97,13 @@ export function PricingSection() {
             Start on pooled cloud hosting, or deploy dedicated regional infrastructure. Pay for AI interview and voice screening sessions only as you need them.
           </p>
 
-          {/* Controls Bar */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6 bg-white p-2 sm:p-2.5 rounded-full border border-neutral-300 shadow-xs">
-            {/* Currency Switcher */}
-            <div className="flex items-center rounded-full bg-neutral-100 p-1">
-              {(Object.keys(currencies) as CurrencyCode[]).map((code) => {
-                const isSelected = currencyCode === code;
-                return (
-                  <button
-                    key={code}
-                    type="button"
-                    onClick={() => setCurrencyCode(code)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
-                      isSelected
-                        ? "bg-neutral-900 text-white shadow-xs"
-                        : "text-neutral-600 hover:text-neutral-900"
-                    }`}
-                  >
-                    {currencies[code].name}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="hidden sm:block h-6 w-px bg-neutral-200" />
-
-            {/* Monthly / Annual Toggle */}
+          {/* Controls Bar: Monthly / Annual Toggle */}
+          <div className="mt-8 flex items-center justify-center bg-white p-1.5 rounded-full border border-neutral-300 shadow-xs">
             <div className="flex items-center rounded-full bg-neutral-100 p-1">
               <button
                 type="button"
                 onClick={() => setBillingCycle("monthly")}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   !isAnnual
                     ? "bg-neutral-900 text-white shadow-xs"
                     : "text-neutral-600 hover:text-neutral-900"
