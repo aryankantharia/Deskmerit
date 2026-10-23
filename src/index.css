@@ -1,0 +1,91 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/uQh9sQ8Ys5ACizY36bKKb4/Chillax-Extralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/16UvC8nnX7oufqLpdW48fq/Chillax-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/3fDvUPppNTQGhxsTS2pvc6/Chillax-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/jpWecLW4VQwhTyCtMEXzGn/Chillax-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/jCEEJyyS12DepErogkJSva/Chillax-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chillax';
+  src: url('https://cdn.magicpatterns.com/uploads/2HUWwZvt95bwXL6N27Dbi8/Chillax-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* Pre-titles: the short green label above section headings */
+.pretitle {
+  font-family: 'Chillax', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+body {
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  color: #17202A;
+  background: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee {
+    animation: none;
+  }
+}
