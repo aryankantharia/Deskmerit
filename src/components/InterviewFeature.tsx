@@ -1,232 +1,44 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRightIcon,
-  MicIcon,
-  ShieldCheckIcon,
-  SparklesIcon,
-  CheckCircle2Icon,
-  PlayIcon,
-  PauseIcon,
-  RotateCcwIcon,
-  InfoIcon
+  VideoIcon,
+  Code2Icon,
+  FileCheck2Icon,
+  SparklesIcon
 } from "lucide-react";
-import { Badge } from "./Badge";
 import { interviewPoints } from "../data/home";
-import { AiInterviewModal } from "./AiInterviewModal";
 
-const interviewSimulations = [
+const interviewScreens = [
   {
-    candidateName: "Ananya Rao",
-    role: "Senior Backend Engineer · Round 1",
-    avatar: "/54a9838b-f0a5-40b4-bbb2-937eca44d3cf.jpg",
-    questions: [
-      {
-        id: "q1",
-        label: "Architecture Boundary",
-        shortLabel: "Q1: Architecture",
-        ai: "You mentioned migrating a monolith to services at Finlytics. How did you decide where to draw the first boundary?",
-        candidate: "We started strictly with payments, because it had the clearest data ownership and the highest deployment pain.",
-        rubric: "System design · 94% Strong",
-        rubricDetail: "Candidate demonstrated clear domain-driven design separation with isolated transactional data models.",
-        scoreTone: "success" as const
-      },
-      {
-        id: "q2",
-        label: "Cache Stampede",
-        shortLabel: "Q2: Cache Spikes",
-        ai: "How did you prevent cache stampedes across Redis during sudden flash-sale traffic spikes?",
-        candidate: "We used probabilistic early expiration with jitter and a distributed mutex so only one worker rebuilds the cache.",
-        rubric: "Cache Resilience · 92% Strong",
-        rubricDetail: "Deep understanding of cache mutation concurrency and thundering herd mitigations.",
-        scoreTone: "success" as const
-      }
-    ]
+    id: "video",
+    label: "Live Video Interview",
+    icon: VideoIcon,
+    image: "/images/ai-interview/ai-interview-video.png",
+    alt: "Sqalible AI Live Video Interview Session with Alex Vance AI Interviewer",
+    caption: "Real-time speech transcription & conversational probing"
   },
   {
-    candidateName: "Devansh Mehta",
-    role: "Fullstack Tech Lead · Round 1",
-    avatar: "/37860f0f-0b35-4f47-9b72-3dd8f24f5c63.jpg",
-    questions: [
-      {
-        id: "q1",
-        label: "State Hydration",
-        shortLabel: "Q1: SSR Hydration",
-        ai: "How do you manage client-side state hydration in high-traffic portals while keeping LCP under 1.2s?",
-        candidate: "We use partial component hydration and streaming SSR, isolating interactive islands to avoid blocking the main thread.",
-        rubric: "Frontend Core · 93% Strong",
-        rubricDetail: "Excellent articulation of progressive hydration boundaries and core web vital optimization.",
-        scoreTone: "success" as const
-      },
-      {
-        id: "q2",
-        label: "Type Safety",
-        shortLabel: "Q2: Runtime Zod",
-        ai: "How do you enforce runtime type safety between microservices and client hooks?",
-        candidate: "We generate schemas with Zod validation at the network boundary, catching invalid payloads before rendering.",
-        rubric: "API Boundary · 90% Validated",
-        rubricDetail: "Strict schema inference safeguards end-to-end data integrity across network transitions.",
-        scoreTone: "success" as const
-      }
-    ]
+    id: "coding",
+    label: "Coding Assessment",
+    icon: Code2Icon,
+    image: "/images/ai-interview/ai-interview-coding.png",
+    alt: "Sqalible AI Technical Assessment & In-Browser Python Coding Environment",
+    caption: "Interactive problem solving, test runner & code evaluation"
+  },
+  {
+    id: "feedback",
+    label: "Screening Feedback",
+    icon: FileCheck2Icon,
+    image: "/images/ai-interview/ai-interview-feedback.png",
+    alt: "Sqalible AI Technical Screen Feedback Scorecard & Category Scores",
+    caption: "Objective rubrics, score gauges & actionable hiring signals"
   }
 ];
 
 export function InterviewFeature() {
-  const [candidateIndex, setCandidateIndex] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [activeSpeaker, setActiveSpeaker] = useState<"ai" | "candidate">("ai");
-  const [isApproved, setIsApproved] = useState(false);
-  const [showRubricInfo, setShowRubricInfo] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Live typewriter animation state
-  const [typedAi, setTypedAi] = useState("");
-  const [typedCandidate, setTypedCandidate] = useState("");
-  const [animationPhase, setAnimationPhase] = useState<"question" | "answer" | "evaluating" | "done">("question");
-  const [replayKey, setReplayKey] = useState(0);
-
-  const conversationRef = useRef<HTMLDivElement>(null);
-
-  // Smooth auto-scroll for conversation area as dialogue streams in
-  useEffect(() => {
-    if (conversationRef.current) {
-      conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
-    }
-  }, [typedAi, typedCandidate, animationPhase]);
-
-  const current = interviewSimulations[candidateIndex];
-  const q = current.questions[questionIndex];
-
-  // Sequence the live animated typing: Question types out -> Answer appears -> Rubric updates -> Auto-replays
-  useEffect(() => {
-    let isCancelled = false;
-    let aiInterval: NodeJS.Timeout;
-    let candInterval: NodeJS.Timeout;
-    let timer1: NodeJS.Timeout;
-    let timer2: NodeJS.Timeout;
-    let timer3: NodeJS.Timeout;
-    let autoReplayTimer: NodeJS.Timeout;
-
-    // Reset fields for new animation run
-    setTypedAi("");
-    setTypedCandidate("");
-    setAnimationPhase("question");
-    setActiveSpeaker("ai");
-
-    const fullQuestion = q.ai;
-    const fullCandidate = q.candidate;
-
-    let aiIndex = 0;
-    // Step 1: Type AI Question
-    aiInterval = setInterval(() => {
-      if (isCancelled) return;
-      if (aiIndex < fullQuestion.length) {
-        aiIndex += 1;
-        setTypedAi(fullQuestion.slice(0, aiIndex));
-      } else {
-        clearInterval(aiInterval);
-        if (isCancelled) return;
-
-        // Step 2: Brief pause, switch speaker to Candidate
-        timer1 = setTimeout(() => {
-          if (isCancelled) return;
-          setAnimationPhase("answer");
-          setActiveSpeaker("candidate");
-
-          let candIndex = 0;
-          candInterval = setInterval(() => {
-            if (isCancelled) return;
-            if (candIndex < fullCandidate.length) {
-              candIndex += 1;
-              setTypedCandidate(fullCandidate.slice(0, candIndex));
-            } else {
-              clearInterval(candInterval);
-              if (isCancelled) return;
-
-              // Step 3: Candidate finishes -> Rubric Evaluating
-              timer2 = setTimeout(() => {
-                if (isCancelled) return;
-                setAnimationPhase("evaluating");
-
-                // Step 4: Rubric updates to final scored state
-                timer3 = setTimeout(() => {
-                  if (isCancelled) return;
-                  setAnimationPhase("done");
-
-                  // Auto replay once the animation of text completes (wait 2.5s to read final scorecard)
-                  autoReplayTimer = setTimeout(() => {
-                    if (isCancelled) return;
-                    setReplayKey((k) => k + 1);
-                  }, 2500);
-                }, 750);
-              }, 400);
-            }
-          }, 20);
-        }, 400);
-      }
-    }, 18);
-
-    return () => {
-      isCancelled = true;
-      clearInterval(aiInterval);
-      clearInterval(candInterval);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(autoReplayTimer);
-    };
-  }, [candidateIndex, questionIndex, replayKey, q]);
-
-  // Audio speech synthesis toggle
-  useEffect(() => {
-    if (isPlayingAudio && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(q.ai);
-      utterance.rate = 1.05;
-      utterance.onend = () => {
-        const candidateUtterance = new SpeechSynthesisUtterance(q.candidate);
-        candidateUtterance.rate = 1.05;
-        candidateUtterance.onend = () => {
-          setIsPlayingAudio(false);
-        };
-        window.speechSynthesis.speak(candidateUtterance);
-      };
-      window.speechSynthesis.speak(utterance);
-    } else {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    }
-
-    return () => {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, [isPlayingAudio, q]);
-
-  const handleSelectCandidate = (idx: number) => {
-    setIsPlayingAudio(false);
-    setCandidateIndex(idx);
-    setQuestionIndex(0);
-    setIsApproved(false);
-    setShowRubricInfo(false);
-    setReplayKey((k) => k + 1);
-  };
-
-  const handleSelectQuestion = (qIdx: number) => {
-    setIsPlayingAudio(false);
-    setQuestionIndex(qIdx);
-    setShowRubricInfo(false);
-    setReplayKey((k) => k + 1);
-  };
-
-  const handleReplay = () => {
-    setIsPlayingAudio(false);
-    setReplayKey((k) => k + 1);
-  };
+  const [activeTab, setActiveTab] = useState(0);
+  const currentScreen = interviewScreens[activeTab];
 
   return (
     <section id="interview" className="scroll-mt-24 overflow-hidden bg-ai py-14 md:py-20" aria-labelledby="interview-title">
@@ -252,278 +64,106 @@ export function InterviewFeature() {
             ))}
           </dl>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-5 text-xs sm:text-sm font-semibold text-ai transition-transform duration-150 hover:bg-ai-light shadow-sm hover:scale-105 cursor-pointer"
-            >
-              <SparklesIcon size={16} strokeWidth={1.75} aria-hidden="true" />
-              Try AI interview
-            </button>
+          {/* Single CTA linking to detail page as requested */}
+          <div className="mt-8">
             <Link
               to="/platform/ai-live-interview"
-              className="inline-flex h-11 items-center gap-2 rounded-full border border-white/40 px-5 text-xs sm:text-sm font-medium text-white transition-colors duration-150 hover:bg-white/10"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-xs sm:text-sm font-semibold text-ai transition-all duration-150 hover:bg-neutral-100 shadow-md hover:scale-105 cursor-pointer"
             >
-              Explore scorecard docs →
+              <SparklesIcon size={16} strokeWidth={2} className="text-teal-600" aria-hidden="true" />
+              <span>Explore AI interview</span>
+              <ArrowRightIcon size={15} strokeWidth={2} aria-hidden="true" />
             </Link>
           </div>
         </div>
 
-        {/* Right Column: Clean, Interactive & Animated Interview Card */}
-        <div className="lg:col-span-7 flex items-center justify-center">
-          <div className="w-full overflow-hidden rounded-none border border-white/20 bg-white shadow-2xl">
-            {/* Top Bar with Role & Interactive Candidate Toggle */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-neutral-200 px-5 py-3 bg-neutral-50/90">
-              <div>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">{current.role}</p>
-                <p className="text-[11px] text-neutral-500">{current.candidateName} · Consented to AI assessment</p>
+        {/* Right Column: High-fidelity Authentic AI Interview Tool Mockup with Mode Switcher */}
+        <div className="lg:col-span-7 flex flex-col items-center justify-center">
+          {/* Mode Switcher Tabs */}
+          <div className="w-full flex items-center justify-between gap-2 mb-3 px-1">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+              {interviewScreens.map((screen, idx) => {
+                const Icon = screen.icon;
+                const isActive = activeTab === idx;
+                return (
+                  <button
+                    key={screen.id}
+                    type="button"
+                    onClick={() => setActiveTab(idx)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
+                      isActive
+                        ? "bg-white text-ai shadow-md"
+                        : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white"
+                    }`}
+                  >
+                    <Icon size={13} strokeWidth={2} />
+                    <span>{screen.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <Link
+              to="/platform/ai-live-interview"
+              className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-teal-200 hover:text-white transition-colors"
+            >
+              <span>View details</span>
+              <ArrowRightIcon size={12} />
+            </Link>
+          </div>
+
+          {/* App Frame with Real Tool Screenshot */}
+          <div className="w-full overflow-hidden rounded-xl border border-white/20 bg-neutral-900 shadow-2xl transition-all duration-300">
+            {/* Window Chrome Header */}
+            <div className="flex items-center justify-between border-b border-white/10 bg-[#0E1520] px-4 py-2.5">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80 inline-block" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                </div>
+                <span className="text-[11px] font-medium text-neutral-400 ml-2 hidden sm:inline">
+                  Sqalible AI Interview · {currentScreen.label}
+                </span>
               </div>
 
               <div className="flex items-center gap-2">
-                {/* Candidate Switcher */}
-                <div className="flex items-center rounded-full bg-neutral-200/80 p-0.5 border border-neutral-300">
-                  {interviewSimulations.map((sim, idx) => (
-                    <button
-                      key={sim.candidateName}
-                      type="button"
-                      onClick={() => handleSelectCandidate(idx)}
-                      className={`px-3 py-0.5 rounded-full text-[11px] font-semibold transition-all cursor-pointer ${
-                        candidateIndex === idx
-                          ? "bg-white text-neutral-900 shadow-2xs"
-                          : "text-neutral-600 hover:text-neutral-900"
-                      }`}
-                    >
-                      {sim.candidateName.split(" ")[0]}
-                    </button>
-                  ))}
-                </div>
-
-                <Badge tone="error">
-                  <span className="h-1.5 w-1.5 rounded-full bg-error animate-pulse" aria-hidden="true" />
-                  Live 12:48
-                </Badge>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Connected · 42:18 remaining
+                </span>
               </div>
             </div>
 
-            {/* Split Video & Live Animated Transcript */}
-            <div className="grid md:grid-cols-12 md:h-[440px]">
-              {/* Candidate Video Preview: Strictly locked height and dimensions */}
-              <div className="relative md:col-span-5 h-[270px] md:h-[440px] bg-neutral-900 overflow-hidden shrink-0">
-                <img
-                  src={current.avatar}
-                  alt={`${current.candidateName} live video`}
-                  className={`h-full w-full object-cover transition-all duration-300 ${
-                    activeSpeaker === "candidate" ? "scale-[1.02] filter brightness-105" : ""
-                  }`}
-                />
+            {/* Tool Screenshot Container */}
+            <Link
+              to="/platform/ai-live-interview"
+              className="block relative group overflow-hidden bg-neutral-950 cursor-pointer"
+              title="Click to explore the AI Live Interview platform"
+            >
+              <img
+                src={currentScreen.image}
+                alt={currentScreen.alt}
+                className="w-full h-auto max-h-[480px] object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]"
+              />
 
-                {/* AI Overlay Badge */}
-                <div
-                  className={`absolute bottom-3 right-3 flex h-14 w-22 flex-col items-center justify-center gap-0.5 rounded-none bg-ai text-white shadow-md border transition-all ${
-                    activeSpeaker === "ai"
-                      ? "border-teal-400 ring-2 ring-teal-400/50 shadow-teal-500/30"
-                      : "border-white/10"
-                  }`}
-                >
-                  <SparklesIcon
-                    size={16}
-                    strokeWidth={1.75}
-                    aria-hidden="true"
-                    className={activeSpeaker === "ai" ? "text-teal-300 animate-spin" : ""}
-                  />
-                  <span className="text-[10px] font-medium">Sqalible AI</span>
-                </div>
-
-                {/* Candidate Live Mic & Equalizer Status */}
-                <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-md bg-neutral-900/90 px-2.5 py-1 text-[11px] text-white backdrop-blur-xs border border-white/10">
-                  <MicIcon
-                    size={13}
-                    strokeWidth={1.75}
-                    aria-hidden="true"
-                    className={activeSpeaker === "candidate" ? "text-teal-400 animate-pulse" : "text-neutral-400"}
-                  />
-                  <span>
-                    {current.candidateName.split(" ")[0]} {activeSpeaker === "candidate" ? "(Speaking)" : "(Listening)"}
-                  </span>
-
-                  {/* Dynamic Audio Equalizer Bars when Candidate Speaks */}
-                  {activeSpeaker === "candidate" && (
-                    <div className="flex items-center gap-0.5 h-3 ml-1">
-                      <span className="w-0.5 bg-teal-400 rounded-full animate-[bounce_0.6s_infinite] h-2" />
-                      <span className="w-0.5 bg-teal-400 rounded-full animate-[bounce_0.8s_infinite] h-3.5" />
-                      <span className="w-0.5 bg-teal-400 rounded-full animate-[bounce_0.5s_infinite] h-1.5" />
-                      <span className="w-0.5 bg-teal-400 rounded-full animate-[bounce_0.9s_infinite] h-3" />
-                    </div>
-                  )}
-                </div>
+              {/* Hover overlay hint */}
+              <div className="absolute inset-0 bg-neutral-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-900/90 text-white border border-white/20 px-4 py-2 text-xs font-semibold shadow-xl backdrop-blur-xs">
+                  <span>Explore AI Live Interview</span>
+                  <ArrowRightIcon size={13} />
+                </span>
               </div>
+            </Link>
 
-              {/* Transcript & Animated Dialogue: Dedicated 7 columns with scrollable conversation */}
-              <div className="flex flex-col border-t border-neutral-200 p-4 sm:p-5 md:col-span-7 md:border-l md:border-t-0 md:h-[440px] justify-between bg-white overflow-hidden">
-                {/* Transcript Header: Label, Replay, and Full-Width Question Buttons */}
-                <div className="shrink-0 pb-2.5 border-b border-neutral-100 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
-                        Live Transcript
-                      </p>
-                      <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
-                    </div>
-
-                    {/* Replay Button */}
-                    <button
-                      type="button"
-                      onClick={handleReplay}
-                      className="inline-flex items-center gap-1 rounded-full border border-neutral-300 bg-white hover:bg-neutral-100 text-neutral-700 px-2.5 py-0.5 text-[10px] font-semibold transition-all cursor-pointer shadow-2xs hover:scale-105"
-                      title="Replay live typing sequence"
-                    >
-                      <RotateCcwIcon size={11} />
-                      Replay
-                    </button>
-                  </div>
-
-                  {/* Interactive Question Pill Buttons - 100% visible, fully clear, never clipped */}
-                  <div className="flex items-center gap-2 w-full">
-                    {current.questions.map((item, qIdx) => (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => handleSelectQuestion(qIdx)}
-                        className={`flex-1 py-1.5 px-3 text-xs font-semibold rounded-xs transition-all cursor-pointer text-center truncate ${
-                          questionIndex === qIdx
-                            ? "bg-primary text-white shadow-xs font-bold"
-                            : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200 border border-neutral-200/60"
-                        }`}
-                      >
-                        {item.shortLabel}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Active Question & Answer Dialogue (Scrollable, Image stays 100% fixed) */}
-                <div
-                  ref={conversationRef}
-                  className="flex-1 overflow-y-auto py-2.5 space-y-3 text-xs pr-1"
-                >
-                  {/* AI Question Box */}
-                  <div className={`p-2.5 rounded-xs transition-colors ${activeSpeaker === "ai" ? "bg-teal-50/90 border border-teal-200 shadow-2xs" : "bg-neutral-50"}`}>
-                    <p className="text-[11px] font-semibold text-ai flex items-center justify-between gap-1">
-                      <span className="flex items-center gap-1">
-                        <SparklesIcon size={11} className={activeSpeaker === "ai" ? "text-teal-600 animate-spin" : ""} />
-                        Sqalible AI
-                      </span>
-                      {animationPhase === "question" && (
-                        <span className="text-[9px] font-bold text-teal-600 uppercase tracking-wider animate-pulse">Typing...</span>
-                      )}
-                    </p>
-                    <p className="mt-1 text-xs text-neutral-800 leading-relaxed font-normal">
-                      {typedAi}
-                      {animationPhase === "question" && (
-                        <span className="inline-block w-1.5 h-3 ml-0.5 bg-primary animate-pulse align-middle" />
-                      )}
-                    </p>
-                  </div>
-
-                  {/* Candidate Answer Box */}
-                  {(animationPhase === "answer" || animationPhase === "evaluating" || animationPhase === "done") && (
-                    <div className={`p-2.5 rounded-xs transition-colors ${activeSpeaker === "candidate" ? "bg-emerald-50/90 border border-emerald-200 shadow-2xs" : "bg-neutral-50"}`}>
-                      <p className="text-[11px] font-semibold text-neutral-700 flex items-center justify-between">
-                        <span>{current.candidateName.split(" ")[0]}</span>
-                        {animationPhase === "answer" && (
-                          <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider animate-pulse">
-                            Speaking...
-                          </span>
-                        )}
-                      </p>
-                      <p className="mt-1 text-xs text-neutral-800 leading-relaxed font-normal">
-                        {typedCandidate}
-                        {animationPhase === "answer" && (
-                          <span className="inline-block w-1.5 h-3 ml-0.5 bg-emerald-600 animate-pulse align-middle" />
-                        )}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Rubric Badge & Interactive Human Decision Sign-Off: Fixed at bottom */}
-                <div className="shrink-0 pt-2.5 border-t border-neutral-100">
-                  <div className="flex flex-wrap items-center gap-1.5 mb-2 min-h-[26px]">
-                    {animationPhase === "evaluating" ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-2.5 py-0.5 text-[11px] font-semibold text-primary animate-pulse">
-                        <SparklesIcon size={11} className="animate-spin text-teal-600" />
-                        Scoring rubric...
-                      </span>
-                    ) : animationPhase === "done" ? (
-                      <button
-                        type="button"
-                        onClick={() => setShowRubricInfo((prev) => !prev)}
-                        className="cursor-pointer"
-                        title="Click to view rubric explanation"
-                      >
-                        <Badge tone={q.scoreTone} className="hover:opacity-80 transition-opacity">
-                          {q.rubric}
-                        </Badge>
-                      </button>
-                    ) : (
-                      <span className="text-[11px] text-neutral-400 italic">
-                        Awaiting candidate response...
-                      </span>
-                    )}
-
-                    {animationPhase === "done" && (
-                      <Badge tone="info">Anti-bias · Passed</Badge>
-                    )}
-                  </div>
-
-                  {showRubricInfo && animationPhase === "done" && (
-                    <div className="p-2 mb-2 bg-neutral-50 border border-neutral-200 rounded-none text-[11px] text-neutral-600 leading-tight">
-                      <p className="font-semibold text-neutral-800 flex items-center gap-1 mb-0.5">
-                        <InfoIcon size={11} /> AI Evaluation Rationale:
-                      </p>
-                      {q.rubricDetail}
-                    </div>
-                  )}
-
-                  {isApproved ? (
-                    <div className="flex items-center justify-between p-2 rounded-none bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
-                      <span className="flex items-center gap-1.5">
-                        <CheckCircle2Icon size={14} className="text-emerald-600" />
-                        Approved by Hiring Lead
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setIsApproved(false)}
-                        className="text-[10px] text-neutral-500 hover:text-neutral-800 underline cursor-pointer"
-                      >
-                        Reset
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      <button
-                        type="button"
-                        onClick={() => setIsApproved(true)}
-                        className="w-full inline-flex items-center justify-center gap-1.5 rounded-none bg-primary hover:bg-teal-700 text-white font-semibold py-1.5 px-3 text-xs transition-colors cursor-pointer shadow-2xs"
-                      >
-                        <ShieldCheckIcon size={13} />
-                        <span>Sign-off &amp; Advance Candidate</span>
-                      </button>
-                      <p className="text-[10px] text-neutral-500 leading-tight">
-                        Human hiring manager sign-off required before advancing.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
+            {/* Bottom Caption Bar */}
+            <div className="flex items-center justify-between border-t border-white/10 bg-[#0B1018] px-4 py-2 text-[11px] text-neutral-400">
+              <span className="truncate">{currentScreen.caption}</span>
+              <span className="shrink-0 text-teal-400 font-medium ml-2">Sqalible Live Telemetry</span>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Interactive 2-minute Sandbox Walkthrough & Scorecard Modal */}
-      <AiInterviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

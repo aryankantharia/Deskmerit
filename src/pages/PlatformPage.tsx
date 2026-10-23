@@ -114,8 +114,8 @@ function AiLiveInterviewFlagshipView({
         pretitle={parent?.product ?? "Sqalible Hire"}
         title={mod?.title ?? "AI Live Interview"}
         description={detail?.summary ?? "An interactive avatar conducts structured first-round technical and behavioural interviews, adapts dynamically to candidate depth, and evaluates architectural reasoning—while your human team retains 100% final hiring authority."}
-        image="/figma-screens/scheduled-interviews.png"
-        imageAlt="Sqalible Structured Technical & Behavioural Interview Telemetry"
+        image="/images/ai-interview/ai-interview-video.png"
+        imageAlt="Sqalible Structured Technical & Behavioural Live Video Interview Interface"
         accent="primary"
       />
 
@@ -151,6 +151,86 @@ function AiLiveInterviewFlagshipView({
           <p className="mt-3 text-[11px] text-neutral-500 text-center">
             * Outcomes verified in enterprise customer pilot studies [1-4]. Final hiring decisions retain 100% human-in-the-loop review.
           </p>
+        </div>
+      </section>
+
+      {/* Real Platform Interface Showcase */}
+      <section className="bg-[#070D14] py-14 md:py-20 text-white border-b border-neutral-800" aria-labelledby="live-screens-title">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="w-full mb-10">
+            <p className="pretitle text-teal-400">Platform Experience</p>
+            <h2 id="live-screens-title" className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              Inside the Sqalible AI Interview Environment
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-neutral-400 max-w-3xl leading-relaxed">
+              Experience the actual candidate and interviewer interfaces—from live conversational video screening to interactive coding sandboxes and multi-dimensional competency rubrics.
+            </p>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-3">
+            {/* Card 1: Live Video Screening */}
+            <div className="flex flex-col rounded-xl border border-white/10 bg-[#0E1522] overflow-hidden group hover:border-teal-500/50 transition-all duration-300 shadow-lg">
+              <div className="p-5 border-b border-white/10 bg-white/[0.02]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">Step 1 · Conversational</span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white">Live Video Interview</h3>
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  Real-time speech-to-text captions, adaptive architectural questions, and conversational turn-taking with Alex Vance AI avatar.
+                </p>
+              </div>
+              <div className="bg-black/50 overflow-hidden flex-1 flex items-center justify-center p-2.5">
+                <img
+                  src="/images/ai-interview/ai-interview-video.png"
+                  alt="Sqalible Live Video Interview Screen with AI Interviewer"
+                  className="w-full h-auto rounded-lg object-contain shadow-lg group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
+
+            {/* Card 2: Coding Sandbox */}
+            <div className="flex flex-col rounded-xl border border-white/10 bg-[#0E1522] overflow-hidden group hover:border-teal-500/50 transition-all duration-300 shadow-lg">
+              <div className="p-5 border-b border-white/10 bg-white/[0.02]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">Step 2 · Hands-on</span>
+                  <span className="h-2 w-2 rounded-full bg-teal-400" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white">Interactive Coding IDE</h3>
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  In-browser multi-language editor with test cases, output console, and evaluation of algorithmic reasoning and edge case handling.
+                </p>
+              </div>
+              <div className="bg-black/50 overflow-hidden flex-1 flex items-center justify-center p-2.5">
+                <img
+                  src="/images/ai-interview/ai-interview-coding.png"
+                  alt="Sqalible Live In-Browser Coding IDE Assessment"
+                  className="w-full h-auto rounded-lg object-contain shadow-lg group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
+
+            {/* Card 3: Feedback Scorecard */}
+            <div className="flex flex-col rounded-xl border border-white/10 bg-[#0E1522] overflow-hidden group hover:border-teal-500/50 transition-all duration-300 shadow-lg">
+              <div className="p-5 border-b border-white/10 bg-white/[0.02]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400">Step 3 · Human Sign-off</span>
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white">Technical Screen Feedback</h3>
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  Overall competency gauges, role-alignment radar, timestamped answer transcripts, and structured next steps for hiring leads.
+                </p>
+              </div>
+              <div className="bg-black/50 overflow-hidden flex-1 flex items-center justify-center p-2.5">
+                <img
+                  src="/images/ai-interview/ai-interview-feedback.png"
+                  alt="Sqalible Technical Screen Feedback and Rubric Scorecard"
+                  className="w-full h-auto rounded-lg object-contain shadow-lg group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

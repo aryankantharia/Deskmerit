@@ -50,7 +50,7 @@ export const moduleDetails: Record<string, ModuleDetail> = {
   },
   "ai-live-interview": {
     summary: "A live AI avatar interviewer runs structured first rounds, adapts questions to each resume, and evaluates coding approach. Your team makes the decision.",
-    image: "/figma-screens/scheduled-interviews.png",
+    image: "/images/ai-interview/ai-interview-video.png",
     imageAlt: "Sqalible Live AI Technical & Behavioural Interview Evaluation Panel",
     highlights: [
       { title: "Adaptive questions", text: "Follow-ups drawn from the resume and previous answers." },
