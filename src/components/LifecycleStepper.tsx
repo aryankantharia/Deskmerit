@@ -146,8 +146,8 @@ export function LifecycleStepper() {
           </p>
         </div>
 
-        {/* Interactive Stepper Navigation Bar: 6 stages */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 border-b border-neutral-300 pb-4">
+        {/* Interactive Stepper Navigation Bar: 6 stages (identical styling across all screens) */}
+        <div className="mt-10 flex overflow-x-auto lg:grid lg:grid-cols-6 gap-2 border-b border-neutral-300 pb-4 no-scrollbar">
           {stages.map((stage, idx) => {
             const Icon = stage.icon;
             const isActive = activeStageIndex === idx;
@@ -157,9 +157,9 @@ export function LifecycleStepper() {
                 key={stage.id}
                 type="button"
                 onClick={() => setActiveStageIndex(idx)}
-                className={`flex flex-col items-start p-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 ${
+                className={`flex flex-col items-start p-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 shrink-0 min-w-[130px] lg:min-w-0 ${
                   isActive
-                    ? "border-primary bg-white shadow-xs lg:-mb-[18px] lg:pb-[16px]"
+                    ? "border-primary bg-white shadow-xs -mb-[18px] pb-[16px]"
                     : "border-transparent hover:bg-neutral-100/80 text-neutral-600"
                 }`}
               >

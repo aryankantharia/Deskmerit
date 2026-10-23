@@ -77,11 +77,11 @@ export function EcosystemSection() {
     if (windowWidth >= 640) {
       return Math.min(400, (windowWidth - 48) / 2.2);
     }
-    return Math.max(280, windowWidth * 0.82);
+    return Math.min(330, Math.max(280, windowWidth - 56));
   }, [windowWidth]);
 
   const targetX = useMemo(() => {
-    const centerOffset = windowWidth / 2 - 12 - cardWidth;
+    const centerOffset = (windowWidth - cardWidth) / 2;
     return centerOffset - currentIndex * (cardWidth + 24);
   }, [windowWidth, cardWidth, currentIndex]);
 
