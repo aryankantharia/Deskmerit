@@ -10,7 +10,6 @@ import { DeskmeritTrustSection } from "../components/DeskmeritTrustSection";
 import { AiVsLegacySection } from "../components/AiVsLegacySection";
 import { DeskmeritTwoWaysToBuy } from "../components/DeskmeritTwoWaysToBuy";
 import { DeskmeritIntegrationsSection } from "../components/DeskmeritIntegrationsSection";
-import { DeskmeritGlobalSection } from "../components/DeskmeritGlobalSection";
 import { DeskmeritTestimonials } from "../components/DeskmeritTestimonials";
 import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
@@ -52,9 +51,6 @@ export function Home() {
 
         {/* 11. Integrations: Works with the tools your team already lives in. + AI MCP server prompt */}
         <DeskmeritIntegrationsSection />
-
-        {/* 13. Global, Locally: Made for teams across India, Australia, New Zealand and the Gulf */}
-        <DeskmeritGlobalSection />
 
         {/* 14. Testimonials: Pilot stories, coming soon */}
         <DeskmeritTestimonials />

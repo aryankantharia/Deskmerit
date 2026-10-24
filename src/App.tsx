@@ -20,6 +20,8 @@ import { DownloadPage } from "./pages/DownloadPage";
 import { ToolsAndTemplatesPage } from "./pages/ToolsAndTemplatesPage";
 import { LegalPage } from "./pages/LegalPage";
 import { TrialSignupPage } from "./pages/TrialSignupPage";
+import { ProductDetailPage } from "./pages/ProductDetailPage";
+import { SolutionDetailPage } from "./pages/SolutionDetailPage";
 
 export function App() {
   return (
@@ -32,19 +34,19 @@ export function App() {
 
           {/* Product & Feature Pages */}
           <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/features/automatic-time-tracking" element={<FeaturesPage />} />
-          <Route path="/features/productivity-tracking" element={<FeaturesPage />} />
+          <Route path="/features/automatic-time-tracking" element={<ProductDetailPage />} />
+          <Route path="/features/productivity-tracking" element={<ProductDetailPage />} />
           <Route path="/features/tracker-plus" element={<TrackerPlusPage />} />
           <Route path="/features/attendance-tracking" element={<AttendanceTrackingPage />} />
-          <Route path="/features/idle-and-private-time" element={<PrivacyPromisePage />} />
-          <Route path="/features/screenshots" element={<PrivacyPromisePage />} />
-          <Route path="/features/project-time-tracking" element={<ItServicesPage />} />
-          <Route path="/features/timesheets-and-reports" element={<TrackerPlusPage />} />
-          <Route path="/features/shift-scheduling" element={<AttendanceTrackingPage />} />
-          <Route path="/features/leave-management" element={<AttendanceTrackingPage />} />
-          <Route path="/features/document-tracking" element={<FeaturesPage />} />
-          <Route path="/features/focus-timer" element={<FeaturesPage />} />
-          <Route path="/features/live-status" element={<Home />} />
+          <Route path="/features/idle-and-private-time" element={<ProductDetailPage />} />
+          <Route path="/features/screenshots" element={<ProductDetailPage />} />
+          <Route path="/features/project-time-tracking" element={<ProductDetailPage />} />
+          <Route path="/features/timesheets-and-reports" element={<ProductDetailPage />} />
+          <Route path="/features/shift-scheduling" element={<ProductDetailPage />} />
+          <Route path="/features/leave-management" element={<ProductDetailPage />} />
+          <Route path="/features/document-tracking" element={<ProductDetailPage />} />
+          <Route path="/features/focus-timer" element={<ProductDetailPage />} />
+          <Route path="/features/live-status" element={<ProductDetailPage />} />
           <Route path="/download" element={<DownloadPage />} />
 
           {/* Trust & Security */}
@@ -58,18 +60,18 @@ export function App() {
           {/* Solutions Pages */}
           <Route path="/solutions" element={<ItServicesPage />} />
           <Route path="/solutions/it-services" element={<ItServicesPage />} />
-          <Route path="/solutions/staff-augmentation" element={<ItServicesPage />} />
-          <Route path="/solutions/agencies" element={<ItServicesPage />} />
-          <Route path="/solutions/bpo" element={<AttendanceTrackingPage />} />
-          <Route path="/solutions/professional-services" element={<ItServicesPage />} />
-          <Route path="/solutions/remote-teams" element={<AttendanceTrackingPage />} />
-          <Route path="/solutions/hybrid-teams" element={<AttendanceTrackingPage />} />
-          <Route path="/solutions/office-teams" element={<AttendanceTrackingPage />} />
-          <Route path="/solutions/hr" element={<AttendanceTrackingPage />} />
-          <Route path="/solutions/managers" element={<Home />} />
-          <Route path="/solutions/finance" element={<ItServicesPage />} />
+          <Route path="/solutions/staff-augmentation" element={<SolutionDetailPage />} />
+          <Route path="/solutions/agencies" element={<SolutionDetailPage />} />
+          <Route path="/solutions/bpo" element={<SolutionDetailPage />} />
+          <Route path="/solutions/professional-services" element={<SolutionDetailPage />} />
+          <Route path="/solutions/remote-teams" element={<SolutionDetailPage />} />
+          <Route path="/solutions/hybrid-teams" element={<SolutionDetailPage />} />
+          <Route path="/solutions/office-teams" element={<SolutionDetailPage />} />
+          <Route path="/solutions/hr" element={<SolutionDetailPage />} />
+          <Route path="/solutions/managers" element={<SolutionDetailPage />} />
+          <Route path="/solutions/finance" element={<SolutionDetailPage />} />
           <Route path="/hrms-add-on" element={<HrmsAddonPage />} />
-          <Route path="/partners/white-label" element={<PricingPage />} />
+          <Route path="/partners/white-label" element={<SolutionDetailPage />} />
 
           {/* Regional Variants (Exact Sitemap paths with & without trailing slashes) */}
           <Route path="/en-in" element={<IndiaPage />} />
