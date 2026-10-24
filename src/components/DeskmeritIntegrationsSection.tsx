@@ -2,6 +2,111 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Terminal, Bot, ArrowRight, Check, Sparkles, MessageSquare } from "lucide-react";
 
+// Authentic Official SVG Logos for Integrations
+function JiraLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path d="M11.571 0H2.083C.932 0 0 .933 0 2.083v9.488C0 6.012 4.417 1.595 9.976 1.595h1.595V0z" fill="#0052CC"/>
+      <path d="M11.917 5.952H6.071c-.932 0-1.69.758-1.69 1.69v4.262c0 3.286 2.667 5.953 5.953 5.953h1.583V5.952z" fill="#2684FF"/>
+      <path d="M23.833 11.905h-9.488c-5.559 0-9.976 4.417-9.976 9.976v.036c0 1.15.932 2.083 2.083 2.083h9.488c5.559 0 9.976-4.417 9.976-9.976v-.036c0-1.15-.932-2.083-2.083-2.083z" fill="#0052CC"/>
+    </svg>
+  );
+}
+
+function AzureDevopsLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path d="M24 8.784l-4.706-4.5-8.529 3.098L4.235 2.5 0 6.647v10.706l3.97 4.147 6.471-2.47 8.853 2.47L24 16.588V8.784zm-4.706 7.442l-7.765-2.206v-3.882l7.765-2.206v8.294z" fill="#0078D7"/>
+      <path d="M19.294 8.353l-7.765 2.206v3.882l7.765 2.206V8.353z" fill="#008AD7"/>
+      <path d="M4.235 2.5l6.53 4.882-6.53 2.47V2.5z" fill="#0078D7"/>
+    </svg>
+  );
+}
+
+function OpenProjectLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="#006699" />
+      <circle cx="12" cy="12" r="6.5" fill="#1DA1F2" />
+      <circle cx="12" cy="12" r="3" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function GoogleCalendarLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="0.8" />
+      <path d="M18 2H6C3.79 2 2 3.79 2 6v2h20V6c0-2.21-1.79-4-4-4z" fill="#4285F4"/>
+      <path d="M2 8v10c0 2.21 1.79 4 4 4h2V8H2z" fill="#34A853"/>
+      <path d="M8 22h8c2.21 0 4-1.79 4-4v-2H8v6z" fill="#FBBC05"/>
+      <path d="M20 16V8h2v8c0 2.21-1.79 4-4 4h-2v-4h4z" fill="#EA4335"/>
+      <text x="12" y="16" textAnchor="middle" fontSize="9" fontWeight="800" fill="#1A73E8" fontFamily="sans-serif">31</text>
+    </svg>
+  );
+}
+
+function OutlookLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <rect x="6" y="3" width="15" height="18" rx="2.5" fill="#0072C6"/>
+      <path d="M13.5 7.5h7.5l-7.5 5.5V7.5z" fill="#005A9E"/>
+      <rect x="3" y="6" width="12" height="12" rx="2.5" fill="#0078D4" stroke="#FFFFFF" strokeWidth="0.8"/>
+      <text x="9" y="14.5" textAnchor="middle" fontSize="7.5" fontWeight="900" fill="#FFFFFF" fontFamily="sans-serif">O</text>
+    </svg>
+  );
+}
+
+function SlackLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+      <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+      <path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
+      <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
+    </svg>
+  );
+}
+
+function TeamsLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="16.5" cy="7.5" r="3" fill="#5059C9"/>
+      <path d="M12.5 13c0-2.2 2-3.5 4-3.5s4 1.3 4 3.5v3h-8v-3z" fill="#5059C9"/>
+      <circle cx="9" cy="6" r="3.5" fill="#7B83EB"/>
+      <path d="M4 12c0-2.5 2.5-4 5-4s5 1.5 5 4v6H4v-6z" fill="#7B83EB"/>
+      <rect x="2" y="10" width="8" height="8" rx="1.5" fill="#4B53BC"/>
+      <text x="6" y="16" textAnchor="middle" fontSize="6.5" fontWeight="900" fill="#FFFFFF" fontFamily="sans-serif">T</text>
+    </svg>
+  );
+}
+
+function ZapierLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="#FFF3EE"/>
+      <path d="M10.8 4h2.4v5.3l3.8-3.8 1.7 1.7-3.8 3.8H20v2.4h-5.1l3.8 3.8-1.7 1.7-3.8-3.8V20h-2.4v-5.1l-3.8 3.8-1.7-1.7 3.8-3.8H4v-2.4h5.3l-3.8-3.8 1.7-1.7 3.8 3.8V4z" fill="#FF4F00"/>
+    </svg>
+  );
+}
+
+function SqalibleLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <img src="/sqalible-logo.png" alt="Sqalible HRMS" className={`${className} object-contain`} />
+  );
+}
+
+function McpServerLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="#FFF0ED"/>
+      <path d="M12 2L14.2 8.3L20.5 10.5L14.2 12.7L12 19L9.8 12.7L3.5 10.5L9.8 8.3L12 2Z" fill="#FF5A36"/>
+      <circle cx="18" cy="17" r="2.2" fill="#FF8364"/>
+      <circle cx="6" cy="6" r="1.5" fill="#FF8364"/>
+    </svg>
+  );
+}
+
 export function DeskmeritIntegrationsSection() {
   const [activePrompt, setActivePrompt] = useState(0);
 
@@ -27,16 +132,66 @@ export function DeskmeritIntegrationsSection() {
   ];
 
   const tools = [
-    { name: "Jira", role: "Tracker Plus", badge: "Live sync", icon: "J", color: "bg-blue-600" },
-    { name: "Azure DevOps", role: "Tracker Plus", badge: "Work items", icon: "AD", color: "bg-sky-600" },
-    { name: "OpenProject", role: "Tracker Plus", badge: "Self-hosted", icon: "OP", color: "bg-teal-600" },
-    { name: "Google Calendar", role: "Meetings as work", badge: "Auto-present", icon: "GC", color: "bg-amber-600" },
-    { name: "Outlook 365", role: "Meetings as work", badge: "Auto-present", icon: "OC", color: "bg-blue-700" },
-    { name: "Slack", role: "Summaries & /status", badge: "Bot", icon: "S", color: "bg-fuchsia-600" },
-    { name: "Microsoft Teams", role: "Daily status feed", badge: "App", icon: "MT", color: "bg-indigo-600" },
-    { name: "Zapier", role: "7,000+ app connectors", badge: "No-code", icon: "Z", color: "bg-orange-600" },
-    { name: "Sqalible HRMS", role: "Native 1-click toggle", badge: "Built-in", icon: "SH", color: "bg-[#0F1730]" },
-    { name: "MCP Server", role: "AI Assistant Query", badge: "New ★", icon: "MCP", color: "bg-[#FF5A36]" },
+    {
+      name: "Jira",
+      role: "Tracker Plus",
+      badge: "Live sync",
+      logo: <JiraLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Azure DevOps",
+      role: "Tracker Plus",
+      badge: "Work items",
+      logo: <AzureDevopsLogo className="w-5 h-5" />,
+    },
+    {
+      name: "OpenProject",
+      role: "Tracker Plus",
+      badge: "Self-hosted",
+      logo: <OpenProjectLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Google Calendar",
+      role: "Meetings as work",
+      badge: "Auto-present",
+      logo: <GoogleCalendarLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Outlook 365",
+      role: "Meetings as work",
+      badge: "Auto-present",
+      logo: <OutlookLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Slack",
+      role: "Summaries & /status",
+      badge: "Bot",
+      logo: <SlackLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Microsoft Teams",
+      role: "Daily status feed",
+      badge: "App",
+      logo: <TeamsLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Zapier",
+      role: "7,000+ app connectors",
+      badge: "No-code",
+      logo: <ZapierLogo className="w-5 h-5" />,
+    },
+    {
+      name: "Sqalible HRMS",
+      role: "Native 1-click toggle",
+      badge: "Built-in",
+      logo: <SqalibleLogo className="w-5 h-5" />,
+    },
+    {
+      name: "MCP Server",
+      role: "AI Assistant Query",
+      badge: "New ★",
+      logo: <McpServerLogo className="w-5 h-5" />,
+    },
   ];
 
   return (
@@ -68,14 +223,12 @@ export function DeskmeritIntegrationsSection() {
           {tools.map((item) => (
             <div
               key={item.name}
-              className="bg-[#FFFFFF] rounded-2xl p-4 sm:p-5 border border-[#E6E2D8] hover:border-[#FF5A36] hover:shadow-card transition-all flex flex-col justify-between"
+              className="group bg-[#FFFFFF] rounded-2xl p-4 sm:p-5 border border-[#E6E2D8] hover:border-[#FF5A36] hover:shadow-card transition-all flex flex-col justify-between"
             >
               <div className="flex items-center justify-between mb-3">
-                <span
-                  className={`w-9 h-9 rounded-xl ${item.color} text-white font-bold text-xs flex items-center justify-center shadow-sm`}
-                >
-                  {item.icon}
-                </span>
+                <div className="w-10 h-10 rounded-xl bg-[#F8FAFC] border border-slate-200/90 shadow-2xs flex items-center justify-center p-2 group-hover:scale-105 group-hover:border-[#FF5A36]/40 transition-all">
+                  {item.logo}
+                </div>
                 <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#F7F4EE] text-[#4A5370] border border-[#E6E2D8]">
                   {item.badge}
                 </span>

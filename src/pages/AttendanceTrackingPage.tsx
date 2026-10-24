@@ -96,62 +96,63 @@ export function AttendanceTrackingPage() {
           <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#38BDF8]/10 rounded-full blur-[140px] pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Breadcrumb */}
-            <div className="text-xs text-[#9AA1B2] flex items-center gap-1.5 mb-6">
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <span>/</span>
-              <Link to="/features" className="hover:text-white transition-colors">Features</Link>
-              <span>/</span>
-              <span className="font-semibold text-white">Attendance Tracking</span>
+            {/* Breadcrumb matching Reference */}
+            <div className="text-xs text-[#20C997] font-semibold flex items-center gap-2 mb-6">
+              <Link to="/" className="hover:underline text-slate-300">Home</Link>
+              <span className="text-slate-500">/</span>
+              <Link to="/features" className="hover:underline text-slate-300">Product</Link>
+              <span className="text-slate-500">/</span>
+              <span>Attendance Tracking</span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-12 gap-10 lg:gap-12 items-center">
               {/* Left Copy */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] border border-[#2E3C6B] text-xs font-semibold text-[#38BDF8]">
-                  <span className="pulse-dot mr-1" />
-                  <span>Workforce Presence · Zero Biometrics</span>
+              <div className="col-span-12 lg:col-span-6 space-y-6">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#20C997] bg-[#132338] px-3.5 py-1 rounded-full inline-block border border-[#20C997]/30">
+                  WORKFORCE PRESENCE · ZERO BIOMETRICS
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.1]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-tight text-white">
                   Attendance that reflects real work,{" "}
                   <span className="text-[#FF5A36] block">not just a login.</span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-[#9AA1B2] leading-relaxed max-w-xl">
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
                   Deskmerit computes daily attendance from tracked work, accepted calendar meetings, and manually logged off-computer sessions — so team members in client workshops all day are never marked absent.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     to="/signup"
-                    className="inline-flex items-center justify-center text-xs sm:text-sm font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-7 py-3.5 rounded-xl shadow-sm transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-sm shadow-[0_4px_16px_rgba(255,90,54,0.35)] hover:shadow-[0_6px_22px_rgba(255,90,54,0.45)] transition-all"
                   >
-                    Start free 14-day trial →
+                    <span>Start free trial</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
                     to="/demo"
-                    className="inline-flex items-center justify-center text-xs sm:text-sm font-semibold text-white bg-[#1A264F] hover:bg-[#243363] border border-[#2E3C6B] px-6 py-3.5 rounded-xl transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#10192A] hover:bg-[#1A264F] text-white font-bold text-sm border border-slate-700 hover:border-slate-500 transition-all"
                   >
-                    Book a live walkthrough
+                    <span>Book a demo</span>
                   </Link>
                 </div>
               </div>
 
               {/* Right Framed App Mockup (macOS Window + June 2026 Calendar) */}
-              <div className="lg:col-span-6">
-                <div className="rounded-2xl border border-[#24305A] bg-[#0F1730] shadow-2xl overflow-hidden">
-                  <div className="bg-[#0A0F1D] px-4 py-3 border-b border-[#24305A] flex items-center justify-between">
+              <div className="col-span-12 lg:col-span-6">
+                <div className="rounded-2xl border border-slate-700/80 bg-[#0F1E36] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                  <div className="bg-[#0A1628] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
-                      <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
-                      <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                      <span className="w-3 h-3 rounded-full bg-[#ED6A5E]" />
+                      <span className="w-3 h-3 rounded-full bg-[#F5BF4F]" />
+                      <span className="w-3 h-3 rounded-full bg-[#62C554]" />
                     </div>
-                    <span className="text-[11px] font-mono text-[#9AA1B2]">
-                      Attendance · Ananya R. (Asia/Kolkata)
-                    </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#12B886]/20 text-[#12B886]">
-                      21 Present · 2 Leave
+                    <div className="text-[11px] font-mono text-slate-300 bg-slate-900/80 px-3 py-1 rounded-md border border-slate-800">
+                      app.deskmerit.com/features/attendance-tracking
+                    </div>
+                    <span className="text-[11px] font-bold text-[#20C997] flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#20C997] animate-pulse" />
+                      Active Engine
                     </span>
                   </div>
 

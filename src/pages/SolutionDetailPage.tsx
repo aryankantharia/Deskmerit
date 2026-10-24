@@ -692,6 +692,7 @@ export function SolutionDetailPage() {
 
   const sol = SOLUTIONS[solutionKey] || SOLUTIONS["remote-teams"];
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const SolutionIcon = sol.pillars[0]?.icon || Users;
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730] font-sans">
@@ -707,35 +708,34 @@ export function SolutionDetailPage() {
           <div className="absolute -bottom-20 right-0 w-[400px] h-[400px] bg-[#38BDF8]/10 rounded-full blur-[120px] pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Breadcrumb */}
-            <div className="text-xs text-[#9AA1B2] flex items-center gap-1.5 mb-6">
-              <Link to="/" className="hover:text-white transition-colors">Home</Link>
-              <span>/</span>
-              <Link to="/solutions/it-services" className="hover:text-white transition-colors">Solutions</Link>
-              <span>/</span>
-              <span className="font-semibold text-white">{sol.title}</span>
+            {/* Breadcrumb matching Reference */}
+            <div className="text-xs text-[#20C997] font-semibold flex items-center gap-2 mb-6">
+              <Link to="/" className="hover:underline text-slate-300">Home</Link>
+              <span className="text-slate-500">/</span>
+              <Link to="/solutions/it-services" className="hover:underline text-slate-300">Solutions</Link>
+              <span className="text-slate-500">/</span>
+              <span>{sol.title}</span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column: Copy & Checklist */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] border border-[#2E3C6B] text-xs font-semibold text-[#38BDF8]">
-                  <span className="pulse-dot mr-1" />
-                  <span>{sol.badge}</span>
+            <div className="grid grid-cols-12 gap-10 lg:gap-12 items-center">
+              {/* Left Column: Headline, Overline, Description & CTAs */}
+              <div className="col-span-12 lg:col-span-6 space-y-6">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#20C997] bg-[#132338] px-3.5 py-1 rounded-full inline-block border border-[#20C997]/30">
+                  {sol.badge}
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.1]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-tight text-white">
                   {sol.title}{" "}
                   <span className="text-[#FF5A36] block">{sol.titleAccent}</span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-[#9AA1B2] leading-relaxed max-w-xl">
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
                   {sol.description}
                 </p>
 
                 {/* Proof Point Checklist with White-background bullets */}
-                <ul className="space-y-3.5 pt-2">
-                  {sol.checkPoints.map((text, i) => (
+                <ul className="space-y-3 pt-1">
+                  {sol.checkPoints.slice(0, 3).map((text, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-[#E6E2D8]">
                       <span className="w-5 h-5 rounded-full bg-white text-[#0F1730] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -745,84 +745,84 @@ export function SolutionDetailPage() {
                   ))}
                 </ul>
 
-                {/* White CTA Button on Dark Section + Secondary Action */}
-                <div className="flex flex-wrap items-center gap-4 pt-4">
+                <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     to="/signup"
-                    className="inline-flex items-center justify-center text-xs sm:text-sm font-bold text-[#0F1730] bg-white hover:bg-slate-100 px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-sm shadow-[0_4px_16px_rgba(255,90,54,0.35)] hover:shadow-[0_6px_22px_rgba(255,90,54,0.45)] transition-all"
                   >
-                    <span>Start free 14-day trial</span>
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#0F1730]" />
+                    <span>Start free trial</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
-
                   <Link
                     to="/demo"
-                    className="inline-flex items-center justify-center text-xs sm:text-sm font-semibold text-white bg-[#1A264F] hover:bg-[#243363] border border-[#2E3C6B] px-6 py-3.5 rounded-xl transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#10192A] hover:bg-[#1A264F] text-white font-bold text-sm border border-slate-700 hover:border-slate-500 transition-all"
                   >
-                    Book a live walkthrough
+                    <span>Book a demo</span>
                   </Link>
                 </div>
-
-                <p className="text-xs text-[#9AA1B2]">
-                  Trusted by 500+ tech delivery and professional service teams worldwide.
-                </p>
               </div>
 
-              {/* Right Column: High-Fidelity Product UI Mockup Card */}
-              <div className="lg:col-span-6">
-                <div className="bg-[#172348] rounded-[24px] p-6 sm:p-8 border border-[#24305A] shadow-2xl">
-                  <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#24305A]">
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-[#38BDF8]">
-                        Deskmerit Enterprise Solution
-                      </div>
-                      <div className="text-sm font-bold text-white mt-0.5">
-                        {sol.mockup.title}
-                      </div>
+              {/* Right Column: Browser Window Mockup with macOS Controls (Screenshot Reference Match) */}
+              <div className="col-span-12 lg:col-span-6">
+                <div className="rounded-2xl border border-slate-700/80 bg-[#0F1E36] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                  <div className="bg-[#0A1628] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-[#ED6A5E]" />
+                      <div className="w-3 h-3 rounded-full bg-[#F5BF4F]" />
+                      <div className="w-3 h-3 rounded-full bg-[#62C554]" />
                     </div>
-                    <span className="text-[11px] font-mono text-[#9AA1B2] bg-[#0F1730] px-2.5 py-1 rounded-md border border-[#24305A]">
-                      Live Telemetry
-                    </span>
+                    <div className="text-[11px] font-mono text-slate-300 bg-slate-900/80 px-3 py-1 rounded-md border border-slate-800">
+                      app.deskmerit.com/{sol.slug}
+                    </div>
+                    <div className="text-[11px] font-bold text-[#20C997] flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#20C997] animate-pulse" />
+                      Active Engine
+                    </div>
                   </div>
 
-                  {/* Stat Cards */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-                    {sol.mockup.stats.map((s, i) => (
-                      <div key={i} className="bg-[#0F1730] p-3.5 rounded-xl border border-[#24305A]">
-                        <div className="text-[10px] text-[#9AA1B2] truncate">{s.label}</div>
-                        <div className="text-sm font-bold text-white mt-1 flex items-center gap-1.5 truncate">
-                          <span>{s.value}</span>
-                          {s.badge && (
-                            <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#12B886]/20 text-[#12B886]">
-                              {s.badge}
-                            </span>
-                          )}
+                  <div className="p-6 space-y-4">
+                    <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-[#FFE6DF] text-[#FF5A36] flex items-center justify-center">
+                          <SolutionIcon className="w-5 h-5" />
                         </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Rows / Activity List */}
-                  <div className="space-y-2">
-                    <div className="text-xs font-bold text-[#9AA1B2] mb-2 flex items-center justify-between">
-                      <span>Operational Metrics</span>
-                      <span className="text-[10px] text-[#38BDF8]">Verified telemetry</span>
-                    </div>
-                    {sol.mockup.rows.map((r, i) => (
-                      <div
-                        key={i}
-                        className="bg-[#0F1730]/70 p-3 rounded-xl border border-[#24305A] flex items-center justify-between text-xs"
-                      >
                         <div>
-                          <div className="font-semibold text-white">{r.name}</div>
-                          <div className="text-[10px] text-[#9AA1B2]">{r.tag}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-bold text-[#FFE6DF]">{r.metric}</div>
-                          <div className="text-[10px] text-[#12B886]">{r.status}</div>
+                          <div className="text-xs font-bold text-white">{sol.mockup.title}</div>
+                          <div className="text-[10px] text-slate-400">{sol.mockup.subtitle}</div>
                         </div>
                       </div>
-                    ))}
+                      <span className="font-mono text-xs font-bold text-[#20C997]">{sol.mockup.stats[0]?.value || "1h 42m"}</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3.5 rounded-xl bg-slate-900/50 border border-slate-800 text-left">
+                        <div className="text-[10px] text-slate-400 font-bold uppercase">Attendance Today</div>
+                        <div className="text-sm font-bold text-white mt-1">6h 12m (Present)</div>
+                      </div>
+                      <div className="p-3.5 rounded-xl bg-slate-900/50 border border-slate-800 text-left">
+                        <div className="text-[10px] text-slate-400 font-bold uppercase">Surveillance Status</div>
+                        <div className="text-sm font-bold text-[#20C997] mt-1">Zero Keylogging</div>
+                      </div>
+                    </div>
+
+                    {/* Live Telemetry Rows */}
+                    <div className="space-y-2 pt-1">
+                      {sol.mockup.rows.slice(0, 2).map((r, i) => (
+                        <div
+                          key={i}
+                          className="bg-slate-900/40 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between text-xs"
+                        >
+                          <div>
+                            <div className="font-semibold text-white">{r.name}</div>
+                            <div className="text-[10px] text-slate-400">{r.tag}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-[#FFE6DF]">{r.metric}</div>
+                            <div className="text-[10px] text-[#20C997]">{r.status}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

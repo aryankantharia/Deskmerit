@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Database,
   Key,
+  Check,
 } from "lucide-react";
 
 export function PrivacyPromisePage() {

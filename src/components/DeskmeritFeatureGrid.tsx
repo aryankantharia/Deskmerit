@@ -89,18 +89,6 @@ export function DeskmeritFeatureGrid() {
     },
   ];
 
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -380, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 380, behavior: "smooth" });
-    }
-  };
-
   return (
     <section className="py-20 lg:py-28 bg-[#FBF9F5] border-b border-[#E6E2D8]/80 font-sans relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

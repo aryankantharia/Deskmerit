@@ -208,14 +208,14 @@ export function FeaturesPage() {
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     to="/signup"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#20C997] hover:bg-[#12B886] text-[#0A1628] font-extrabold text-sm shadow-[0_4px_16px_rgba(32,201,151,0.3)] hover:shadow-[0_6px_22px_rgba(32,201,151,0.4)] transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-sm shadow-[0_4px_16px_rgba(255,90,54,0.35)] hover:shadow-[0_6px_22px_rgba(255,90,54,0.45)] transition-all"
                   >
                     <span>Start free trial</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
                     to="/demo"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-transparent hover:bg-white/10 text-white font-bold text-sm border border-slate-600 transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#10192A] hover:bg-[#1A264F] text-white font-bold text-sm border border-slate-700 hover:border-slate-500 transition-all"
                   >
                     <span>Book a demo</span>
                   </Link>

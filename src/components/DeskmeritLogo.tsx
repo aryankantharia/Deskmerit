@@ -5,6 +5,7 @@ interface DeskmeritLogoProps {
   variant?: "horizontal" | "reverse" | "stacked" | "symbol";
   className?: string;
   size?: "sm" | "md" | "lg";
+  endorsement?: boolean;
 }
 
 export function DeskmeritLogo({
