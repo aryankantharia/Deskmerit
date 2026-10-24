@@ -17,14 +17,14 @@ export function DeskmeritLogo({
 
   // Scale configs based on size
   const fontSize =
-    size === "sm" ? "text-lg" : size === "lg" ? "text-2xl" : "text-[21px]";
+    size === "sm" ? "text-lg" : size === "lg" ? "text-[27px]" : "text-[23px]";
 
   if (variant === "symbol") {
     return (
       <Link
         to="/"
         aria-label="Deskmerit home"
-        className={`inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#0F1730] text-white font-extrabold text-sm ${className}`}
+        className={`inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#0F1730] text-white font-black text-base ${className}`}
       >
         <span>D</span>
       </Link>
@@ -38,12 +38,12 @@ export function DeskmeritLogo({
       className={`group inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5A36] rounded-lg py-1 ${className}`}
     >
       <span
-        className={`font-sans font-extrabold tracking-[-0.035em] leading-none ${fontSize}`}
+        className={`font-sans font-black tracking-[-0.04em] leading-none ${fontSize}`}
         style={{ color: textColor }}
       >
         deskmerit
       </span>
-      <span className="w-1.5 h-1.5 rounded-full bg-[#FF5A36] shrink-0 self-baseline mb-0.5" />
+      <span className="w-2 h-2 rounded-full bg-[#FF5A36] shrink-0 self-baseline mb-0.5" />
     </Link>
   );
 }

@@ -260,7 +260,7 @@ export function DeskmeritHeader() {
           )}
         </AnimatePresence>
 
-        {/* Responsive Mobile Navigation Drawer (Exact Match with Reference Screenshot 4) */}
+        {/* Responsive Mobile Navigation Drawer (Brand-Aligned: Exact Web Structure & Deskmerit Colors) */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -268,218 +268,359 @@ export function DeskmeritHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
-              className="fixed inset-0 z-[100] bg-white overflow-y-auto flex flex-col justify-between px-6 py-6 lg:hidden"
+              className="fixed inset-0 z-[100] bg-white overflow-y-auto flex flex-col justify-between px-6 py-6 lg:hidden font-sans"
             >
               <div>
-                {/* Top Row: Logo Left, Purple-Tinted Close X Button Right */}
+                {/* Top Row: Wordmark Logo Left, Ember Close Button Right */}
                 <div className="flex items-center justify-between pb-5 border-b border-slate-100">
                   <DeskmeritLogo variant="horizontal" size="md" />
                   <button
                     type="button"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-10 h-10 rounded-xl bg-[#F0F2FD] text-[#635BFF] hover:bg-[#E2E6FD] flex items-center justify-center transition-colors"
+                    className="w-10 h-10 rounded-xl bg-[#FFE6DF] text-[#FF5A36] hover:bg-[#FFD4CA] flex items-center justify-center transition-colors shadow-xs"
                     aria-label="Close menu"
                   >
                     <X className="w-5 h-5 stroke-[2.5]" />
                   </button>
                 </div>
 
-                {/* Main Navigation List with Dashed Dividers & Blue Carets */}
-                <div className="divide-y divide-dashed divide-slate-200 mt-2">
-                  {/* Products Item */}
+                {/* Main Navigation List with Web-Matching Structured Accordions */}
+                <div className="divide-y divide-slate-100 mt-2">
+                  {/* 1. Products Section */}
                   <div className="py-3.5">
                     <button
                       type="button"
                       onClick={() =>
                         setMobileSection(mobileSection === "products" ? null : "products")
                       }
-                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                      className="w-full flex items-center justify-between font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors text-left"
                     >
-                      <span>Products</span>
+                      <span className={mobileSection === "products" ? "text-[#FF5A36]" : ""}>
+                        Products
+                      </span>
                       <ChevronRight
-                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                        className={`w-4 h-4 text-[#FF5A36] transition-transform duration-200 ${
                           mobileSection === "products" ? "rotate-90" : ""
                         }`}
                       />
                     </button>
                     {mobileSection === "products" && (
-                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                      <div className="mt-3 pl-2 space-y-4 pt-1 animate-fade-in">
+                        {/* Featured Tracker Plus Spotlight */}
                         <Link
                           to="/features/tracker-plus"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="p-2.5 rounded-lg bg-[#FFE6DF]/60 text-xs font-bold text-[#C2361A] flex items-center justify-between"
+                          className="p-3 rounded-xl bg-[#FFE6DF]/70 border border-[#FFD4CA] text-xs font-bold text-[#C2361A] flex items-center justify-between shadow-xs"
                         >
-                          <span>Tracker Plus for Jira & DevOps</span>
-                          <span className="text-[9px] uppercase px-1.5 py-0.5 bg-[#C2361A] text-white rounded font-extrabold">★ Key</span>
+                          <div>
+                            <div className="font-extrabold text-[#C2361A]">Tracker Plus for Jira & DevOps</div>
+                            <div className="text-[11px] text-[#0F1730] font-normal mt-0.5">Start work directly from sprint tasks</div>
+                          </div>
+                          <span className="text-[9px] uppercase px-2 py-0.5 bg-[#FF5A36] text-white rounded-md font-extrabold shrink-0">
+                            ★ Key
+                          </span>
                         </Link>
-                        <Link
-                          to="/features/attendance-tracking"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Attendance & Shift Tracking
-                        </Link>
-                        <Link
-                          to="/features/automatic-time-tracking"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Automatic Computer Tracking
-                        </Link>
-                        <Link
-                          to="/download"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Download Desktop App (Win/Mac/Linux)
-                        </Link>
+
+                        {/* Group: Tracking */}
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            Tracking
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/features/automatic-time-tracking"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Automatic Computer Tracking
+                            </Link>
+                            <Link
+                              to="/features/productivity-tracking"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Productivity Scores & App Analytics
+                            </Link>
+                            <Link
+                              to="/features/document-tracking"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Document Tracking (Window Titles Only)
+                            </Link>
+                            <Link
+                              to="/features/live-status"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Live Status Feed (60s Refresh)
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Group: Bill & Report */}
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            Bill & Report
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/features/billable-hours"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Billable Hours & Client Invoicing
+                            </Link>
+                            <Link
+                              to="/features/timesheet-approvals"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Timesheet Approvals & Audit Trail
+                            </Link>
+                            <Link
+                              to="/features/project-costing"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Project Budgeting & Margins
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Group: People & Shifts */}
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            People & Shifts
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/features/attendance-tracking"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Attendance & Shift Scheduling
+                            </Link>
+                            <Link
+                              to="/features/geofenced-punch"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Geofenced Mobile Clock-in
+                            </Link>
+                            <Link
+                              to="/download"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] hover:bg-slate-100 transition-colors"
+                            >
+                              Download Desktop App (Win/Mac/Linux)
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  {/* Solutions Item */}
+                  {/* 2. Solutions Section */}
                   <div className="py-3.5">
                     <button
                       type="button"
                       onClick={() =>
                         setMobileSection(mobileSection === "solutions" ? null : "solutions")
                       }
-                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                      className="w-full flex items-center justify-between font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors text-left"
                     >
-                      <span>Solutions</span>
+                      <span className={mobileSection === "solutions" ? "text-[#FF5A36]" : ""}>
+                        Solutions
+                      </span>
                       <ChevronRight
-                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                        className={`w-4 h-4 text-[#FF5A36] transition-transform duration-200 ${
                           mobileSection === "solutions" ? "rotate-90" : ""
                         }`}
                       />
                     </button>
                     {mobileSection === "solutions" && (
-                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
-                        <Link
-                          to="/solutions/it-services"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          IT Services & Consultancies
-                        </Link>
-                        <Link
-                          to="/solutions/staff-augmentation"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Staff Augmentation
-                        </Link>
-                        <Link
-                          to="/solutions/remote-teams"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Remote & Hybrid Teams
-                        </Link>
-                        <Link
-                          to="/hrms-add-on"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Sqalible HRMS Add-on
-                        </Link>
+                      <div className="mt-3 pl-2 space-y-4 pt-1 animate-fade-in">
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            By Industry
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/solutions/it-services"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              IT Services & Consultancies
+                            </Link>
+                            <Link
+                              to="/solutions/software-development"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Software & Product Engineering
+                            </Link>
+                            <Link
+                              to="/solutions/staff-augmentation"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Staff Augmentation
+                            </Link>
+                            <Link
+                              to="/solutions/bpo-contact-centers"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              BPO & Contact Centers
+                            </Link>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            By Work Model & Ecosystem
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/solutions/remote-teams"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Remote & Hybrid Teams
+                            </Link>
+                            <Link
+                              to="/hrms-add-on"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Sqalible HRMS Add-on
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  {/* Developers / Integrations Item */}
+                  {/* 3. Integrations Section */}
                   <div className="py-3.5">
                     <button
                       type="button"
                       onClick={() =>
-                        setMobileSection(mobileSection === "developers" ? null : "developers")
+                        setMobileSection(mobileSection === "integrations" ? null : "integrations")
                       }
-                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                      className="w-full flex items-center justify-between font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors text-left"
                     >
-                      <span>Developers</span>
+                      <span className={mobileSection === "integrations" ? "text-[#FF5A36]" : ""}>
+                        Integrations
+                      </span>
                       <ChevronRight
-                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
-                          mobileSection === "developers" ? "rotate-90" : ""
+                        className={`w-4 h-4 text-[#FF5A36] transition-transform duration-200 ${
+                          mobileSection === "integrations" ? "rotate-90" : ""
                         }`}
                       />
                     </button>
-                    {mobileSection === "developers" && (
-                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
-                        <Link
-                          to="/integrations/jira"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Jira Software & Azure DevOps
-                        </Link>
-                        <Link
-                          to="/developers/mcp-server"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          Claude MCP Server
-                        </Link>
-                        <Link
-                          to="/developers"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          REST API & Webhooks
-                        </Link>
-                        <Link
-                          to="/integrations"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
-                        >
-                          All 50+ Integrations Directory
-                        </Link>
+                    {mobileSection === "integrations" && (
+                      <div className="mt-3 pl-2 space-y-4 pt-1 animate-fade-in">
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            Developer & Sprint Tools
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/integrations/jira"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Jira Software Bi-directional Sync
+                            </Link>
+                            <Link
+                              to="/integrations/azure-devops"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Azure DevOps Work Items
+                            </Link>
+                            <Link
+                              to="/developers/mcp-server"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Claude MCP AI Server
+                            </Link>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-1.5">
+                            Ecosystem & Directory
+                          </div>
+                          <div className="grid grid-cols-1 gap-1.5">
+                            <Link
+                              to="/developers"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                            >
+                              REST API & Webhooks
+                            </Link>
+                            <Link
+                              to="/integrations"
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="p-2 rounded-lg bg-[#FFE6DF]/60 text-xs font-bold text-[#C2361A] hover:text-[#FF5A36] transition-colors"
+                            >
+                              Explore all 50+ Integrations →
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  {/* Resources Item */}
+                  {/* 4. Resources Section */}
                   <div className="py-3.5">
                     <button
                       type="button"
                       onClick={() =>
                         setMobileSection(mobileSection === "resources" ? null : "resources")
                       }
-                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                      className="w-full flex items-center justify-between font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors text-left"
                     >
-                      <span>Resources</span>
+                      <span className={mobileSection === "resources" ? "text-[#FF5A36]" : ""}>
+                        Resources
+                      </span>
                       <ChevronRight
-                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                        className={`w-4 h-4 text-[#FF5A36] transition-transform duration-200 ${
                           mobileSection === "resources" ? "rotate-90" : ""
                         }`}
                       />
                     </button>
                     {mobileSection === "resources" && (
-                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                      <div className="mt-3 pl-2 space-y-3 pt-1 animate-fade-in">
                         <Link
                           to="/privacy-promise"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] block"
                         >
-                          Employee Privacy Promise
+                          Employee Privacy Promise (Zero Keylogging)
                         </Link>
                         <Link
                           to="/compare"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] block"
                         >
-                          Competitor Comparisons
+                          Competitor Comparisons (Hubstaff, Time Doctor)
                         </Link>
                         <Link
                           to="/security"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] block"
                         >
-                          Security & Encryption
+                          Security, SOC2 & GDPR Compliance
                         </Link>
                         <Link
                           to="/blog"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] block"
                         >
                           Guides & Remote Playbooks
                         </Link>
@@ -487,61 +628,73 @@ export function DeskmeritHeader() {
                     )}
                   </div>
 
-                  {/* Pricing Item (Direct Link) */}
+                  {/* Direct Link: Pricing */}
                   <div className="py-3.5">
                     <Link
                       to="/pricing"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors"
+                      className="block font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors"
                     >
                       Pricing
                     </Link>
                   </div>
 
-                  {/* Sign in Item (Direct Link) */}
+                  {/* Direct Link: Sign in */}
                   <div className="py-3.5">
                     <a
                       href="https://app.deskmerit.com"
                       target="_blank"
                       rel="noreferrer"
-                      className="block font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors"
+                      className="block font-extrabold text-[18px] text-[#0F1730] hover:text-[#FF5A36] transition-colors"
                     >
                       Sign in
                     </a>
                   </div>
                 </div>
 
-                {/* Bordered Showcase Box (Screenshot 4 Reference) */}
+                {/* Deskmerit Brand Highlight Card (Replaces Purple Box) */}
                 <Link
-                  to="/features"
+                  to="/features/tracker-plus"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="mt-6 block p-4 rounded-xl border border-slate-200 bg-white hover:border-[#635BFF] shadow-sm transition-colors group"
+                  className="mt-6 block p-4 rounded-2xl border border-[#FFE6DF] bg-gradient-to-br from-[#FFF9F7] via-white to-white hover:border-[#FF5A36] shadow-xs transition-all group"
                 >
-                  <div className="font-bold text-[14px] text-[#635BFF] group-hover:underline">
-                    See all products
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF5A36]" />
+                      <span className="font-extrabold text-[14px] text-[#0F1730] group-hover:text-[#FF5A36] transition-colors">
+                        Tracker Plus for Jira & DevOps
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-[#FF5A36] text-white">
+                      ★ Key
+                    </span>
                   </div>
-                  <div className="text-xs text-[#4A5370] mt-0.5">
-                    Explore our full product catalogue
+                  <p className="text-xs text-[#4A5370] mt-2 leading-relaxed">
+                    Synchronize billable work logs directly from Jira issues and Azure DevOps boards without manual time entry.
+                  </p>
+                  <div className="mt-3 flex items-center gap-1.5 text-xs font-bold text-[#FF5A36]">
+                    <span>Explore Tracker Plus</span>
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>
               </div>
 
-              {/* Bottom Side-by-Side CTAs (Screenshot 4 Reference) */}
-              <div className="pt-6 pb-2 grid grid-cols-2 gap-3 border-t border-slate-100 mt-6">
+              {/* Bottom Side-by-Side CTAs (Deskmerit Brand Colors: Ember Coral + White/Navy) */}
+              <div className="pt-6 pb-2 grid grid-cols-2 gap-3 border-t border-slate-100 mt-6 bg-white">
                 <Link
                   to="/signup"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 px-4 rounded-xl bg-[#635BFF] hover:bg-[#5248EE] text-white font-bold text-xs sm:text-sm text-center shadow-md flex items-center justify-center gap-1"
+                  className="py-3.5 px-4 rounded-xl bg-[#FF5A36] hover:bg-[#E04826] text-white font-bold text-xs sm:text-sm text-center shadow-md flex items-center justify-center gap-1.5 transition-all"
                 >
-                  <span>Start now</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <span>Start free trial</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to="/demo"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 px-4 rounded-xl bg-white border border-slate-300 text-[#0F1730] font-bold text-xs sm:text-sm text-center hover:bg-slate-50 shadow-sm flex items-center justify-center"
+                  className="py-3.5 px-4 rounded-xl bg-white border border-slate-300 text-[#0F1730] font-bold text-xs sm:text-sm text-center hover:bg-slate-50 shadow-sm flex items-center justify-center transition-all"
                 >
-                  <span>Contact sales</span>
+                  <span>Book a demo</span>
                 </Link>
               </div>
             </motion.div>

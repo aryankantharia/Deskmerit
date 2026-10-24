@@ -82,6 +82,15 @@
   background: #4A5370;
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Marquee styles */
 @keyframes marquee {
   from { transform: translateX(0); }
