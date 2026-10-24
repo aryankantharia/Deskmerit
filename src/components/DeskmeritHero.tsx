@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   ShieldCheck,
@@ -17,13 +17,6 @@ import {
 } from "lucide-react";
 
 export function DeskmeritHero() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-
-  const handleStartTrial = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate(`/signup?email=${encodeURIComponent(email)}`);
-  };
 
   const partnerTools = [
     { name: "Jira Software", category: "Task Sync" },
@@ -73,52 +66,36 @@ export function DeskmeritHero() {
               Connect Jira or Azure DevOps, press start, and defensible client hours and attendance build on their own.
             </p>
 
-            {/* Email Input Lead Capture (Exact Match with Image 4 [Enter email] [Let's talk]) */}
-            <form onSubmit={handleStartTrial} className="pt-2 max-w-lg">
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-1.5 rounded-2xl bg-white border border-slate-300 focus-within:border-[#FF5A36] focus-within:ring-2 focus-within:ring-[#FF5A36]/20 shadow-sm transition-all">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your work email"
-                  required
-                  className="w-full px-4 py-3 text-xs sm:text-sm text-[#0F1730] placeholder-slate-400 bg-transparent focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 px-6 py-3 rounded-xl bg-[#0F1730] hover:bg-[#FF5A36] text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-1.5"
-                >
-                  <span>Start free trial</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </form>
+            {/* Direct High-Converting CTAs (Email input removed as requested) */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <Link
+                to="/signup"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E04422] text-white font-bold text-sm shadow-[0_4px_16px_rgba(255,90,54,0.32)] hover:shadow-[0_6px_22px_rgba(255,90,54,0.45)] transition-all"
+              >
+                <span>Start free trial</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/demo"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-[#0F1730] font-bold text-sm border border-slate-300 shadow-sm hover:border-slate-400 transition-all"
+              >
+                <span>Book a demo</span>
+              </Link>
+            </div>
 
-            {/* Secondary Option & Trust Microcopy */}
-            <div className="space-y-2 pt-1">
-              <div className="flex items-center gap-4 text-xs font-medium text-[#4A5370]">
-                <span>or</span>
-                <Link
-                  to="/demo"
-                  className="font-bold text-[#FF5A36] hover:underline flex items-center gap-1"
-                >
-                  Book a 20-minute product demo <ArrowRight className="w-3 h-3" />
-                </Link>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 text-xs text-[#9AA1B2]">
-                <span className="flex items-center gap-1 text-[#4A5370]">
-                  <Check className="w-3.5 h-3.5 text-[#12B886]" /> No credit card required
-                </span>
-                <span>·</span>
-                <span className="flex items-center gap-1 text-[#4A5370]">
-                  <Check className="w-3.5 h-3.5 text-[#12B886]" /> Windows, macOS & Linux
-                </span>
-                <span>·</span>
-                <span className="flex items-center gap-1 text-[#4A5370]">
-                  <Clock className="w-3.5 h-3.5 text-[#FF5A36]" /> Setup in under 10 minutes
-                </span>
-              </div>
+            {/* Trust Microcopy */}
+            <div className="flex flex-wrap items-center gap-3 text-xs text-[#9AA1B2] pt-1">
+              <span className="flex items-center gap-1 text-[#4A5370]">
+                <Check className="w-3.5 h-3.5 text-[#12B886]" /> 14-day free trial · No credit card
+              </span>
+              <span>·</span>
+              <span className="flex items-center gap-1 text-[#4A5370]">
+                <Check className="w-3.5 h-3.5 text-[#12B886]" /> Windows, macOS & Linux
+              </span>
+              <span>·</span>
+              <span className="flex items-center gap-1 text-[#4A5370]">
+                <Clock className="w-3.5 h-3.5 text-[#FF5A36]" /> 10-minute setup
+              </span>
             </div>
           </div>
 
