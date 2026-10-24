@@ -2,30 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritLogo } from "./DeskmeritLogo";
 import { FOOTER_SECTIONS, LEGAL_LINKS } from "../data/deskmeritNav";
-import { Linkedin, Twitter, Youtube, ShieldCheck, MapPin, Phone, Mail } from "lucide-react";
+import { Linkedin, Twitter, Youtube, ShieldCheck, Phone, ExternalLink } from "lucide-react";
 
 export function DeskmeritFooter() {
   return (
     <footer className="bg-[#0A0F1D] text-[#F7F4EE] pt-16 pb-12 border-t border-[#24305A] font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Footer Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 pb-12 border-b border-[#24305A]">
-          {/* Brand info column */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Brand Header Banner */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-10 border-b border-[#24305A]">
+          <div className="space-y-3 max-w-xl">
             <DeskmeritLogo variant="reverse" endorsement={true} size="md" />
-
-            <p className="text-xs sm:text-sm text-[#9AA1B2] max-w-sm mt-3 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
               Time tracking people trust. Most tools are designed for the person watching. Deskmerit is designed for both sides of the screen.
             </p>
+          </div>
 
-            <div className="pt-2">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A264F] text-xs text-[#E6E2D8] border border-[#2E3C6B]">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#12B886]" />
-                <span>Zero keystrokes · No webcams · Pure trust</span>
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] text-xs text-[#E6E2D8] border border-[#2E3C6B]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#12B886]" />
+              <span>Zero keystrokes · No webcams · Pure trust</span>
+            </span>
 
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex items-center gap-2">
               <a
                 href="https://linkedin.com"
                 target="_blank"
@@ -55,42 +53,71 @@ export function DeskmeritFooter() {
               </a>
             </div>
           </div>
-
-          {/* Nav columns */}
-          {FOOTER_SECTIONS.slice(0, 5).map((section) => (
-            <div key={section.title} className="space-y-3">
-              <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#9AA1B2]">
-                {section.title}
-              </h4>
-              <ul className="space-y-2 text-xs">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
 
-        {/* Global Support Centers & Client Offices (Sqalible Pattern) */}
-        <div className="py-10 border-b border-[#24305A]">
+        {/* All 7 Sitemap Columns Grid: Product, Solutions, Regions, Compare, Resources, Company, Legal */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-8 pb-12 border-b border-[#24305A]">
+          {FOOTER_SECTIONS.map((section) => {
+            const isCompany = section.title === "Company";
+            const isLegal = section.title === "Legal";
+
+            return (
+              <div key={section.title} className="space-y-3">
+                <div className="flex items-center gap-1.5">
+                  <h4
+                    className={`text-[11px] font-bold uppercase tracking-wider ${
+                      isCompany
+                        ? "text-[#FF5A36]"
+                        : isLegal
+                        ? "text-[#38BDF8]"
+                        : "text-[#9AA1B2]"
+                    }`}
+                  >
+                    {section.title}
+                  </h4>
+                  {isCompany && (
+                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#FF5A36]/20 text-[#FFA994] font-mono">
+                      8
+                    </span>
+                  )}
+                  {isLegal && (
+                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#38BDF8]/20 text-[#BAE6FD] font-mono">
+                      6
+                    </span>
+                  )}
+                </div>
+
+                <ul className="space-y-2 text-xs">
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      {link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors inline-flex items-center gap-1"
+                        >
+                          <span>{link.label}</span>
+                          <ExternalLink className="w-3 h-3 opacity-60" />
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors block"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Global Support Centers & Client Offices */}
+        <div className="py-2">
           <div className="text-[11px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-6 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#12B886]" />
             <span>Global Support Centers & Client Offices</span>
@@ -169,7 +196,7 @@ export function DeskmeritFooter() {
         </div>
 
         {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#9AA1B2]">
+        <div className="pt-8 border-t border-[#24305A] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#9AA1B2]">
           <div className="text-center md:text-left">
             <span>© 2026 Kombee Technologies (India) Pvt. Ltd. · </span>
             <span className="font-medium text-[#E6E2D8]">A Kombee Technologies product</span>

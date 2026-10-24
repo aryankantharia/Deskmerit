@@ -214,6 +214,18 @@ export const FOOTER_SECTIONS = [
       { label: "Contact", href: "/contact" },
       { label: "Book a demo", href: "/demo" },
       { label: "Start free trial", href: "/signup" },
+      { label: "Log in", href: "https://app.deskmerit.com", external: true },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms of Service", href: "/legal/terms" },
+      { label: "Privacy Policy", href: "/legal/privacy" },
+      { label: "Data Processing Agreement", href: "/legal/dpa" },
+      { label: "Sub-processors", href: "/legal/subprocessors" },
+      { label: "Cookie Policy", href: "/legal/cookies" },
+      { label: "Service Level Agreement", href: "/legal/sla" },
     ],
   },
 ];
