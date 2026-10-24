@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
+  ChevronRight,
   ArrowRight,
   Menu,
   X,
@@ -26,6 +27,7 @@ export function DeskmeritHeader() {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -39,8 +41,20 @@ export function DeskmeritHeader() {
   }, []);
 
   useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     setActiveMenu(null);
     setMobileMenuOpen(false);
+    setMobileSection(null);
   }, [location.pathname]);
 
   const handleMouseEnter = (menu: string) => {
@@ -246,119 +260,288 @@ export function DeskmeritHeader() {
           )}
         </AnimatePresence>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Responsive Mobile Navigation Drawer (Exact Match with Reference Screenshot 4) */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-slate-200 bg-white text-[#0F1730] px-4 py-6 space-y-6 overflow-hidden max-h-[85vh] overflow-y-auto shadow-xl"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              className="fixed inset-0 z-[100] bg-white overflow-y-auto flex flex-col justify-between px-6 py-6 lg:hidden"
             >
-              <div className="space-y-4">
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                    Products
+              <div>
+                {/* Top Row: Logo Left, Purple-Tinted Close X Button Right */}
+                <div className="flex items-center justify-between pb-5 border-b border-slate-100">
+                  <DeskmeritLogo variant="horizontal" size="md" />
+                  <button
+                    type="button"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-10 h-10 rounded-xl bg-[#F0F2FD] text-[#635BFF] hover:bg-[#E2E6FD] flex items-center justify-center transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-5 h-5 stroke-[2.5]" />
+                  </button>
+                </div>
+
+                {/* Main Navigation List with Dashed Dividers & Blue Carets */}
+                <div className="divide-y divide-dashed divide-slate-200 mt-2">
+                  {/* Products Item */}
+                  <div className="py-3.5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMobileSection(mobileSection === "products" ? null : "products")
+                      }
+                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                    >
+                      <span>Products</span>
+                      <ChevronRight
+                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                          mobileSection === "products" ? "rotate-90" : ""
+                        }`}
+                      />
+                    </button>
+                    {mobileSection === "products" && (
+                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                        <Link
+                          to="/features/tracker-plus"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2.5 rounded-lg bg-[#FFE6DF]/60 text-xs font-bold text-[#C2361A] flex items-center justify-between"
+                        >
+                          <span>Tracker Plus for Jira & DevOps</span>
+                          <span className="text-[9px] uppercase px-1.5 py-0.5 bg-[#C2361A] text-white rounded font-extrabold">★ Key</span>
+                        </Link>
+                        <Link
+                          to="/features/attendance-tracking"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Attendance & Shift Tracking
+                        </Link>
+                        <Link
+                          to="/features/automatic-time-tracking"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Automatic Computer Tracking
+                        </Link>
+                        <Link
+                          to="/download"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Download Desktop App (Win/Mac/Linux)
+                        </Link>
+                      </div>
+                    )}
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <Link to="/features" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      All Features Overview
+
+                  {/* Solutions Item */}
+                  <div className="py-3.5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMobileSection(mobileSection === "solutions" ? null : "solutions")
+                      }
+                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                    >
+                      <span>Solutions</span>
+                      <ChevronRight
+                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                          mobileSection === "solutions" ? "rotate-90" : ""
+                        }`}
+                      />
+                    </button>
+                    {mobileSection === "solutions" && (
+                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                        <Link
+                          to="/solutions/it-services"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          IT Services & Consultancies
+                        </Link>
+                        <Link
+                          to="/solutions/staff-augmentation"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Staff Augmentation
+                        </Link>
+                        <Link
+                          to="/solutions/remote-teams"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Remote & Hybrid Teams
+                        </Link>
+                        <Link
+                          to="/hrms-add-on"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Sqalible HRMS Add-on
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Developers / Integrations Item */}
+                  <div className="py-3.5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMobileSection(mobileSection === "developers" ? null : "developers")
+                      }
+                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                    >
+                      <span>Developers</span>
+                      <ChevronRight
+                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                          mobileSection === "developers" ? "rotate-90" : ""
+                        }`}
+                      />
+                    </button>
+                    {mobileSection === "developers" && (
+                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                        <Link
+                          to="/integrations/jira"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Jira Software & Azure DevOps
+                        </Link>
+                        <Link
+                          to="/developers/mcp-server"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Claude MCP Server
+                        </Link>
+                        <Link
+                          to="/developers"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          REST API & Webhooks
+                        </Link>
+                        <Link
+                          to="/integrations"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          All 50+ Integrations Directory
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Resources Item */}
+                  <div className="py-3.5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMobileSection(mobileSection === "resources" ? null : "resources")
+                      }
+                      className="w-full flex items-center justify-between font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors text-left"
+                    >
+                      <span>Resources</span>
+                      <ChevronRight
+                        className={`w-4 h-4 text-[#635BFF] transition-transform duration-200 ${
+                          mobileSection === "resources" ? "rotate-90" : ""
+                        }`}
+                      />
+                    </button>
+                    {mobileSection === "resources" && (
+                      <div className="mt-3 pl-2 grid grid-cols-1 gap-2 pt-1 animate-fade-in">
+                        <Link
+                          to="/privacy-promise"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Employee Privacy Promise
+                        </Link>
+                        <Link
+                          to="/compare"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Competitor Comparisons
+                        </Link>
+                        <Link
+                          to="/security"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Security & Encryption
+                        </Link>
+                        <Link
+                          to="/blog"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="p-2 rounded-lg bg-slate-50 text-xs font-bold text-[#0A2540] hover:text-[#FF5A36]"
+                        >
+                          Guides & Remote Playbooks
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Pricing Item (Direct Link) */}
+                  <div className="py-3.5">
+                    <Link
+                      to="/pricing"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors"
+                    >
+                      Pricing
                     </Link>
-                    <Link to="/features/tracker-plus" className="p-2.5 rounded-lg bg-[#FFE6DF]/50 text-xs font-bold text-[#C2361A]">
-                      Tracker Plus ★ Key
-                    </Link>
-                    <Link to="/features/attendance-tracking" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Attendance Tracking
-                    </Link>
-                    <Link to="/features/automatic-time-tracking" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Automatic Tracking
-                    </Link>
-                    <Link to="/download" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Download Desktop App
-                    </Link>
+                  </div>
+
+                  {/* Sign in Item (Direct Link) */}
+                  <div className="py-3.5">
+                    <a
+                      href="https://app.deskmerit.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block font-bold text-[18px] text-[#0A2540] hover:text-[#635BFF] transition-colors"
+                    >
+                      Sign in
+                    </a>
                   </div>
                 </div>
 
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                    Solutions
+                {/* Bordered Showcase Box (Screenshot 4 Reference) */}
+                <Link
+                  to="/features"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mt-6 block p-4 rounded-xl border border-slate-200 bg-white hover:border-[#635BFF] shadow-sm transition-colors group"
+                >
+                  <div className="font-bold text-[14px] text-[#635BFF] group-hover:underline">
+                    See all products
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <Link to="/solutions/it-services" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      IT Services & Consultancies
-                    </Link>
-                    <Link to="/solutions/staff-augmentation" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Staff Augmentation
-                    </Link>
-                    <Link to="/solutions/remote-teams" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Remote & Hybrid Teams
-                    </Link>
-                    <Link to="/hrms-add-on" className="p-2.5 rounded-lg bg-[#FFE6DF]/50 text-xs font-bold text-[#C2361A]">
-                      Sqalible HRMS Add-on
-                    </Link>
+                  <div className="text-xs text-[#4A5370] mt-0.5">
+                    Explore our full product catalogue
                   </div>
-                </div>
-
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                    Integrations
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <Link to="/integrations/jira" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Jira & Azure DevOps
-                    </Link>
-                    <Link to="/developers/mcp-server" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Claude MCP Server
-                    </Link>
-                    <Link to="/integrations" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      All 50+ Integrations
-                    </Link>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                    Resources & Trust
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <Link to="/privacy-promise" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Employee Privacy Promise
-                    </Link>
-                    <Link to="/compare" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Competitor Comparisons
-                    </Link>
-                    <Link to="/security" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Security & Compliance
-                    </Link>
-                    <Link to="/pricing" className="p-2.5 rounded-lg bg-slate-50 text-xs font-semibold hover:text-[#FF5A36]">
-                      Pricing Plans
-                    </Link>
-                  </div>
-                </div>
+                </Link>
               </div>
 
-              {/* Mobile Actions */}
-              <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
-                <a
-                  href="https://app.deskmerit.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-3 rounded-xl border border-slate-300 text-center font-bold text-sm text-[#0F1730] hover:bg-slate-50"
-                >
-                  Sign in to Web App
-                </a>
-                <Link
-                  to="/demo"
-                  className="w-full py-3 rounded-xl border border-slate-300 text-center font-bold text-sm text-[#0F1730] hover:bg-slate-50"
-                >
-                  Book a Product Demo
-                </Link>
+              {/* Bottom Side-by-Side CTAs (Screenshot 4 Reference) */}
+              <div className="pt-6 pb-2 grid grid-cols-2 gap-3 border-t border-slate-100 mt-6">
                 <Link
                   to="/signup"
-                  className="w-full py-3.5 rounded-xl bg-[#FF5A36] text-white text-center font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 px-4 rounded-xl bg-[#635BFF] hover:bg-[#5248EE] text-white font-bold text-xs sm:text-sm text-center shadow-md flex items-center justify-center gap-1"
                 >
-                  <span>Start 14-Day Free Trial</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Start now</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/demo"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 px-4 rounded-xl bg-white border border-slate-300 text-[#0F1730] font-bold text-xs sm:text-sm text-center hover:bg-slate-50 shadow-sm flex items-center justify-center"
+                >
+                  <span>Contact sales</span>
                 </Link>
               </div>
             </motion.div>

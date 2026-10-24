@@ -19,15 +19,109 @@ import {
 export function DeskmeritHero() {
 
   const partnerTools = [
-    { name: "Jira Software", category: "Task Sync" },
-    { name: "Azure DevOps", category: "Sprint Boards" },
-    { name: "OpenProject", category: "Open Source" },
-    { name: "Google Calendar", category: "Meeting Presence" },
-    { name: "Outlook 365", category: "Calendar Work" },
-    { name: "Slack", category: "/status Command" },
-    { name: "Microsoft Teams", category: "Daily Feed" },
-    { name: "Sqalible HRMS", category: "Native 1-Click Module" },
-    { name: "Claude MCP Server", category: "AI Workforce Query" },
+    {
+      name: "Jira Software",
+      category: "Task Sync",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <path d="M11.53 2c0 5.25 4.25 9.5 9.5 9.5h.97v-1.94c0-4.17-3.39-7.56-7.56-7.56H11.53z" fill="#0052CC"/>
+          <path d="M6.78 6.75c0 5.25 4.25 9.5 9.5 9.5h.97v-1.94c0-4.17-3.39-7.56-7.56-7.56H6.78z" fill="#2684FF"/>
+          <path d="M2.03 11.5c0 5.25 4.25 9.5 9.5 9.5h.97v-1.94c0-4.17-3.39-7.56-7.56-7.56H2.03z" fill="#0052CC"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Azure DevOps",
+      category: "Sprint Boards",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <path d="M22 6.84L14.7 2 6.5 5.5v4.3l5.2 2.3-5.2 2.3v4.1L14.7 22 22 17.16V6.84z" fill="#0078D7"/>
+          <path d="M6.5 9.8l5.2 2.3-5.2 2.3L2 12l4.5-2.2z" fill="#005A9E"/>
+        </svg>
+      ),
+    },
+    {
+      name: "OpenProject",
+      category: "Open Source",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" fill="#1A5380"/>
+          <circle cx="12" cy="12" r="5" fill="#35C4EE"/>
+          <circle cx="12" cy="12" r="2.2" fill="#FFFFFF"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Google Calendar",
+      category: "Meeting Presence",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="3" y="4" width="18" height="17" rx="3" fill="#FFFFFF" stroke="#4285F4" strokeWidth="1.5"/>
+          <path d="M3 8h18" stroke="#4285F4" strokeWidth="1.5"/>
+          <circle cx="8" cy="12" r="1.2" fill="#EA4335"/>
+          <circle cx="12" cy="12" r="1.2" fill="#FBBC05"/>
+          <circle cx="16" cy="12" r="1.2" fill="#34A853"/>
+          <circle cx="8" cy="16" r="1.2" fill="#4285F4"/>
+          <circle cx="12" cy="16" r="1.2" fill="#EA4335"/>
+          <circle cx="16" cy="16" r="1.2" fill="#34A853"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Outlook 365",
+      category: "Calendar Work",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="7" y="4" width="14" height="16" rx="2" fill="#0078D4"/>
+          <rect x="3" y="7" width="9" height="10" rx="1.5" fill="#005A9E"/>
+          <circle cx="7.5" cy="12" r="2.2" fill="#FFFFFF" fillOpacity="0.9"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Slack",
+      category: "/status Command",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0">
+          <path d="M6 15a2 2 0 1 1-2-2h2v2zm1 0a2 2 0 1 1 2 2v-5H7v3z" fill="#E01E5A"/>
+          <path d="M9 6a2 2 0 1 1-2-2v2h2zm0 1a2 2 0 1 1 2 2H6V7h3z" fill="#36C5F0"/>
+          <path d="M18 9a2 2 0 1 1 2 2h-2V9zm-1 0a2 2 0 1 1-2-2v5h2V9z" fill="#2EB67D"/>
+          <path d="M15 18a2 2 0 1 1 2 2v-2h-2zm0-1a2 2 0 1 1-2-2h5v2h-3z" fill="#ECB22E"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Microsoft Teams",
+      category: "Daily Feed",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="7" y="4" width="14" height="16" rx="3" fill="#5059C9"/>
+          <rect x="3" y="7" width="9" height="10" rx="2" fill="#7B83EB"/>
+          <path d="M6 10h3v4H6z" fill="#FFFFFF"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Sqalible HRMS",
+      category: "Native 1-Click Module",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="#0F1730"/>
+          <circle cx="12" cy="12" r="5" fill="#FF5A36"/>
+          <circle cx="12" cy="12" r="2" fill="#FFFFFF"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Claude MCP Server",
+      category: "AI Workforce Query",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="#CC785C"/>
+          <path d="M12 6l1.8 4.2L18 12l-4.2 1.8L12 18l-1.8-4.2L6 12l4.2-1.8L12 6z" fill="#FFFFFF"/>
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -83,19 +177,29 @@ export function DeskmeritHero() {
               </Link>
             </div>
 
-            {/* Trust Microcopy */}
-            <div className="flex flex-wrap items-center gap-3 text-xs text-[#9AA1B2] pt-1">
-              <span className="flex items-center gap-1 text-[#4A5370]">
-                <Check className="w-3.5 h-3.5 text-[#12B886]" /> 14-day free trial · No credit card
-              </span>
-              <span>·</span>
-              <span className="flex items-center gap-1 text-[#4A5370]">
-                <Check className="w-3.5 h-3.5 text-[#12B886]" /> Windows, macOS & Linux
-              </span>
-              <span>·</span>
-              <span className="flex items-center gap-1 text-[#4A5370]">
-                <Clock className="w-3.5 h-3.5 text-[#FF5A36]" /> 10-minute setup
-              </span>
+            {/* Prominent High-Visibility Trust Bar (Screenshot 3 Highlighted) */}
+            <div className="pt-4">
+              <div className="inline-flex flex-wrap items-center gap-2.5 sm:gap-4 px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F1730]">
+                  <Check className="w-4 h-4 text-[#12B886] stroke-[2.5]" />
+                  <span>14-day free trial</span>
+                  <span className="text-[11px] font-normal text-[#4A5370]">· No credit card</span>
+                </div>
+
+                <span className="text-slate-300 hidden sm:inline">·</span>
+
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F1730]">
+                  <Check className="w-4 h-4 text-[#12B886] stroke-[2.5]" />
+                  <span>Windows, macOS & Linux</span>
+                </div>
+
+                <span className="text-slate-300 hidden sm:inline">·</span>
+
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F1730]">
+                  <Clock className="w-4 h-4 text-[#FF5A36] stroke-[2.5]" />
+                  <span>10-minute setup</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -221,19 +325,20 @@ export function DeskmeritHero() {
           </div>
         </div>
 
-        {/* Integration Partner Badges (Clean Continuous Row) */}
+        {/* Integration Partner Badges (Screenshot 2: With Real Brand Logos) */}
         <div className="mt-20 pt-10 border-t border-slate-100">
           <p className="text-center text-[11px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-6">
             Trusted by modern delivery teams across Jira, Azure DevOps, and Sqalible HRMS
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-5xl mx-auto">
             {partnerTools.map((tool) => (
               <div
                 key={tool.name}
-                className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2 hover:border-[#FF5A36] transition-colors"
+                className="px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200/90 shadow-subtle flex items-center gap-2 hover:border-[#FF5A36] transition-colors"
               >
+                {tool.icon}
                 <span className="text-xs font-bold text-[#0F1730]">{tool.name}</span>
-                <span className="text-[10px] text-[#4A5370] bg-white px-1.5 py-0.5 rounded border border-slate-200/50">
+                <span className="text-[10px] text-[#4A5370] bg-white px-1.5 py-0.5 rounded border border-slate-200/50 font-medium">
                   {tool.category}
                 </span>
               </div>
