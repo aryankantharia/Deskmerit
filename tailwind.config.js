@@ -1,63 +1,99 @@
-export default {content: [
-  './index.html',
-  './src/**/*.{js,ts,jsx,tsx}'
-],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}'
+  ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Poppins", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Chillax", "Poppins", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["'Martel Sans'", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        display: ["'Martel Sans'", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        human: ["Lora", "Georgia", "serif"],
       },
       colors: {
+        midnight: {
+          DEFAULT: "#0F1730",
+          50: "#F2F4F8",
+          100: "#E5E9F1",
+          800: "#172348",
+          900: "#0F1730",
+        },
+        ember: {
+          DEFAULT: "#FF5A36",
+          hover: "#E94A27",
+          deep: "#C2361A",
+          tint: "#FFE6DF",
+          subtle: "#FFF1ED",
+        },
+        paper: {
+          DEFAULT: "#F7F4EE",
+          dark: "#EDE9E0",
+          card: "#FFFFFF",
+        },
+        dusk: {
+          DEFAULT: "#24305A",
+          dark: "#1B2446",
+          light: "#334173",
+        },
+        slate: {
+          DEFAULT: "#4A5370",
+          muted: "#6B7594",
+          light: "#8F97B0",
+        },
+        mist: {
+          DEFAULT: "#E6E2D8",
+          dark: "#D6D1C5",
+          light: "#F0ECE3",
+        },
+        live: {
+          mint: "#12B886",
+          amber: "#F5A524",
+          iris: "#5B6CFF",
+          fog: "#9AA1B2",
+          rose: "#E5484D",
+        },
+        // Backwards compatibility with generic tokens
         primary: {
-          DEFAULT: "#047B72",
-          hover: "#046962",
-          pressed: "#03544E",
-          bright: "#069A8E",
-          light: "#ECFCFA",
-          disabled: "#9FE1DC",
+          DEFAULT: "#FF5A36",
+          hover: "#E94A27",
+          pressed: "#C2361A",
+          bright: "#FF5A36",
+          light: "#FFE6DF",
+          disabled: "#FFA994",
         },
         secondary: {
-          DEFAULT: "#EF6503",
-          hover: "#FA7C37",
-          light: "#FEE9DA",
+          DEFAULT: "#0F1730",
+          hover: "#24305A",
+          light: "#F7F4EE",
         },
-        ai: {
-          DEFAULT: "#047B72",
-          hover: "#069A8E",
-          light: "#ECFCFA",
-        },
-        accent: {
-          DEFAULT: "#C98272",
-          light: "#FAF1EF",
-        },
-        neutral: {
-          50: "#FAFBFC",
-          100: "#F4F6F8",
-          200: "#E7EBF0",
-          300: "#D5DBE2",
-          400: "#B5BEC9",
-          500: "#8A95A3",
-          600: "#687483",
-          700: "#4B5563",
-          800: "#303946",
-          900: "#17202A",
-        },
-        success: { DEFAULT: "#15803D", light: "#DCFCE7", border: "#BBF7D0" },
-        warning: { DEFAULT: "#B45309", light: "#FEF3C7", border: "#FDE68A" },
-        error: { DEFAULT: "#DC2626", light: "#FEE2E2", border: "#FECACA" },
-        info: { DEFAULT: "#0284C7", light: "#E0F2FE", border: "#BAE6FD" },
       },
-      fontSize: {
-        display: ["48px", { lineHeight: "56px", fontWeight: "700" }],
-        h1: ["32px", { lineHeight: "40px", fontWeight: "700" }],
-        h2: ["24px", { lineHeight: "32px", fontWeight: "600" }],
-        h3: ["20px", { lineHeight: "28px", fontWeight: "600" }],
-        h4: ["18px", { lineHeight: "26px", fontWeight: "500" }],
-        body1: ["16px", { lineHeight: "24px" }],
-        body2: ["14px", { lineHeight: "20px" }],
-        caption: ["12px", { lineHeight: "16px" }],
+      boxShadow: {
+        'subtle': '0 2px 10px rgba(15, 23, 48, 0.04)',
+        'card': '0 4px 20px rgba(15, 23, 48, 0.06)',
+        'elevated': '0 12px 36px rgba(15, 23, 48, 0.09)',
+        'glow-ember': '0 0 24px rgba(255, 90, 54, 0.25)',
+      },
+      borderRadius: {
+        'button': '12px',
+        'card': '20px',
+        'widget': '18px',
+      },
+      animation: {
+        'pulse-gentle': 'pulseGentle 1.6s ease-in-out infinite',
+        'marquee': 'marquee 35s linear infinite',
+      },
+      keyframes: {
+        pulseGentle: {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.22)', opacity: '0.8' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
     },
   },
+  plugins: [],
 };

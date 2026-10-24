@@ -1,139 +1,147 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, Navigate, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { CurrencyProvider } from "./utils/currencyContext";
 import { RouteEffects } from "./components/layout/RouteEffects";
 import { Home } from "./pages/Home";
-import { PlatformPage } from "./pages/PlatformPage";
-import { SolutionPage } from "./pages/SolutionPage";
-import { WhyPage } from "./pages/WhyPage";
-import { ComparePage } from "./pages/ComparePage";
-import { IntegrationsPage } from "./pages/IntegrationsPage";
-import { InfoPage } from "./pages/InfoPage";
+import { FeaturesPage } from "./pages/FeaturesPage";
+import { TrackerPlusPage } from "./pages/TrackerPlusPage";
+import { AttendanceTrackingPage } from "./pages/AttendanceTrackingPage";
 import { PricingPage } from "./pages/PricingPage";
-import { ResourcePage } from "./pages/ResourcePage";
-import { ToolPage } from "./pages/ToolPage";
-import { CompanyPage } from "./pages/CompanyPage";
-import { ContactPage } from "./pages/ContactPage";
+import { ItServicesPage } from "./pages/ItServicesPage";
+import { HrmsAddonPage } from "./pages/HrmsAddonPage";
+import { IndiaPage } from "./pages/IndiaPage";
+import { IntegrationsPage } from "./pages/IntegrationsPage";
+import { DeskTimeAlternativePage } from "./pages/DeskTimeAlternativePage";
+import { PrivacyPromisePage } from "./pages/PrivacyPromisePage";
+import { AboutPage } from "./pages/AboutPage";
+import { BlogPage } from "./pages/BlogPage";
+import { DemoPage } from "./pages/DemoPage";
+import { DownloadPage } from "./pages/DownloadPage";
+import { ToolsAndTemplatesPage } from "./pages/ToolsAndTemplatesPage";
+import { LegalPage } from "./pages/LegalPage";
 import { TrialSignupPage } from "./pages/TrialSignupPage";
-import { TrialWorkspacePage } from "./pages/TrialWorkspacePage";
-import { BlogListingPage } from "./pages/BlogListingPage";
-import { BlogDetailPage } from "./pages/BlogDetailPage";
-import { ScalForcePage } from "./pages/ScalForcePage";
-import { ScalForceComparePage } from "./pages/ScalForceComparePage";
-import { NotFound } from "./pages/NotFound";
-
-function RedirectIndustry() {
-  const { slug } = useParams();
-  return <Navigate to={`/solutions/${slug}`} replace />;
-}
-
-const resourcePaths = [
-  "/resources",
-  "/resources/guides",
-  "/resources/webinars",
-  "/customers",
-  "/help",
-  "/changelog",
-  "/status",
-  "/tools/templates"
-];
-
-const infoPaths = [
-  "/responsible-ai",
-  "/security",
-  "/privacy",
-  "/terms",
-  "/dpa",
-  "/subprocessors",
-  "/accessibility",
-  "/cookie-settings"
-];
-
-const companyPaths = [
-  "/about",
-  "/careers",
-  "/partners",
-  "/press",
-  "/life-at-sqalible",
-  "/life-at-squalible",
-  "/life"
-];
 
 export function App() {
   return (
-    <BrowserRouter>
-      <RouteEffects />
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <CurrencyProvider>
+      <BrowserRouter>
+        <RouteEffects />
+        <Routes>
+          {/* Core Home */}
+          <Route path="/" element={<Home />} />
 
-        {/* Core Platform & Solution Routes */}
-        <Route path="/platform" element={<PlatformPage />} />
-        <Route path="/platform/:slug" element={<PlatformPage />} />
-        <Route path="/solutions" element={<SolutionPage />} />
-        <Route path="/solutions/:slug" element={<SolutionPage />} />
-        <Route path="/why-sqalible" element={<WhyPage />} />
-        <Route path="/compare/:slug" element={<ComparePage />} />
-        <Route path="/integrations" element={<IntegrationsPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/scalforce" element={<ScalForcePage />} />
-        <Route path="/scalforce/direct-employment-vs-scalforce" element={<ScalForceComparePage />} />
-        <Route path="/scalforce-vs-direct-employment" element={<Navigate to="/scalforce/direct-employment-vs-scalforce" replace />} />
-        <Route path="/tools/:slug" element={<ToolPage />} />
-        <Route path="/company" element={<Navigate to="/about" replace />} />
+          {/* Product & Feature Pages */}
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/features/automatic-time-tracking" element={<FeaturesPage />} />
+          <Route path="/features/productivity-tracking" element={<FeaturesPage />} />
+          <Route path="/features/tracker-plus" element={<TrackerPlusPage />} />
+          <Route path="/features/attendance-tracking" element={<AttendanceTrackingPage />} />
+          <Route path="/features/idle-and-private-time" element={<PrivacyPromisePage />} />
+          <Route path="/features/screenshots" element={<PrivacyPromisePage />} />
+          <Route path="/features/project-time-tracking" element={<ItServicesPage />} />
+          <Route path="/features/timesheets-and-reports" element={<TrackerPlusPage />} />
+          <Route path="/features/shift-scheduling" element={<AttendanceTrackingPage />} />
+          <Route path="/features/leave-management" element={<AttendanceTrackingPage />} />
+          <Route path="/features/document-tracking" element={<FeaturesPage />} />
+          <Route path="/features/focus-timer" element={<FeaturesPage />} />
+          <Route path="/features/live-status" element={<Home />} />
+          <Route path="/download" element={<DownloadPage />} />
 
-        {/* Blogs */}
-        <Route path="/blog" element={<BlogListingPage />} />
-        <Route path="/blogs" element={<BlogListingPage />} />
-        <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+          {/* Trust & Security */}
+          <Route path="/security" element={<PrivacyPromisePage />} />
+          <Route path="/privacy-promise" element={<PrivacyPromisePage />} />
+          <Route path="/trust" element={<PrivacyPromisePage />} />
 
-        {/* Sitemap-Approved Resources, Info & Legal, Company Routes */}
-        {resourcePaths.map((p) => (
-          <Route key={p} path={p} element={<ResourcePage />} />
-        ))}
-        {infoPaths.map((p) => (
-          <Route key={p} path={p} element={<InfoPage />} />
-        ))}
-        {companyPaths.map((p) => (
-          <Route key={p} path={p} element={<CompanyPage />} />
-        ))}
+          {/* Pricing */}
+          <Route path="/pricing" element={<PricingPage />} />
 
-        {/* Contact & Free Trial Routes */}
-        <Route path="/contact" element={<ContactPage mode="demo" />} />
-        <Route path="/signup" element={<TrialSignupPage />} />
-        <Route path="/trial" element={<TrialWorkspacePage />} />
-        <Route path="/trial/sandbox" element={<TrialWorkspacePage />} />
+          {/* Solutions Pages */}
+          <Route path="/solutions" element={<ItServicesPage />} />
+          <Route path="/solutions/it-services" element={<ItServicesPage />} />
+          <Route path="/solutions/staff-augmentation" element={<ItServicesPage />} />
+          <Route path="/solutions/agencies" element={<ItServicesPage />} />
+          <Route path="/solutions/bpo" element={<AttendanceTrackingPage />} />
+          <Route path="/solutions/professional-services" element={<ItServicesPage />} />
+          <Route path="/solutions/remote-teams" element={<AttendanceTrackingPage />} />
+          <Route path="/solutions/hybrid-teams" element={<AttendanceTrackingPage />} />
+          <Route path="/solutions/office-teams" element={<AttendanceTrackingPage />} />
+          <Route path="/solutions/hr" element={<AttendanceTrackingPage />} />
+          <Route path="/solutions/managers" element={<Home />} />
+          <Route path="/solutions/finance" element={<ItServicesPage />} />
+          <Route path="/hrms-add-on" element={<HrmsAddonPage />} />
+          <Route path="/partners/white-label" element={<PricingPage />} />
 
-        {/* Canonical Redirects for Legacy / Unapproved Paths */}
-        <Route path="/about-us" element={<Navigate to="/about" replace />} />
-        <Route path="/career" element={<Navigate to="/careers" replace />} />
-        <Route path="/our-team" element={<Navigate to="/about" replace />} />
-        <Route path="/internship-opportunities" element={<Navigate to="/careers" replace />} />
-        <Route path="/event-page" element={<Navigate to="/careers" replace />} />
-        <Route path="/strategic-partnerships" element={<Navigate to="/partners" replace />} />
-        <Route path="/insights/strategic-partnerships" element={<Navigate to="/partners" replace />} />
-        <Route path="/forbes" element={<Navigate to="/press" replace />} />
-        <Route path="/resource" element={<Navigate to="/blog" replace />} />
-        <Route path="/security-policy" element={<Navigate to="/security" replace />} />
-        <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
-        <Route path="/cookie-policy" element={<Navigate to="/cookie-settings" replace />} />
-        <Route path="/customize-cookies" element={<Navigate to="/cookie-settings" replace />} />
-        <Route path="/disclaimer" element={<Navigate to="/terms" replace />} />
-        <Route path="/calculator" element={<Navigate to="/tools/gratuity-calculator" replace />} />
-        <Route path="/calculator/*" element={<Navigate to="/tools/gratuity-calculator" replace />} />
-        <Route path="/services" element={<Navigate to="/platform/hire" replace />} />
-        <Route path="/services/*" element={<Navigate to="/platform/hire" replace />} />
-        <Route path="/staffing-solution" element={<Navigate to="/solutions/it-staffing" replace />} />
-        <Route path="/roles/*" element={<Navigate to="/platform/hire" replace />} />
-        <Route path="/industry/:slug" element={<RedirectIndustry />} />
-        <Route path="/case-study" element={<Navigate to="/customers" replace />} />
-        <Route path="/case-studies/*" element={<Navigate to="/customers" replace />} />
-        <Route path="/our-clients" element={<Navigate to="/customers" replace />} />
-        <Route path="/insights/our-clients" element={<Navigate to="/customers" replace />} />
-        <Route path="/faqs" element={<Navigate to="/help" replace />} />
-        <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
+          {/* Regional Variants */}
+          <Route path="/en-in" element={<IndiaPage />} />
+          <Route path="/india" element={<IndiaPage />} />
+          <Route path="/en-au" element={<IndiaPage />} />
+          <Route path="/australia" element={<IndiaPage />} />
+          <Route path="/en-nz" element={<IndiaPage />} />
+          <Route path="/new-zealand" element={<IndiaPage />} />
+          <Route path="/en-ae" element={<IndiaPage />} />
+          <Route path="/uae" element={<IndiaPage />} />
+          <Route path="/en-sa" element={<IndiaPage />} />
+          <Route path="/saudi-arabia" element={<IndiaPage />} />
 
-        {/* 404 Catch-All */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Comparisons */}
+          <Route path="/compare" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/desktime-alternative" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/hubstaff-alternative" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/time-doctor-alternative" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/activtrak-alternative" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/toggl-alternative" element={<DeskTimeAlternativePage />} />
+          <Route path="/compare/time-champ-alternative" element={<DeskTimeAlternativePage />} />
+
+          {/* Integrations & Developers */}
+          <Route path="/integrations" element={<IntegrationsPage />} />
+          <Route path="/integrations/:slug" element={<IntegrationsPage />} />
+          <Route path="/developers" element={<IntegrationsPage />} />
+          <Route path="/developers/mcp-server" element={<IntegrationsPage />} />
+
+          {/* Editorial & Guides */}
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPage />} />
+          <Route path="/guides/employee-monitoring-laws" element={<IndiaPage />} />
+          <Route path="/guides/employee-monitoring-laws/:country" element={<IndiaPage />} />
+
+          {/* Free Tools & Templates */}
+          <Route path="/tools" element={<ToolsAndTemplatesPage />} />
+          <Route path="/tools/utilisation-calculator" element={<ToolsAndTemplatesPage />} />
+          <Route path="/tools/overtime-calculator" element={<ToolsAndTemplatesPage />} />
+          <Route path="/templates" element={<ToolsAndTemplatesPage />} />
+          <Route path="/templates/timesheet-template" element={<ToolsAndTemplatesPage />} />
+          <Route path="/templates/employee-monitoring-policy" element={<ToolsAndTemplatesPage />} />
+
+          {/* Company & Conversion */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/careers" element={<AboutPage />} />
+          <Route path="/partners" element={<AboutPage />} />
+          <Route path="/press" element={<AboutPage />} />
+          <Route path="/contact" element={<DemoPage />} />
+          <Route path="/demo" element={<DemoPage />} />
+          <Route path="/signup" element={<TrialSignupPage />} />
+
+          {/* Legal Pages */}
+          <Route path="/legal/terms" element={<LegalPage />} />
+          <Route path="/legal/privacy" element={<LegalPage />} />
+          <Route path="/legal/dpa" element={<LegalPage />} />
+          <Route path="/legal/subprocessors" element={<LegalPage />} />
+          <Route path="/legal/cookies" element={<LegalPage />} />
+          <Route path="/legal/sla" element={<LegalPage />} />
+
+          {/* Canonical Fallbacks */}
+          <Route path="/privacy" element={<Navigate to="/privacy-promise" replace />} />
+          <Route path="/terms" element={<Navigate to="/legal/terms" replace />} />
+          <Route path="/calculator" element={<Navigate to="/tools/utilisation-calculator" replace />} />
+          <Route path="/customers" element={<Home />} />
+          <Route path="/glossary" element={<BlogPage />} />
+          <Route path="/changelog" element={<FeaturesPage />} />
+
+          {/* 404 Catch-All */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </CurrencyProvider>
   );
 }

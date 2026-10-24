@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "../components/Header";
+import { PulseTrackHeader } from "../components/PulseTrackHeader";
 import { Hero } from "../components/Hero";
 import { ProofStrip } from "../components/ProofStrip";
 import { LifecycleStepper } from "../components/LifecycleStepper";
@@ -8,38 +8,38 @@ import { DashboardShowcase } from "../components/DashboardShowcase";
 import { AiVsLegacySection } from "../components/AiVsLegacySection";
 import { EcosystemSection } from "../components/EcosystemSection";
 import { PageCta } from "../components/layout/PageCta";
-import { Footer } from "../components/Footer";
+import { PulseTrackFooter } from "../components/PulseTrackFooter";
 
 export function Home() {
   return (
-    <div className="min-h-screen w-full bg-accent-light font-sans text-neutral-900">
-      <Header />
+    <div className="min-h-screen w-full bg-[#F7F4EE] font-sans text-[#0F1730]">
+      <PulseTrackHeader />
       <main>
-        {/* Beat 1: Hero with headline, 2 CTAs, live product UI (not stock) */}
+        {/* Beat 1: Hero with headline, 2 CTAs, floating SaaS cards cluster */}
         <Hero />
 
-        {/* Beat 2: Slim logo bar / proof strip directly under hero */}
+        {/* Beat 2: Slim trust bar / proof strip directly under hero */}
         <ProofStrip />
 
-        {/* Beat 3: Lifecycle stepper: Hire → ... → Exit (click a step to swap screenshot) */}
+        {/* Beat 3: Lifecycle stepper: Track → Connect → Verify → Bill → Trust */}
         <LifecycleStepper />
 
-        {/* Beat 4: Signature moment: interactive and simple AI interview demo */}
+        {/* Beat 4: Signature moment: interactive Tracker Plus simulation demo */}
         <InterviewFeature />
 
-        {/* Beat 5: Dashboard / analytics with 3 callouts */}
+        {/* Beat 5: Dashboard / analytics with live module callouts */}
         <DashboardShowcase />
 
-        {/* Beat 6: AI-native vs Legacy (compact, 5 rows) */}
+        {/* Beat 6: Trust-First vs Legacy Trackers 3-column benchmark */}
         <AiVsLegacySection />
 
-        {/* Beat 7: Solutions tabs + integrations marquee + trust tiles */}
+        {/* Beat 7: Solutions tabs (Industry, Team, Region) + integrations marquee */}
         <EcosystemSection />
 
         {/* Beat 8: Reused PageCta card matching application standard */}
-        <PageCta title="Experience Hiring Requests & Approvals in action with our HRMS engineering specialists." />
+        <PageCta title="See your team's real week by Friday." />
       </main>
-      <Footer />
+      <PulseTrackFooter />
     </div>
   );
 }

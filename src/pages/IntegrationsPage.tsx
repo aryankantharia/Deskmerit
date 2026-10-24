@@ -1,175 +1,303 @@
-import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { PulseTrackHeader } from "../components/PulseTrackHeader";
+import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
 import {
-  ArrowRightIcon,
-  SearchIcon,
-  BlocksIcon,
-  SparklesIcon,
-  CheckCircle2Icon,
-  ShieldCheckIcon,
-  LayersIcon,
-  ExternalLinkIcon
+  Boxes,
+  ArrowRight,
+  Bot,
+  Terminal,
+  Check,
+  Search,
+  ExternalLink,
 } from "lucide-react";
-import { PageLayout } from "../components/layout/PageLayout";
-import { PageHero } from "../components/layout/PageHero";
-import { PageCta } from "../components/layout/PageCta";
-import { IntegrationsHeroCard } from "../components/layout/HeroCards";
-import { IntegrationLogo } from "../components/IntegrationLogo";
-import { integrations } from "../data/home";
+
+interface IntegrationItem {
+  id: string;
+  name: string;
+  category: "pm" | "calendars" | "chat" | "automation" | "hrms" | "developers";
+  tagline: string;
+  badge: string;
+  description: string;
+  linkText: string;
+  href: string;
+  initials: string;
+  color: string;
+}
+
+const INTEGRATIONS_LIST: IntegrationItem[] = [
+  {
+    id: "jira",
+    name: "Jira Software",
+    category: "pm",
+    tagline: "Tracker Plus",
+    badge: "Direct PM sync",
+    description: "Pick Jira issues in the PulseTrack desktop agent and press Start. Time logs against that issue's project and client with no Jira timers.",
+    linkText: "View Jira integration →",
+    href: "/integrations/jira",
+    initials: "J",
+    color: "bg-blue-600",
+  },
+  {
+    id: "azure-devops",
+    name: "Azure DevOps",
+    category: "pm",
+    tagline: "Tracker Plus",
+    badge: "Boards & work items",
+    description: "Start tracking from any Azure DevOps work item assigned to you, alongside Jira or on its own with zero duplicate project names.",
+    linkText: "View Azure DevOps integration →",
+    href: "/integrations/azure-devops",
+    initials: "AD",
+    color: "bg-sky-600",
+  },
+  {
+    id: "openproject",
+    name: "OpenProject",
+    category: "pm",
+    tagline: "Tracker Plus",
+    badge: "Open-source PM",
+    description: "The open-source PM tool gets an automatic tracker that respects your self-hosting choices with tasks keyed strictly by ID.",
+    linkText: "View OpenProject integration →",
+    href: "/integrations/openproject",
+    initials: "OP",
+    color: "bg-teal-600",
+  },
+  {
+    id: "google-calendar",
+    name: "Google Calendar",
+    category: "calendars",
+    tagline: "Meetings count as work",
+    badge: "Calendar sync",
+    description: "Accepted meetings during working hours automatically count toward attendance, so meeting-heavy days are never marked absent.",
+    linkText: "View Google Calendar integration →",
+    href: "/integrations/google-calendar",
+    initials: "GC",
+    color: "bg-amber-600",
+  },
+  {
+    id: "outlook-calendar",
+    name: "Outlook Calendar",
+    category: "calendars",
+    tagline: "Meetings count as work",
+    badge: "Microsoft 365",
+    description: "Read-only calendar presence for Microsoft 365 users. Disconnect stops reads immediately without lingering tokens.",
+    linkText: "View Outlook integration →",
+    href: "/integrations/outlook-calendar",
+    initials: "OC",
+    color: "bg-blue-700",
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    category: "chat",
+    tagline: "Summaries & /status",
+    badge: "Bot",
+    description: "Daily and weekly summaries posted to your team channels, and a convenient `/pulsetrack status` command to look up anyone's live state.",
+    linkText: "View Slack integration →",
+    href: "/integrations/slack",
+    initials: "S",
+    color: "bg-fuchsia-600",
+  },
+  {
+    id: "microsoft-teams",
+    name: "Microsoft Teams",
+    category: "chat",
+    tagline: "Summaries & live status",
+    badge: "Bot-based",
+    description: "Automated work summaries and live status lookups inside Teams channels. No complex custom webhooks to configure.",
+    linkText: "View Teams integration →",
+    href: "/integrations/microsoft-teams",
+    initials: "MT",
+    color: "bg-indigo-600",
+  },
+  {
+    id: "zapier",
+    name: "Zapier",
+    category: "automation",
+    tagline: "No-code workflows",
+    badge: "7,000+ apps",
+    description: "Send attendance to payroll systems, post overtime alerts, or update Google Sheets and Airtable without writing code.",
+    linkText: "View Zapier integration →",
+    href: "/integrations/zapier",
+    initials: "Z",
+    color: "bg-orange-600",
+  },
+  {
+    id: "make",
+    name: "Make",
+    category: "automation",
+    tagline: "Visual automations",
+    badge: "Published app",
+    description: "Build robust visual workflows with PulseTrack triggers and actions across your enterprise tech stack.",
+    linkText: "View Make integration →",
+    href: "/integrations/make",
+    initials: "M",
+    color: "bg-purple-600",
+  },
+  {
+    id: "sqalible",
+    name: "Sqalible HRMS",
+    category: "hrms",
+    tagline: "Native add-on",
+    badge: "1-click toggle",
+    description: "Turn on time tracking inside the HRMS you already use. Auto-provision employees, single sign-on, and one consolidated invoice.",
+    linkText: "View HRMS add-on →",
+    href: "/hrms-add-on",
+    initials: "SH",
+    color: "bg-[#0F1730]",
+  },
+  {
+    id: "rest-api",
+    name: "REST API",
+    category: "developers",
+    tagline: "Scoped, read-only keys",
+    badge: "OpenAPI specs",
+    description: "Versioned, read-only REST API with 100 req/min per key by default, self-serve scopes, and guaranteed 30 days notice on breaking changes.",
+    linkText: "View API docs →",
+    href: "/developers",
+    initials: "RA",
+    color: "bg-slate-700",
+  },
+  {
+    id: "mcp-server",
+    name: "MCP Server",
+    category: "developers",
+    tagline: "For AI assistants",
+    badge: "Claude ready",
+    description: "Model Context Protocol server allowing Claude and AI agents to query attendance, project margins and timesheet summaries safely.",
+    linkText: "View MCP server docs →",
+    href: "/developers/mcp-server",
+    initials: "MS",
+    color: "bg-[#FF5A36]",
+  },
+];
 
 export function IntegrationsPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get("category");
-  const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(categoryParam || "All");
+  const [filter, setFilter] = useState<string>("all");
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    if (categoryParam) {
-      setSelectedCategory(categoryParam);
-    }
-  }, [categoryParam]);
+  const categories = [
+    { id: "all", label: "All integrations" },
+    { id: "pm", label: "Project management" },
+    { id: "calendars", label: "Calendars" },
+    { id: "chat", label: "Chat" },
+    { id: "automation", label: "Automation" },
+    { id: "hrms", label: "HRMS" },
+    { id: "developers", label: "Developers" },
+  ];
 
-  const handleSelectCategory = (cat: string) => {
-    setSelectedCategory(cat);
-    if (cat === "All") {
-      searchParams.delete("category");
-      setSearchParams(searchParams, { replace: true });
-    } else {
-      setSearchParams({ category: cat }, { replace: true });
-    }
-  };
-
-  const categories = ["All", "Communication", "Identity", "Job boards", "Biometrics", "Banking", "Accounting"];
-
-  const filteredIntegrations = integrations.filter((item) => {
-    const matchesQuery = `${item.name} ${item.desc} ${item.category}`
-      .toLowerCase()
-      .includes(query.trim().toLowerCase());
-    const matchesCategory = selectedCategory === "All" || item.category.toLowerCase() === selectedCategory.toLowerCase();
-    return matchesQuery && matchesCategory;
+  const filtered = INTEGRATIONS_LIST.filter((item) => {
+    const matchesCategory = filter === "all" || item.category === filter;
+    const matchesSearch =
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.description.toLowerCase().includes(search.toLowerCase()) ||
+      item.tagline.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   return (
-    <PageLayout>
-      <PageHero
-        crumbs={[{ title: "Why Sqalible", href: "/why-sqalible" }, { title: "Integrations" }]}
-        pretitle="Open Ecosystem"
-        title="Seamless Integrations for the Modern Enterprise"
-        description="Connect your identity providers, biometric timeclocks, corporate banks, and communication tools directly to Sqalible with certified native connectors."
-        image="none"
-        aside={<IntegrationsHeroCard />}
-      />
+    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+      <PulseTrackHeader />
 
-      <section className="bg-white py-10 md:py-14" aria-label="Integration Directory">
-        <div className="mx-auto max-w-7xl px-6">
-          {/* Search Field & Category Filter Bar */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
-            {/* Rounded Search Bar */}
-            <div className="relative w-full max-w-md">
-              <SearchIcon
-                size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
-              />
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search integrations by name or category..."
-                className="w-full h-11 rounded-full border border-neutral-300 bg-white pl-11 pr-4 text-body2 text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-primary focus:ring-2 focus:ring-teal-500/20 transition-all shadow-xs"
-              />
-            </div>
+      <main>
+        {/* Header */}
+        <div className="py-16 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] mb-6 shadow-sm">
+            <span className="pulse-dot" />
+            <span>Ecosystem</span>
+          </div>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2">
-              {categories.map((cat) => (
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
+            Connect PulseTrack to the tools{" "}
+            <span className="text-[#FF5A36] block sm:inline font-normal">
+              your team already uses.
+            </span>
+          </h1>
+
+          <p className="text-lg text-[#4A5370] max-w-2xl mx-auto font-normal">
+            Project tools feed Tracker Plus, calendars feed attendance, chat tools get daily summaries, and the API and MCP server connect everything else.
+          </p>
+        </div>
+
+        {/* Filters & Search */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-1.5 p-1 bg-[#FFFFFF] rounded-xl border border-[#E6E2D8] shadow-subtle">
+              {categories.map((c) => (
                 <button
-                  key={cat}
+                  key={c.id}
                   type="button"
-                  onClick={() => handleSelectCategory(cat)}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
-                    selectedCategory.toLowerCase() === cat.toLowerCase()
-                      ? "bg-primary text-white shadow-xs"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  onClick={() => setFilter(c.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    filter === c.id
+                      ? "bg-[#0F1730] text-white"
+                      : "text-[#4A5370] hover:text-[#0F1730]"
                   }`}
                 >
-                  {cat}
+                  {c.label}
                 </button>
               ))}
             </div>
-          </div>
 
-          {/* Integrations Grid */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredIntegrations.map((item) => (
+            <div className="relative w-full sm:w-64">
+              <Search className="w-4 h-4 text-[#9AA1B2] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search tools..."
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E6E2D8] bg-[#FFFFFF] focus:outline-none focus:border-[#FF5A36]"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Integration Cards Grid */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((item) => (
               <div
-                key={item.name}
-                className="group flex flex-col justify-between rounded-none border border-neutral-200 bg-white p-6 shadow-xs hover:border-teal-500/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                key={item.id}
+                className="bg-[#FFFFFF] rounded-2xl p-7 border border-[#E6E2D8] hover:border-[#FF5A36] hover:shadow-card transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-50 border border-neutral-100 group-hover:border-teal-500/30 transition-colors duration-200 shadow-2xs">
-                      <IntegrationLogo name={item.name} className="w-6 h-6 shrink-0" />
-                    </div>
-                    <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-600">
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className={`w-11 h-11 rounded-xl ${item.color} text-white font-bold text-xs flex items-center justify-center shadow-sm`}
+                    >
+                      {item.initials}
+                    </span>
+                    <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#F7F4EE] text-[#4A5370] border border-[#E6E2D8]">
                       {item.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-neutral-900 group-hover:text-primary transition-colors">
-                    {item.name}
-                  </h3>
-                  <span className="text-xs font-medium text-neutral-400 block mb-2">{item.category}</span>
-                  <p className="text-sm text-neutral-600 leading-relaxed">
-                    {item.desc}
+                  <h3 className="font-bold text-lg text-[#0F1730]">{item.name}</h3>
+                  <div className="text-xs font-semibold text-[#FF5A36] mb-2">{item.tagline}</div>
+                  <p className="text-xs text-[#4A5370] leading-relaxed">
+                    {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-primary">
-                  <span>Configuration Guide</span>
-                  <ArrowRightIcon size={14} className="group-hover:translate-x-1 transition-transform" />
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8]">
+                  <Link
+                    to={item.href}
+                    className="text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] flex items-center justify-between group transition-colors"
+                  >
+                    <span>{item.linkText}</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
-
-          {filteredIntegrations.length === 0 && (
-            <div className="rounded-none border border-neutral-200 bg-neutral-50 p-12 text-center">
-              <p className="text-body1 text-neutral-600">No integrations found matching “{query}”.</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery("");
-                  setSelectedCategory("All");
-                }}
-                className="mt-4 rounded-full bg-primary text-white text-xs font-semibold px-4 py-2 hover:bg-teal-600 transition-colors"
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
-
-          {/* Custom Webhook & API Callout */}
-          <div className="mt-14 rounded-none border border-neutral-800 bg-[#0A0E17] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-            <div className="max-w-xl">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-500/20 px-3 py-1 text-xs font-semibold text-teal-300 mb-3">
-                <SparklesIcon size={13} /> Open Developer API
-              </span>
-              <h3 className="text-xl font-bold text-white">Need a Custom In-House Connector?</h3>
-              <p className="mt-2 text-sm text-neutral-300 leading-relaxed">
-                Build custom sync workflows using our modern GraphQL and REST APIs. Subscribe to real-time webhooks for employee joins, leaves, promotions, and payroll events.
-              </p>
-            </div>
-            <Link
-              to="/contact"
-              className="shrink-0 rounded-full bg-primary hover:bg-teal-600 px-6 py-3 text-xs font-semibold text-white shadow-md transition-all hover:scale-105"
-            >
-              Request Custom Integration
-            </Link>
-          </div>
         </div>
-      </section>
 
-      <PageCta title="Connect your entire enterprise HR stack in minutes." />
-    </PageLayout>
+        <PulseTrackCtaBand />
+      </main>
+
+      <PulseTrackFooter />
+    </div>
   );
 }

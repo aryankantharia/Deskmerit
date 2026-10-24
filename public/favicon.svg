@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- PulseTrack Live Loop Icon Mark (64x64 master construction) -->
+  <path
+    d="M 21 52 L 21 25 A 13 13 0 1 1 43.19 34.19"
+    stroke="#0F1730"
+    stroke-width="8.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="31.2" cy="37.7" r="5.4" fill="#FF5A36" />
+</svg>

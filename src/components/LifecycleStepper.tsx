@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRightIcon,
-  CheckCircle2Icon,
-  ShieldCheckIcon,
-  UsersIcon,
-  LaptopIcon,
-  ClockIcon,
-  CreditCardIcon,
-  LineChartIcon,
-  LogOutIcon,
-  SparklesIcon,
-  LucideIcon
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  Timer,
+  Layers,
+  CalendarCheck,
+  Receipt,
+  Coffee,
+  Sparkles,
+  LucideIcon,
 } from "lucide-react";
 
 interface LifecycleStage {
@@ -21,244 +20,193 @@ interface LifecycleStage {
   title: string;
   desc: string;
   metric: string;
-  image: string;
   link: string;
   bullets: string[];
   icon: LucideIcon;
-  isAiLayer?: boolean;
 }
 
 const stages: LifecycleStage[] = [
   {
-    id: "hire",
-    name: "1. Hire",
-    badge: "Recruitment & Screening",
-    title: "Autonomous Live Interview & Candidate Screening",
-    desc: "AI conducts structured technical and behavioral first rounds 24/7. Evaluates real architectural reasoning, generates explainable rubrics, and submits candidates for final human sign-off.",
-    metric: "70% Reduction in Time-to-Hire",
-    image: "/dashboards/ai-interview-dashboard.png",
-    link: "/platform/hire",
+    id: "track",
+    name: "1. Track",
+    badge: "Continuous Work Recording",
+    title: "Automatic Background Time Recording",
+    desc: "Records working time on apps, websites and document titles the moment you start your workday. No timers to remember, no forgotten hours.",
+    metric: "100% Timesheet Accuracy",
+    link: "/features/automatic-time-tracking",
     bullets: [
-      "24/7 live AI interview with adaptive questioning",
-      "Automated rubric scoring against role competencies",
-      "Human-in-the-loop sign-off before any decision"
+      "Lightweight Rust agent (<25MB RAM, no CPU lag)",
+      "Smart default categorization (Productive, Neutral, Unproductive)",
+      "Works 100% offline with zero data loss",
     ],
-    icon: UsersIcon
+    icon: Timer,
   },
   {
-    id: "onboard",
-    name: "2. Onboard",
-    badge: "Digital Provisioning",
-    title: "Zero-Delay Hardware & Account Provisioning",
-    desc: "Turn accepted offer letters into active employee records in minutes. Automatically issue digital asset assignments, collect verified KYC tax forms, and sync email/Slack accounts.",
-    metric: "Day-One Work Readiness",
-    image: "/dashboards/assets-core-hr-dashboard.png",
-    link: "/platform/onboard",
+    id: "connect",
+    name: "2. Connect",
+    badge: "Tracker Plus (Flagship)",
+    title: "Start Tracking from Jira & Azure DevOps Tasks",
+    desc: "Your people choose the task they’re working on straight from your PM tool inside the desktop agent. One click logs time, fills attendance and updates billing.",
+    metric: "357h Disconnect Gap Closed",
+    link: "/features/tracker-plus",
     bullets: [
-      "Digital document collection & automated KYC checks",
-      "Asset tracking & IT serial number allocation",
-      "Automated Google Workspace & Slack provisioning"
+      "Live task list from Jira, Azure DevOps & OpenProject",
+      "Each employee connects their own personal access token",
+      "Two projects called 'Website'? Never merged or confused",
     ],
-    icon: LaptopIcon
+    icon: Layers,
   },
   {
-    id: "manage",
-    name: "3. Manage",
-    badge: "Workforce Operations",
-    title: "Biometric Attendance & Single Employee Master",
-    desc: "Real-time sync between physical biometric turnstiles, mobile geofenced check-ins, and shift rosters. Never lose a work hour to manual spreadsheets or attendance disputes.",
-    metric: "100% Real-Time Attendance Sync",
-    image: "/dashboards/attendance_calendar_view.png",
-    link: "/platform/manage",
+    id: "verify",
+    name: "3. Verify",
+    badge: "No Biometric Punch Clock",
+    title: "Attendance That Reflects Real Knowledge Work",
+    desc: "Computes daily attendance from tracked computer work, Google/Outlook calendar meetings, and logged offline time so workshop days are never marked absent.",
+    metric: "Every Employee's Own Timezone",
+    link: "/features/attendance-tracking",
     bullets: [
-      "ZKTeco & Matrix biometric hardware gateway",
-      "Dynamic shift planning & overtime rules",
-      "Self-service leave requests with automated manager alerts"
+      "Days close at each person's local midnight",
+      "Overnight shifts judged fairly across midnight boundaries",
+      "Full HR correction audit trails logged with reasons",
     ],
-    icon: ClockIcon
+    icon: CalendarCheck,
   },
   {
-    id: "pay",
-    name: "4. Pay",
-    badge: "Statutory Payroll",
-    title: "Automated Multi-Tier Statutory Payroll Runs",
-    desc: "Seamless payroll calculations directly connected to biometric attendance telemetry. Enforces 100% statutory compliance for PF, ESI, TDS, and Gratuity with one-click bank disbursals.",
-    metric: "99.99% Statutory Payroll Accuracy",
-    image: "/dashboards/payroll_final_settlement.png",
-    link: "/platform/pay",
+    id: "bill",
+    name: "4. Bill",
+    badge: "Defensible Client Invoicing",
+    title: "Project Profitability & Budget Variance Alerts",
+    desc: "Converts tracked hours into cost, billable value and budget alerts automatically. See weekly billable vs non-billable trends per team, engineer and account.",
+    metric: "35% Non-Billable Leakage Reclaimed",
+    link: "/features/project-time-tracking",
     bullets: [
-      "Automated PF, ESI, Professional Tax & TDS withholding",
-      "Direct bank integration (HDFC, ICICI, RazorpayX)",
-      "Instant password-protected digital payslip delivery"
+      "Billable rates per employee varying by project",
+      "Automatic budget alerts before invoices surprise clients",
+      "Sub-30s Excel and CSV exports matching the screen",
     ],
-    icon: CreditCardIcon
+    icon: Receipt,
   },
   {
-    id: "grow",
-    name: "5. Grow",
-    badge: "Performance & OKRs",
-    title: "Continuous 360 Feedback & Objective OKRs",
-    desc: "Move beyond stressful annual appraisals. Track real project deliverables, peer feedback, and goal milestones to recognize top performers and address burnout early.",
-    metric: "40% Higher Employee Retention",
-    image: "/dashboards/performance_dashboard_16_10.png",
-    link: "/platform/grow",
+    id: "trust",
+    name: "5. Trust",
+    badge: "Dignity & Privacy",
+    title: "Employee-First Data & Private Time Protection",
+    desc: "Monitoring fails when people feel watched. PulseTrack gives employees a self-view of their day and a one-click Private Time pause that is never mislabelled as idle.",
+    metric: "Zero Keystroke Keylogging",
+    link: "/privacy-promise",
     bullets: [
-      "Configurable 360-degree peer review cycles",
-      "Goal tracking connected to team deliverables & project milestones",
-      "Transparent promotion ladders & internal mobility"
+      "No keystrokes, no webcam, no audio recording under any plan",
+      "Screenshots off by default and announced when enabled",
+      "Compliance-ready for India DPDP Act and Australia NSW laws",
     ],
-    icon: LineChartIcon
+    icon: Coffee,
   },
-  {
-    id: "exit",
-    name: "6. Exit",
-    badge: "Access Governance",
-    title: "5-Gate Offboarding & Instant Access Revocation",
-    desc: "Guaranteed zero zombie accounts. Enforce strict sequential sign-offs across IT hardware return, finance clearance, and HR exit interviews with automated credential revocation.",
-    metric: "Zero Zombie Accounts SLA",
-    image: "/dashboards/exit_clearance_gates.png",
-    link: "/platform/exit",
-    bullets: [
-      "Mandatory 5-gate departmental clearance workflow",
-      "Instant SCIM/SAML token revocation across SSO",
-      "Automated Gratuity & Full-and-Final settlement ledger"
-    ],
-    icon: LogOutIcon
-  }
 ];
 
 export function LifecycleStepper() {
-  const [activeStageIndex, setActiveStageIndex] = useState(0);
-  const activeStage = stages[activeStageIndex];
+  const [activeStageId, setActiveStageId] = useState<string>("track");
+  const activeStage = stages.find((s) => s.id === activeStageId) || stages[0];
 
   return (
-    <section id="lifecycle" className="bg-[#FAF7F2] py-16 md:py-24 border-b border-neutral-200" aria-labelledby="lifecycle-title">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Section Heading with Hire → Exit explicitly on second line */}
-        <div className="max-w-3xl">
-          <p className="pretitle text-primary">Continuous Workforce Automation</p>
-          <h2 id="lifecycle-title" className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 tracking-tight">
-            <span>The Complete Employee Lifecycle:</span>
-            <span className="block mt-1">Hire → Exit</span>
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-600 leading-relaxed">
-            Every transition is unified in a single system of record. Select any stage to inspect the live software workflow.
-          </p>
+    <section className="py-20 bg-[#F7F4EE] border-b border-[#E6E2D8]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
+              Work-time lifecycle
+            </p>
+            <h2 className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F1730] tracking-[-0.025em]">
+              One click that does three jobs.
+            </h2>
+            <p className="mt-2 text-sm text-[#4A5370] max-w-xl">
+              From task selection in Jira to client invoices and payroll attendance, experience the end-to-end trust-first pipeline.
+            </p>
+          </div>
+          <Link
+            to="/features"
+            className="inline-flex items-center gap-1 text-xs font-bold text-[#C2361A] hover:text-[#FF5A36] transition-colors shrink-0"
+          >
+            Explore all capabilities <ArrowRight size={14} />
+          </Link>
         </div>
 
-        {/* Interactive Stepper Navigation Bar: 6 stages (identical styling across all screens) */}
-        <div
-          className="mt-10 flex overflow-x-auto lg:grid lg:grid-cols-6 gap-2.5 border-b border-neutral-300 pb-4 no-scrollbar"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {stages.map((stage, idx) => {
-            const Icon = stage.icon;
-            const isActive = activeStageIndex === idx;
-
+        {/* 5-Step Navigation Tabs */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-1.5 bg-[#FFFFFF] rounded-2xl border border-[#E6E2D8] shadow-subtle mb-8">
+          {stages.map((s) => {
+            const Icon = s.icon;
+            const isSelected = s.id === activeStageId;
             return (
               <button
-                key={stage.id}
+                key={s.id}
                 type="button"
-                onClick={() => setActiveStageIndex(idx)}
-                className={`flex flex-col items-start px-3.5 py-3 text-left transition-all duration-200 cursor-pointer rounded-none border-b-2 shrink-0 min-w-[145px] lg:min-w-0 ${
-                  isActive
-                    ? "border-primary bg-white shadow-xs -mb-[18px] pb-[16px]"
-                    : "border-transparent hover:bg-neutral-100/80 text-neutral-600"
+                onClick={() => setActiveStageId(s.id)}
+                className={`flex items-center gap-2 p-3 rounded-xl text-left transition-all ${
+                  isSelected
+                    ? "bg-[#0F1730] text-white shadow-sm"
+                    : "text-[#4A5370] hover:text-[#0F1730] hover:bg-[#F7F4EE]"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Icon
-                    size={18}
-                    strokeWidth={isActive ? 2.2 : 2}
-                    className={isActive ? "text-primary" : "text-neutral-500"}
-                  />
-                  <span
-                    className={`text-sm font-bold ${
-                      isActive ? "text-primary" : "text-neutral-900"
-                    }`}
-                  >
-                    {stage.name}
-                  </span>
-                </div>
-                <span className="text-xs font-medium truncate w-full text-neutral-500">
-                  {stage.badge}
-                </span>
+                <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-[#FF5A36]" : "text-[#4A5370]"}`} />
+                <span className="text-xs font-bold truncate">{s.name}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Active Stage Interactive Showcase */}
-        <div className="mt-8 grid gap-8 lg:grid-cols-12 items-center bg-white border border-neutral-200 p-6 md:p-10 shadow-sm">
-          {/* Left Column: Capability details */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold mb-3 bg-teal-50 border border-teal-200 text-teal-800">
-                <CheckCircle2Icon size={13} className="text-teal-600" />
-                {activeStage.metric}
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 leading-snug">
-                {activeStage.title}
-              </h3>
-
-              <p className="mt-3 text-sm text-neutral-600 leading-relaxed font-normal">
-                {activeStage.desc}
-              </p>
-
-              <ul className="mt-6 space-y-2.5">
-                {activeStage.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-800 font-medium">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full shrink-0 bg-primary" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
+        {/* Active Stage Detail Panel */}
+        <div className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFE6DF] text-[#C2361A] text-xs font-bold">
+              <span className="pulse-dot" />
+              <span>{activeStage.badge}</span>
             </div>
 
-            <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
+              {activeStage.title}
+            </h3>
+
+            <p className="text-sm text-[#4A5370] leading-relaxed">
+              {activeStage.desc}
+            </p>
+
+            <ul className="space-y-2.5 pt-2">
+              {activeStage.bullets.map((b, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-xs text-[#0F1730]">
+                  <CheckCircle2 className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
+                  <span className="leading-snug">{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="pt-4 flex items-center gap-4">
               <Link
                 to={activeStage.link}
-                className="inline-flex items-center gap-2 text-xs font-bold transition-colors text-primary hover:text-teal-700"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF5A36] hover:text-[#E94A27] transition-colors"
               >
-                Inspect detailed architecture
-                <ArrowRightIcon size={14} />
+                Learn more about {activeStage.name.split(". ")[1]} <ArrowRight size={14} />
               </Link>
-
-              <span className="text-[11px] text-neutral-400 font-mono">
-                Stage {activeStageIndex + 1} of 6
-              </span>
             </div>
           </div>
 
-          {/* Right Column: Live Screenshot Showcase */}
-          <div className="lg:col-span-7">
-            <div className="overflow-hidden rounded-none border border-neutral-300 bg-[#0A0E17] shadow-xl">
-              {/* macOS Header */}
-              <div className="flex items-center justify-between border-b border-neutral-800 bg-[#0E1724] px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
-                  <span className="ml-2 font-mono text-[11px] text-neutral-400 truncate">
-                    app.sqalible.com/{activeStage.id}
-                  </span>
-                </div>
-                <span className="text-[10px] uppercase font-bold text-teal-400 bg-teal-950/80 border border-teal-500/30 px-2 py-0.5 rounded-full">
-                  {activeStage.badge}
-                </span>
-              </div>
-
-              {/* Swappable Screenshot Display */}
-              <div className="p-2 sm:p-3 bg-neutral-950">
-                <img
-                  key={activeStage.image}
-                  src={activeStage.image}
-                  alt={activeStage.title}
-                  className="w-full h-[320px] sm:h-[400px] object-cover object-top border border-neutral-800"
-                  loading="lazy"
-                />
-              </div>
+          {/* Metric & Callout Card */}
+          <div className="lg:col-span-5 bg-[#F7F4EE] rounded-2xl p-6 sm:p-8 border border-[#E6E2D8] text-center space-y-4">
+            <div className="text-xs font-semibold text-[#4A5370] uppercase tracking-wider">
+              Measurable Impact
+            </div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-[#C2361A] font-display">
+              {activeStage.metric}
+            </div>
+            <p className="text-xs text-[#4A5370] leading-relaxed">
+              Standardized across all {activeStage.name.split(". ")[1].toLowerCase()} workflows in PulseTrack desktop and cloud sync.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/signup"
+                className="inline-flex items-center justify-center w-full py-2.5 rounded-xl bg-[#0F1730] text-white text-xs font-bold hover:bg-[#24305A] transition-colors"
+              >
+                Test with your team →
+              </Link>
             </div>
           </div>
         </div>
