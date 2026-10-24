@@ -66,7 +66,7 @@ export function Hero() {
             <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
               <a
                 href="/signup"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#FF5A36] hover:bg-[#E94A27] px-7 sm:px-8 text-sm sm:text-base font-bold text-[#0F1730] shadow-lg shadow-orange-950/40 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#FF5A36] hover:bg-[#E94A27] px-7 sm:px-8 text-sm sm:text-base font-extrabold text-white shadow-lg shadow-orange-950/40 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 Start free trial
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={2.2} />
@@ -218,7 +218,7 @@ export function Hero() {
                   <button
                     type="button"
                     onClick={() => setIsTracking(!isTracking)}
-                    className="py-1.5 px-3 rounded-lg bg-[#FF5A36] text-[#0F1730] text-[11px] font-bold hover:bg-[#E94A27] transition-colors flex items-center justify-center gap-1"
+                    className="py-1.5 px-3 rounded-lg bg-[#FF5A36] text-white text-[11px] font-extrabold hover:bg-[#E94A27] transition-colors flex items-center justify-center gap-1"
                   >
                     {isTracking ? <Square className="w-3 h-3 fill-current" /> : <Play className="w-3 h-3 fill-current" />}
                     {isTracking ? "Stop" : "Resume"}

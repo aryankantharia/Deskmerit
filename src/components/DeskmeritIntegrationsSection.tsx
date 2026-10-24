@@ -284,7 +284,7 @@ export function DeskmeritIntegrationsSection() {
                     onClick={() => setActivePrompt(idx)}
                     className={`text-xs px-3 py-1.5 rounded-lg border transition-all text-left ${
                       activePrompt === idx
-                        ? "bg-[#FF5A36] text-[#0F1730] font-bold border-[#FF5A36]"
+                        ? "bg-[#FF5A36] text-white font-extrabold border-[#FF5A36]"
                         : "bg-[#0F1730] text-[#E6E2D8] border-[#24305A] hover:border-[#4A5370]"
                     }`}
                   >
@@ -307,7 +307,7 @@ export function DeskmeritIntegrationsSection() {
 
                 {/* AI Response */}
                 <div className="flex items-start gap-2.5">
-                  <span className="w-6 h-6 rounded-full bg-[#FF5A36] text-[#0F1730] text-xs font-bold flex items-center justify-center shrink-0">
+                  <span className="w-6 h-6 rounded-full bg-[#FF5A36] text-white text-xs font-black flex items-center justify-center shrink-0">
                     AI
                   </span>
                   <div className="space-y-1.5 flex-1">

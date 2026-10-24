@@ -344,7 +344,7 @@ export function AttendanceTrackingPage() {
               <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
                 <Link
                   to="/signup"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-sm"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs text-center transition-all shadow-md hover:shadow-glow-ember"
                 >
                   Start free trial
                 </Link>

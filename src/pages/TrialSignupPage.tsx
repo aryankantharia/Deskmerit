@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { Check, ArrowRight, ShieldCheck, Download, CheckCircle2, Clock } from "lucide-react";
 import { useCurrency } from "../utils/currencyContext";
 
@@ -115,7 +116,7 @@ export function TrialSignupPage() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs shadow transition-colors flex items-center justify-center gap-2 mt-2"
+                  className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs shadow-md hover:shadow-glow-ember transition-colors flex items-center justify-center gap-2 mt-2"
                 >
                   Create workspace →
                 </button>
@@ -168,7 +169,7 @@ export function TrialSignupPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   to="/download"
-                  className="w-full sm:w-auto px-6 py-3 rounded-[12px] bg-[#FF5A36] text-[#0F1730] font-bold text-xs flex items-center justify-center gap-2 hover:bg-[#E94A27] transition-colors"
+                  className="w-full sm:w-auto px-6 py-3 rounded-[12px] bg-[#FF5A36] text-white font-extrabold text-xs flex items-center justify-center gap-2 hover:bg-[#E94A27] shadow-md hover:shadow-glow-ember transition-colors"
                 >
                   <Download className="w-4 h-4" /> Download Desktop Agent
                 </Link>
@@ -182,6 +183,33 @@ export function TrialSignupPage() {
             </div>
           )}
         </div>
+
+        {step === "form" && (
+          <DeskmeritFaq
+            title="Trial & Onboarding FAQs"
+            category="FAQS"
+            helpTitle="Need Help Rolling Out to Your Team?"
+            helpDescription="Our enterprise onboarding engineers can pre-provision your team workspaces, configure Jira tokens, and coordinate pilot trials."
+            customFaqs={[
+              {
+                q: "Is a credit card required to start the 14-day free trial?",
+                a: "No. You never need to enter credit card details to start a trial. At the end of the 14 days, you can decide whether to upgrade or continue on our free tier."
+              },
+              {
+                q: "Can I invite other team members during the trial period?",
+                a: "Yes. All trial workspaces support unlimited seat invitations with full access to Tracker Plus, calendar sync, and payroll reporting."
+              },
+              {
+                q: "What happens to our tracked data after the trial ends?",
+                a: "All your team members' time records, projects, and custom settings remain securely saved in your tenant. If you do not upgrade immediately, your workspace gracefully shifts to the free Starter plan."
+              },
+              {
+                q: "Can we switch between Pro and Premium during the trial?",
+                a: "Yes. You can switch plan features anytime within your Workspace Settings to test white-label reporting, API webhooks, or additional PM tool integrations."
+              }
+            ]}
+          />
+        )}
       </main>
 
       <DeskmeritFooter />

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { InteractiveTrackerWidget } from "../components/InteractiveTrackerWidget";
 import {
   ShieldCheck,
@@ -203,6 +204,36 @@ export function PrivacyPromisePage() {
             <strong className="text-[#0F1730]">Compliance Roadmap:</strong> SOC 2 Type II and ISO 27001 programmes are actively in progress with third-party auditors. Security questionnaires and DPAs available upon request.
           </div>
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Privacy & Compliance FAQs"
+          category="FAQS"
+          helpTitle="Have Compliance or Legal Inquiries?"
+          helpDescription="Our security and data governance officers can provide completed standard security questionnaires (CAIQ/SIG) and sign custom enterprise DPAs."
+          customFaqs={[
+            {
+              q: "Can an employer turn on keystroke logging or webcam recording?",
+              a: "No, never. Neither keystroke logging nor webcam/audio recording code exists anywhere in our software. Deskmerit was architected from day one without surveillance mechanisms."
+            },
+            {
+              q: "How does Private Time work from the employee's perspective?",
+              a: "Team members can activate Private Time with a single click in their desktop agent. While Private Time is active, all application logging, URL tracking, and timers cease immediately, and the period is never categorized as unexcused idle time."
+            },
+            {
+              q: "Are screenshots mandatory, and how are they handled?",
+              a: "Screenshots are turned OFF by default across all plans. If an organization enables screenshots for strict regulatory audit compliance, captures are blurred by default, and team members are clearly notified in advance."
+            },
+            {
+              q: "Do employees have access to view their own recorded data?",
+              a: "Yes. Every team member has access to an Employee First-View dashboard where they can review their complete timeline, active applications, and logged task hours before timesheets are locked for payroll."
+            },
+            {
+              q: "What data privacy regulations does Deskmerit comply with?",
+              a: "Deskmerit is compliant with the EU General Data Protection Regulation (GDPR), the Indian Digital Personal Data Protection (DPDP) Act 2023, Australian Privacy Principles (APPs), and the NSW Workplace Surveillance Act."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand
           title="Tracking your team won't resent."

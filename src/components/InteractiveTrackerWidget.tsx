@@ -172,15 +172,15 @@ export function InteractiveTrackerWidget() {
             <button
               type="button"
               onClick={handleToggleTracking}
-              className={`h-11 px-4 rounded-[12px] font-bold text-xs flex items-center justify-center gap-2 transition-all ${
+              className={`h-11 px-4 rounded-[12px] font-extrabold text-xs flex items-center justify-center gap-2 transition-all ${
                 isTracking && !isPrivateTime
-                  ? "bg-[#FF5A36] text-[#0F1730] hover:bg-[#E94A27]"
-                  : "bg-[#12B886] text-[#0F1730] hover:bg-[#0fa678]"
+                  ? "bg-[#24305A] hover:bg-[#334173] text-white border border-[#384574]"
+                  : "bg-[#FF5A36] hover:bg-[#E94A27] text-white shadow-md hover:shadow-glow-ember"
               }`}
             >
               {isTracking && !isPrivateTime ? (
                 <>
-                  <Square className="w-3.5 h-3.5 fill-current" /> Stop
+                  <Square className="w-3.5 h-3.5 fill-current text-[#FF5A36]" /> Stop
                 </>
               ) : (
                 <>

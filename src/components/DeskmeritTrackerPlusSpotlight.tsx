@@ -102,7 +102,7 @@ export function DeskmeritTrackerPlusSpotlight() {
 
                 <div className="p-3.5 rounded-xl bg-[#0F1730] border border-[#24305A] flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="w-9 h-9 rounded-lg bg-teal-600 text-white font-bold text-xs flex items-center justify-center">
+                    <span className="w-9 h-9 rounded-lg bg-[#182A44] text-white font-bold text-xs flex items-center justify-center">
                       O
                     </span>
                     <div>

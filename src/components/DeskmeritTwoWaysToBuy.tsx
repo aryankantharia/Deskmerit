@@ -53,7 +53,7 @@ export function DeskmeritTwoWaysToBuy() {
 
             <Link
               to="/signup"
-              className="w-full py-3.5 px-4 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs text-center transition-colors shadow-md hover:shadow-glow-ember flex items-center justify-center gap-2"
             >
               Start free trial
               <ArrowRight className="w-3.5 h-3.5" />

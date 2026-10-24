@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { Check, ArrowRight, ToggleLeft, ToggleRight, Sparkles, ShieldCheck } from "lucide-react";
 
 export function HrmsAddonPage() {
@@ -43,7 +44,7 @@ export function HrmsAddonPage() {
               <div className="flex flex-wrap gap-3 pt-2">
                 <Link
                   to="/signup"
-                  className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-sm transition-all"
+                  className="inline-flex items-center justify-center text-xs font-extrabold text-white bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-md hover:shadow-glow-ember transition-all"
                 >
                   Start free 14-day trial →
                 </Link>
@@ -213,6 +214,36 @@ export function HrmsAddonPage() {
             </table>
           </div>
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Sqalible HRMS Add-On FAQs"
+          category="INTEGRATION FAQS"
+          helpTitle="Have Existing Biometric or Payroll Systems?"
+          helpDescription="Our solutions architects can configure zero-disruption sync between your current biometric logs, Jira workflows, and Sqalible payroll."
+          customFaqs={[
+            {
+              q: "How do I activate Deskmerit inside my Sqalible HRMS account?",
+              a: "Navigate to your Sqalible Admin Portal > Add-ons Marketplace, and toggle 'Deskmerit Automatic Time Tracking' to On. Your employee master directory and project codes sync instantly."
+            },
+            {
+              q: "Do employees need a separate password or portal login?",
+              a: "No. Employees authenticate using their standard Sqalible credentials or company SAML SSO. There are no secondary passwords to manage or forget."
+            },
+            {
+              q: "How does timesheet data transfer into monthly payroll?",
+              a: "Deskmerit's verified attendance hours, approved overtime, and project timesheets populate directly into Sqalible's payroll calculation engine automatically. No CSV downloads or manual ledger entry required."
+            },
+            {
+              q: "Can we activate Deskmerit for only select departments?",
+              a: "Yes. You can enable Deskmerit per department, role, or team. For instance, you can turn on Tracker Plus for engineering and delivery squads while keeping back-office staff on standard attendance."
+            },
+            {
+              q: "How are public holidays and approved leaves reconciled?",
+              a: "Because Deskmerit is natively unified with Sqalible HRMS, approved leaves and gazetted holidays on the company calendar are automatically accounted for, so team members on leave are never erroneously flagged as absent."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand
           title="Already on Sqalible? Switch it on today."

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { useCurrency } from "../utils/currencyContext";
 import {
   ShieldCheck,
@@ -605,7 +606,7 @@ export function IndiaPage() {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
                   to="/signup"
-                  className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-sm transition-all"
+                  className="inline-flex items-center justify-center text-xs font-extrabold text-white bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-md hover:shadow-glow-ember transition-all"
                 >
                   {region.isArabic
                     ? "ابدأ التجربة المجانية 14 يوماً ←"
@@ -655,7 +656,7 @@ export function IndiaPage() {
 
               <Link
                 to={`/signup?plan=pro&region=${region.code}`}
-                className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-colors block"
+                className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs text-center transition-colors shadow-md hover:shadow-glow-ember block"
               >
                 {region.isArabic
                   ? "بدء التجربة المجانية الآن"
@@ -737,22 +738,14 @@ export function IndiaPage() {
           </div>
         </section>
 
-        {/* Regional FAQ */}
-        <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-2xl font-bold text-[#0F1730] mb-6">
-            {region.isArabic
-              ? "الأسئلة الشائعة من الشركات"
-              : `Questions from ${region.name} teams`}
-          </h3>
-          <div className="space-y-3">
-            {region.faqs.map((faq, i) => (
-              <div key={i} className="p-5 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8]">
-                <h4 className="font-bold text-sm text-[#0F1730] mb-1.5">{faq.q}</h4>
-                <p className="text-xs text-[#4A5370] leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Regional FAQ Section (Deskmerit Standard) */}
+        <DeskmeritFaq
+          title={region.isArabic ? "الأسئلة الشائعة من الشركات" : "Questions, Answered Honestly"}
+          category={region.isArabic ? "الأسئلة الشائعة" : "FAQS"}
+          customFaqs={region.faqs}
+          helpTitle={region.isArabic ? "تحتاج مساعدة في اختيار الحل المناسب؟" : `Need Help with ${region.name} Compliance & Billing?`}
+          helpDescription={region.isArabic ? "تواصل مع خبرائنا لتحديد التكوين الأمثل لفرق العمل والمؤسسات الخاصة بك." : `Speak directly with our regional compliance specialists for custom ${region.currency} billing, GST/VAT invoices, and localized data hosting.`}
+        />
 
         <DeskmeritCtaBand
           title={region.ctaTitle}

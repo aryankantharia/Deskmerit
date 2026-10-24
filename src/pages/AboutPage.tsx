@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   ShieldCheck,
   MousePointer,
@@ -447,6 +448,36 @@ export function AboutPage() {
             </section>
           </>
         )}
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Company & Partnership FAQs"
+          category="FAQS"
+          helpTitle="Looking to Partner with Deskmerit?"
+          helpDescription="Whether you are an MSP reseller, HR technology ISV, or delivery consultancy, connect with our alliances team to explore partnership tiers."
+          customFaqs={[
+            {
+              q: "What is Deskmerit's founding mission and philosophy?",
+              a: "Deskmerit was founded on the conviction that software teams and agencies deserve transparent, auditable time data without invasive employee surveillance. We build high-trust productivity tooling that starts from the task token, not from webcam or keystroke snooping."
+            },
+            {
+              q: "Where is Deskmerit hosted and where is customer data stored?",
+              a: "Deskmerit provides multi-region data residency across AWS data centers in India (Mumbai), Australia (Sydney), UAE (me-central-1), and the United States (us-east-1), complying fully with local DPDP, NSW, and GDPR frameworks."
+            },
+            {
+              q: "How does Deskmerit partner with IT services providers and MSPs?",
+              a: "Our MSP and Reseller program provides multi-tenant agency dashboards, white-label client reporting, volume seat tier discounts, and dedicated priority migration assistance."
+            },
+            {
+              q: "What open career opportunities are currently available?",
+              a: "We hire globally across distributed engineering, product design, and enterprise customer success. View our open roles on this page or email careers@deskmerit.com."
+            },
+            {
+              q: "How can journalists and media outlets request press briefings?",
+              a: "Download our media kit directly from the Press tab, or reach out to press@deskmerit.com for executive commentary and high-resolution brand assets."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand />
       </main>

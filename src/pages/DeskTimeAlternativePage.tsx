@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { Check, Minus, ArrowRight, ShieldCheck, RefreshCw, Smartphone, Layers, CheckCircle2, X } from "lucide-react";
 
 interface CompetitorConfig {
@@ -274,7 +275,7 @@ export function DeskTimeAlternativePage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-sm transition-all"
+              className="inline-flex items-center justify-center text-xs font-extrabold text-white bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-md hover:shadow-glow-ember transition-all"
             >
               Start free 14-day trial →
             </Link>
@@ -502,6 +503,36 @@ export function DeskTimeAlternativePage() {
             </div>
           </section>
         )}
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Alternative & Migration FAQs"
+          category="FAQS"
+          helpTitle="Considering a Migration from Another Tracker?"
+          helpDescription="Our migration specialists help you import user rosters, migrate historical project mappings, and run parallel testing with zero team disruption."
+          customFaqs={[
+            {
+              q: "How difficult is it to migrate our team from DeskTime or Hubstaff?",
+              a: "Migration typically takes under 15 minutes. You can import your user roster via CSV or SCIM directory sync, connect your Jira or Azure DevOps workspaces, and roll out the silent MSI installer to endpoints via MDM."
+            },
+            {
+              q: "Does Deskmerit require intrusive screenshots like legacy monitoring tools?",
+              a: "No. Screenshots are completely disabled by default across all tiers. If your enterprise audit compliance strictly requires screenshots, they are blurred by default and employees receive clear visual indicators."
+            },
+            {
+              q: "Why do developers and engineers prefer Deskmerit over traditional trackers?",
+              a: "Traditional trackers assign work post-hoc based on URL keywords. Deskmerit starts directly from the task token (e.g. PROJ-104), ensuring zero invasive webcam/keystroke surveillance and 100% auditable timesheets."
+            },
+            {
+              q: "Can we run Deskmerit in parallel with our current vendor during a trial?",
+              a: "Yes. Deskmerit runs independently without interfering with existing time tracking agents, allowing you to compare accuracy, resource consumption, and team sentiment over a 14-day trial."
+            },
+            {
+              q: "Does Deskmerit have offline tracking support?",
+              a: "Yes. An embedded SQLite transactional queue records local task telemetry when network connection drops (e.g. during flights or site visits) and syncs securely as soon as connection is restored."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand
           title="Try the tracker that starts from the task."

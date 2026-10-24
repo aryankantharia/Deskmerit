@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { Logo } from "./Logo";
-import { faqs as defaultFaqs } from "../data/home";
+import { Plus, Minus, ArrowRight } from "lucide-react";
+import { DeskmeritLogo } from "./DeskmeritLogo";
 
 export interface FaqItem {
   q: string;
@@ -22,191 +21,98 @@ export interface FaqSectionProps {
 }
 
 export function FaqSection({
-  title = "Frequently Asked Questions",
-  pretitle = "Frequently Asked Questions",
-  faqs = defaultFaqs,
-  className = "bg-white py-16 md:py-24",
-  containerClassName = "mx-auto max-w-7xl px-6",
-  cardTitle = "Need Help Choosing the Right HRMS Solution?",
-  cardDescription = "Build smarter with AI-powered hiring, attendance, payroll compliance, and enterprise workflows tailored to your business.",
-  cardButtonText = "Book a demo",
-  cardButtonHref = "/contact"
+  title = "Questions, Answered Honestly",
+  pretitle = "FAQS",
+  faqs = [],
+  className = "py-20 lg:py-28 bg-[#FFFFFF] border-t border-slate-100 font-sans",
+  containerClassName = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  cardTitle = "Need Help Choosing the Right Solution?",
+  cardDescription = "Connect with our product specialists to determine the optimal configuration for your engineering, agency, or enterprise workflows.",
+  cardButtonText = "Contact our team",
+  cardButtonHref = "/demo",
 }: FaqSectionProps) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const isDefaultTitle = title === "Frequently Asked Questions";
-
-  // Generate structured JSON-LD FAQPage schema for SEO and accessibility
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
     <section className={className} aria-labelledby="faq-title">
-      {/* JSON-LD Structured Data Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className={containerClassName}>
-        {/* Section Header */}
-        <div className="mb-10 sm:mb-12 text-left">
-          {pretitle && (
-            <p className="pretitle text-primary mb-2">
-              {pretitle}
-            </p>
-          )}
-          <h2 id="faq-title" className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 tracking-tight">
-            {isDefaultTitle ? (
-              <>
-                Everything you need to know about <span className="text-primary">Sqalible</span>
-              </>
-            ) : (
-              title
-            )}
+        {/* Section Heading */}
+        <div className="mb-12">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#FF5A36]" />
+            <span>{pretitle}</span>
+          </div>
+          <h2 id="faq-title" className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-[-0.03em]">
+            {title}
           </h2>
         </div>
 
-        {/* 2-Column Split: Left Promo Card + Right Underlined Accordions */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Branded Gradient Promo Card */}
-          <div className="lg:col-span-5 relative overflow-hidden rounded-none bg-gradient-to-br from-[#06151B] via-[#052930] to-[#044841] p-8 sm:p-10 text-white shadow-xl border border-teal-500/20 flex flex-col justify-between min-h-[460px] lg:min-h-[500px]">
-            {/* Ambient Graphic Waves / Sweeping Concentric Arcs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {/* Ambient corner glows for rich depth */}
-              <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-teal-400/20 blur-3xl pointer-events-none" />
-              <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-emerald-500/15 blur-2xl pointer-events-none" />
+        {/* 2-Column Split: Left Promo Card + Right Accordions */}
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Dark Callout Highlight Box */}
+          <div className="col-span-12 lg:col-span-5">
+            <div className="rounded-3xl bg-gradient-to-br from-[#0A1628] via-[#0F1E36] to-[#0A1324] p-8 sm:p-10 text-white shadow-xl border border-slate-800 relative overflow-hidden flex flex-col justify-between min-h-[380px]">
+              {/* Subtle Radial Glow in background */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5A36]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
 
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 450 560"
-                preserveAspectRatio="xMaxYMax slice"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <defs>
-                  <linearGradient id="faqArcStroke" x1="1" y1="1" x2="0.1" y2="0.2">
-                    <stop offset="0%" stopColor="#5EEAD4" stopOpacity="1" />
-                    <stop offset="35%" stopColor="#2DD4BF" stopOpacity="0.85" />
-                    <stop offset="70%" stopColor="#14B8A6" stopOpacity="0.5" />
-                    <stop offset="100%" stopColor="#044E48" stopOpacity="0.05" />
-                  </linearGradient>
-                </defs>
+              <div>
+                {/* Brand Logo in Reverse (White Wordmark) */}
+                <div className="mb-8">
+                  <DeskmeritLogo variant="reverse" size="md" />
+                </div>
 
-                <g>
-                  {Array.from({ length: 24 }, (_, i) => {
-                    const rx = 50 + i * 16;
-                    const ry = 75 + i * 22;
-                    const cx = 450;
-                    const cy = 520;
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.025em] leading-snug">
+                  {cardTitle}
+                </h3>
 
-                    // Angles: 186 deg (bottom) to 82 deg (top-right)
-                    const radStart = (186 * Math.PI) / 180;
-                    const radEnd = (82 * Math.PI) / 180;
-
-                    const startX = cx + rx * Math.cos(radStart);
-                    const startY = cy - ry * Math.sin(radStart);
-                    const endX = cx + rx * Math.cos(radEnd);
-                    const endY = cy - ry * Math.sin(radEnd);
-
-                    const strokeWidth = i % 4 === 0 ? 1.4 : 1.0;
-                    const opacity = Math.min(0.85, 0.22 + (i / 24) * 0.58);
-
-                    return (
-                      <path
-                        key={i}
-                        d={`M ${startX.toFixed(1)} ${startY.toFixed(1)} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 1 ${endX.toFixed(1)} ${endY.toFixed(1)}`}
-                        stroke="url(#faqArcStroke)"
-                        strokeWidth={strokeWidth}
-                        strokeOpacity={opacity}
-                        strokeLinecap="round"
-                      />
-                    );
-                  })}
-                </g>
-              </svg>
-            </div>
-
-            {/* Card Content Top */}
-            <div className="relative z-10">
-              <div className="mb-8">
-                <Logo inverted />
+                <p className="text-sm text-slate-300 leading-relaxed mt-4">
+                  {cardDescription}
+                </p>
               </div>
-              <h3 className="text-2xl sm:text-[28px] font-extrabold text-white leading-tight mb-4">
-                {cardTitle}
-              </h3>
-              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-sm">
-                {cardDescription}
-              </p>
-            </div>
 
-            {/* Card Content Bottom */}
-            <div className="relative z-10 mt-8 pt-6">
-              <Link
-                to={cardButtonHref}
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-bold text-[#0A1118] shadow-md transition-all duration-200 hover:bg-neutral-100 hover:shadow-lg hover:scale-105 active:scale-[0.98]"
-              >
-                {cardButtonText}
-              </Link>
+              <div className="pt-8">
+                <Link
+                  to={cardButtonHref}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-[#0F1730] hover:bg-slate-100 font-bold text-xs sm:text-sm shadow-md transition-all group"
+                >
+                  <span>{cardButtonText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 text-[#FF5A36]" />
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* Right Underlined Accordions */}
-          <div className="lg:col-span-7 divide-y divide-neutral-300 border-t border-neutral-300">
-            {faqs.map((faq, i) => {
-              const isOpen = open === i;
+          {/* Right Column: Clean Accordion List */}
+          <div className="col-span-12 lg:col-span-7 divide-y divide-slate-100">
+            {faqs.map((faq, idx) => {
+              const isOpen = openIndex === idx;
               return (
-                <div key={faq.q} className="py-5 sm:py-6">
+                <div key={idx} className="py-5">
                   <button
                     type="button"
+                    onClick={() => toggle(idx)}
+                    className="w-full text-left flex items-start justify-between gap-4 font-bold text-base sm:text-[17px] text-[#0F1730] hover:text-[#FF5A36] transition-colors"
                     aria-expanded={isOpen}
-                    aria-controls={`faq-answer-${i}`}
-                    id={`faq-header-${i}`}
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full flex items-start justify-between text-left font-bold text-base sm:text-lg text-neutral-900 hover:text-primary transition-colors cursor-pointer gap-4 group"
                   >
-                    <span className="pr-2 group-hover:text-primary transition-colors leading-snug">
-                      {faq.q}
-                    </span>
-                    <span
-                      className={`text-2xl sm:text-3xl font-light shrink-0 leading-none select-none transition-colors ${
-                        isOpen ? "text-primary" : "text-neutral-500 group-hover:text-primary"
-                      }`}
-                      aria-hidden="true"
-                    >
-                      {isOpen ? "−" : "+"}
+                    <span>{faq.q}</span>
+                    <span className="shrink-0 text-slate-400 hover:text-[#FF5A36] mt-0.5">
+                      {isOpen ? (
+                        <Minus className="w-4 h-4 text-[#FF5A36]" />
+                      ) : (
+                        <Plus className="w-4 h-4" />
+                      )}
                     </span>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        id={`faq-answer-${i}`}
-                        role="region"
-                        aria-labelledby={`faq-header-${i}`}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-3.5 pr-6 sm:pr-10 text-sm sm:text-[15px] text-neutral-600 leading-relaxed font-normal">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {isOpen && (
+                    <div className="pt-3 text-sm text-[#4A5370] leading-relaxed animate-fade-in pr-6">
+                      {faq.a}
+                    </div>
+                  )}
                 </div>
               );
             })}

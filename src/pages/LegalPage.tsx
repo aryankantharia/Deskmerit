@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { Shield, FileText, CheckCircle2, Lock, ShieldCheck, Download } from "lucide-react";
 
 export function LegalPage() {
@@ -250,6 +252,38 @@ export function LegalPage() {
             )}
           </div>
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Legal & Compliance FAQs"
+          category="FAQS"
+          helpTitle="Need a Custom Data Processing Addendum?"
+          helpDescription="Enterprise customers on annual commitments can request counter-signed DPAs with custom model clauses, audit rights, and specialized security SLA schedules."
+          customFaqs={[
+            {
+              q: "Can enterprise customers execute a bilateral DPA with Deskmerit?",
+              a: "Yes. We offer standard Data Processing Agreements including EU/UK Standard Contractual Clauses (SCCs), Swiss addenda, and India DPDP 2023 compliance terms. Contact legal@deskmerit.com for execution."
+            },
+            {
+              q: "How does Deskmerit comply with the Indian DPDP Act 2023?",
+              a: "Deskmerit acts as a Data Processor on behalf of the customer (Data Fiduciary). Telemetry capture requires explicit prior employee consent, and personal data can be homed exclusively within AWS Mumbai (ap-south-1)."
+            },
+            {
+              q: "What is your uptime guarantee under the Service Level Agreement (SLA)?",
+              a: "Deskmerit guarantees 99.9% monthly availability for cloud ingestion APIs and web dashboard services. In the event of an SLA breach, enterprise accounts receive automated service billing credits."
+            },
+            {
+              q: "What notice period is provided before adding new subprocessors?",
+              a: "We maintain a public Sub-processors registry and provide at least 30 calendar days' advance written notice to designated enterprise contacts before engaging any new infrastructure or telemetry subprocessor."
+            },
+            {
+              q: "How can a customer request complete data export or deletion upon termination?",
+              a: "Account owners can trigger an automated JSON/CSV archive export from their admin dashboard. Upon contract termination, all primary database records and automated backups are purged within 30 days."
+            }
+          ]}
+        />
+
+        <DeskmeritCtaBand />
       </main>
 
       <DeskmeritFooter />

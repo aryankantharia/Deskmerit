@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { InteractiveTrackerWidget } from "../components/InteractiveTrackerWidget";
 import {
   Check,
@@ -343,77 +344,16 @@ export function TrackerPlusPage() {
           </div>
         </section>
 
-        {/* SECTION 5: Signature FAQ Layout (Sqalible Screenshot 1: Left Dark Card + Right Accordion) */}
-        <section className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E6E2D8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              {/* Left Side: Dark High-Contrast Mesh Card */}
-              <div className="lg:col-span-5 bg-[#0F1730] rounded-3xl p-8 sm:p-10 text-white relative overflow-hidden border border-[#24305A] shadow-2xl">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5A36]/20 rounded-full blur-[80px] pointer-events-none" />
-                <div className="relative z-10 space-y-6">
-                  <div className="w-10 h-10 rounded-xl bg-[#FF5A36]/20 text-[#FF5A36] flex items-center justify-center">
-                    <HelpCircle className="w-5 h-5" />
-                  </div>
+        {/* SECTION 5: Signature Split FAQ Layout (Deskmerit Standard) */}
+        <DeskmeritFaq
+          title="Questions, Answered Honestly"
+          category="FAQS"
+          customFaqs={faqs}
+          helpTitle="Need Help Choosing the Right Setup?"
+          helpDescription="Our solutions engineers can show you how Tracker Plus maps onto your Jira boards, Azure DevOps pipelines, or Sqalible HRMS directory in minutes."
+        />
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                    Need Help Choosing the Right Setup?
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
-                    Our solutions engineers can show you how Tracker Plus maps onto your Jira boards, Azure DevOps pipelines, or Sqalible HRMS directory in minutes.
-                  </p>
-
-                  <div className="pt-4">
-                    <Link
-                      to="/demo"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0F1730] hover:bg-[#F7F4EE] text-xs font-bold transition-all shadow"
-                    >
-                      <span>Talk to an expert</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side: Accordion FAQ */}
-              <div className="lg:col-span-7 space-y-4">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                  Frequently Asked Questions
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-8">
-                  Tracker Plus FAQs
-                </h2>
-
-                <div className="divide-y divide-[#E6E2D8]">
-                  {faqs.map((faq, idx) => {
-                    const isOpen = openFaq === idx;
-                    return (
-                      <div key={idx} className="py-4">
-                        <button
-                          type="button"
-                          onClick={() => setOpenFaq(isOpen ? null : idx)}
-                          className="w-full flex items-center justify-between text-left py-2 font-bold text-sm sm:text-base text-[#0F1730] hover:text-[#FF5A36] transition-colors"
-                        >
-                          <span>{faq.q}</span>
-                          <span className="text-[#FF5A36] shrink-0 ml-4">
-                            {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mt-2 pt-2 pb-2">
-                            {faq.a}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 6: High-Impact Full-Width CTA Banner (Sqalible Screenshot 1) */}
+        {/* SECTION 6: High-Impact Full-Width CTA Banner */}
         <section className="bg-[#0F1730] text-white py-16 lg:py-20 border-b border-[#24305A]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 bg-[#172348] p-8 sm:p-12 rounded-[24px] border border-[#2B3969] shadow-2xl">
@@ -432,7 +372,7 @@ export function TrackerPlusPage() {
               <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
                 <Link
                   to="/signup"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-sm"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs text-center transition-all shadow-md hover:shadow-glow-ember"
                 >
                   Start free trial
                 </Link>

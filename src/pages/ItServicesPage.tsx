@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritFaq } from "../components/DeskmeritFaq";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Code2,
   TrendingUp,
@@ -384,37 +385,12 @@ export function ItServicesPage() {
         />
 
         {/* ========================================================================= */}
-        {/* 6. BOTTOM PRE-FOOTER CTA BANNER (Matching Reference Image 2)              */}
+        {/* 6. FINAL CTA BAND                                                         */}
         {/* ========================================================================= */}
-        <section className="py-12 bg-white font-sans">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl bg-gradient-to-r from-[#0C5A4D] via-[#0E6C5C] to-[#0A4B40] p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="max-w-2xl space-y-2">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-[#A3F3D8]">
-                  GET STARTED IN 2 MINUTES
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.025em]">
-                  Ready to transform workforce operations with Deskmerit for Startups & Scaleups?
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 shrink-0">
-                <Link
-                  to="/signup"
-                  className="px-6 py-3.5 rounded-xl bg-white text-[#0A4B40] hover:bg-slate-100 font-extrabold text-xs sm:text-sm shadow-md transition-all whitespace-nowrap"
-                >
-                  Start free trial
-                </Link>
-                <Link
-                  to="/demo"
-                  className="px-6 py-3.5 rounded-xl bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-sm border border-white/50 transition-all whitespace-nowrap"
-                >
-                  Book a demo
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <DeskmeritCtaBand
+          title="Ready to transform workforce operations with Deskmerit for Startups & Scaleups?"
+          subtitle="Install in under 2 minutes. Free 14-day trial, no credit card required."
+        />
       </main>
 
       <DeskmeritFooter />

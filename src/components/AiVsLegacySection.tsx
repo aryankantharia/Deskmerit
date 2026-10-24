@@ -75,7 +75,7 @@ export function AiVsLegacySection() {
               <span className="text-white text-xs sm:text-sm font-extrabold tracking-tight">
                 Deskmerit (Trust-First)
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0F1730] bg-[#FF5A36] px-2.5 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-white bg-[#FF5A36] px-2.5 py-0.5 rounded-full shadow-xs">
                 Recommended
               </span>
             </div>

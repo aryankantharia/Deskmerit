@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Download,
   Laptop,
@@ -101,7 +102,7 @@ export function DownloadPage() {
                 <button
                   type="button"
                   onClick={() => handleDownload("Windows", "deskmerit-setup-v1.0.exe")}
-                  className="w-full py-3 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                  className="w-full py-3 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-glow-ember transition-colors"
                 >
                   <Download className="w-4 h-4" /> Download for Windows
                 </button>
@@ -213,8 +214,8 @@ export function DownloadPage() {
               <div className="lg:col-span-6 max-w-md mx-auto w-full">
                 <div className="bg-[#0F1730] text-white rounded-[24px] p-7 border border-[#24305A] shadow-2xl space-y-5">
                   <div className="flex items-center gap-2.5 pb-4 border-b border-[#24305A]">
-                    <span className="w-7 h-7 rounded-lg bg-[#FF5A36] text-[#0F1730] font-bold text-sm flex items-center justify-center font-display">
-                      p
+                    <span className="w-7 h-7 rounded-lg bg-[#FF5A36] text-white font-black text-sm flex items-center justify-center font-display">
+                      ●
                     </span>
                     <h4 className="font-bold text-sm text-white">Before we start</h4>
                   </div>
@@ -257,7 +258,7 @@ export function DownloadPage() {
                     <button
                       type="button"
                       onClick={() => alert("Consent confirmed! Tracking ready.")}
-                      className="flex-1 py-2.5 rounded-[10px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs transition-colors text-center"
+                      className="flex-1 py-2.5 rounded-[10px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs shadow-md hover:shadow-glow-ember transition-colors text-center"
                     >
                       I understand — continue
                     </button>
@@ -312,6 +313,36 @@ export function DownloadPage() {
             📱 <strong>Note:</strong> Deskmerit tracks computer work. There is no mobile phone app — phones aren't tracked.
           </div>
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Download & Installation FAQs"
+          category="FAQS"
+          helpTitle="Rolling Out Across 100+ Endpoints?"
+          helpDescription="Our enterprise deployment team provides pre-configured MSI packages, Intune / Jamf MDM policies, and dedicated setup assistance."
+          customFaqs={[
+            {
+              q: "Does installing Deskmerit require local administrative privileges?",
+              a: "On Windows, a user-space per-user .exe installer can run without admin rights. For fleet-wide deployment, sysadmins can use our signed .msi installer via Group Policy, Microsoft Intune, or Jamf."
+            },
+            {
+              q: "Is the macOS agent compatible with Apple Silicon (M1/M2/M3/M4) chips?",
+              a: "Yes. Deskmerit is built as a Universal 2 binary with native ARM64 and Intel x86_64 binaries, notarized directly by Apple with hardened runtime entitlements."
+            },
+            {
+              q: "How much CPU and RAM does the desktop agent consume?",
+              a: "The Deskmerit daemon is written in Rust, consuming less than 25MB of RAM and virtually 0% background CPU, with zero battery drain on laptops."
+            },
+            {
+              q: "How are software updates delivered and managed?",
+              a: "Updates are delivered via automated background silent patching. Enterprise administrators can lock specific release rings or manage rollouts through internal repository channels."
+            },
+            {
+              q: "Why isn't there a mobile phone app for iOS or Android?",
+              a: "Deskmerit tracks focused computer work. We deliberately do not build phone tracking apps to guarantee that team members are never tracked off hours or on personal mobile devices."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand />
       </main>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   BookOpen,
   Clock,
@@ -209,7 +210,7 @@ export function BlogPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     selectedCategory === cat
-                      ? "bg-[#FF5A36] text-[#0F1730] font-bold shadow-sm"
+                      ? "bg-[#FF5A36] text-white font-extrabold shadow-sm"
                       : "bg-[#1A264F] text-[#9AA1B2] hover:text-white border border-[#2B3969]"
                   }`}
                 >
@@ -399,7 +400,7 @@ export function BlogPage() {
                   </h2>
                   <div className="flex items-center gap-4 text-xs text-[#9AA1B2] pt-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full bg-[#FF5A36] text-[#0F1730] font-bold text-xs flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-full bg-[#FF5A36] text-white font-black text-xs flex items-center justify-center">
                         {activeArticle.author.avatar}
                       </div>
                       <span className="text-white font-medium">{activeArticle.author.name}</span>
@@ -489,7 +490,7 @@ export function BlogPage() {
                     </p>
                     <Link
                       to="/signup"
-                      className="block w-full py-2.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all"
+                      className="block w-full py-2.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs text-center shadow-md hover:shadow-glow-ember transition-all"
                     >
                       Start Free Trial
                     </Link>
@@ -499,6 +500,32 @@ export function BlogPage() {
             </div>
           </div>
         )}
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Editorial & Research FAQs"
+          category="FAQS"
+          helpTitle="Looking for Specific Whitepapers?"
+          helpDescription="Our research team produces statutory payroll compliance playbooks, remote productivity benchmarks, and employee privacy frameworks."
+          customFaqs={[
+            {
+              q: "Who conducts the workforce research published on the Deskmerit blog?",
+              a: "Our research is authored by in-house engineering leads, organizational psychologists, and labor compliance experts, drawing on anonymized aggregate telemetry from over 100,000 tracked engineering hours."
+            },
+            {
+              q: "How often are statutory payroll and monitoring regulations updated?",
+              a: "We publish updated regional guidance within 48 hours of legislative updates in India (DPDP Act), Australia (NSW Workplace Surveillance), and the European Union (GDPR & AI Act)."
+            },
+            {
+              q: "Can companies republish or cite Deskmerit research benchmarks?",
+              a: "Yes. All whitepapers and data visualizations are licensed under Creative Commons (CC BY 4.0) with standard attribution and link to deskmerit.com."
+            },
+            {
+              q: "How can industry practitioners submit a guest contribution?",
+              a: "Send your pitch or draft outline to editorial@deskmerit.com. We prioritize practitioner-led case studies on asynchronous work, engineering utilization, and transparent management."
+            }
+          ]}
+        />
       </main>
 
       <DeskmeritFooter />

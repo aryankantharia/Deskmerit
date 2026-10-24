@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Calculator,
   Download,
@@ -190,7 +191,7 @@ export function ToolsAndTemplatesPage() {
                 </div>
                 <Link
                   to="/signup"
-                  className="px-5 py-2.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs transition-colors shrink-0"
+                  className="px-5 py-2.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs shadow-md hover:shadow-glow-ember transition-colors shrink-0"
                 >
                   Automate utilisation →
                 </Link>
@@ -399,6 +400,32 @@ export function ToolsAndTemplatesPage() {
             </div>
           )}
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Tools & Template FAQs"
+          category="FAQS"
+          helpTitle="Ready to Automate Calculations?"
+          helpDescription="Rather than maintaining manual spreadsheets and calculators, let Deskmerit calculate utilization, overtime and payroll exports automatically."
+          customFaqs={[
+            {
+              q: "Are these calculators and templates completely free for commercial use?",
+              a: "Yes. All Excel templates, policy documents, and calculators on this page are 100% free with no registration or credit card required. You may adapt and distribute them within your organization."
+            },
+            {
+              q: "How does Deskmerit automate employee utilization calculations?",
+              a: "Deskmerit maps logged hours directly to billable task tags and client contracts from Jira or Azure DevOps, automatically dividing billable hours by total shift duration to generate instant utilization percentages."
+            },
+            {
+              q: "Can the employee monitoring policy template be tailored to our jurisdiction?",
+              a: "Yes. The text is designed as an open starting point that complies with the core requirements of GDPR, India DPDP Act 2023, and Australian workplace surveillance standards."
+            },
+            {
+              q: "Does Deskmerit export timesheet reports into Excel or CSV?",
+              a: "Yes. Deskmerit offers automated one-click CSV and Excel exports, direct API endpoints, and automatic synchronization into accounting software like QuickBooks and Xero."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand />
       </main>

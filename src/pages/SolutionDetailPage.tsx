@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Building2,
   Users,
@@ -867,49 +868,15 @@ export function SolutionDetailPage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 3. FAQ ACCORDION SECTION                                                  */}
+        {/* 3. SIGNATURE SPLIT FAQ SECTION (Deskmerit Standard)                       */}
         {/* ========================================================================= */}
-        <section className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-              Common Questions
-            </div>
-            <h2 className="text-3xl font-extrabold text-[#0F1730]">
-              Frequently asked questions
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {sol.faqs.map((faq, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <div
-                  key={i}
-                  className="rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] overflow-hidden transition-all shadow-xs"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[#0F1730] hover:text-[#FF5A36] transition-colors"
-                  >
-                    <span>{faq.q}</span>
-                    {isOpen ? (
-                      <ChevronUp className="w-4 h-4 text-[#FF5A36] shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
-                    )}
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-xs text-[#4A5370] leading-relaxed border-t border-[#E6E2D8]/60">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        <DeskmeritFaq
+          title="Questions, Answered Honestly"
+          category="FAQS"
+          customFaqs={sol.faqs}
+          helpTitle="Need Help Choosing the Right Solution?"
+          helpDescription="Connect with our product specialists to determine the optimal configuration for your engineering, agency, or enterprise workflows."
+        />
 
         {/* ========================================================================= */}
         {/* 4. FINAL CTA BAND                                                         */}

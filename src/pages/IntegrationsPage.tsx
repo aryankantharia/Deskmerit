@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Boxes,
   ArrowRight,
@@ -61,7 +62,7 @@ const INTEGRATIONS_LIST: IntegrationItem[] = [
     linkText: "View OpenProject integration →",
     href: "/integrations/openproject",
     initials: "OP",
-    color: "bg-teal-600",
+    color: "bg-[#182A44]",
   },
   {
     id: "google-calendar",
@@ -293,6 +294,36 @@ export function IntegrationsPage() {
             ))}
           </div>
         </div>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Integrations & API FAQs"
+          category="FAQS"
+          helpTitle="Building a Custom Tool Integration?"
+          helpDescription="Our developer advocacy team provides dedicated guidance for connecting Deskmerit Webhooks and MCP Servers with your in-house engineering systems."
+          customFaqs={[
+            {
+              q: "How does the Jira and Azure DevOps bi-directional sync work?",
+              a: "When a developer starts work on a Jira issue or Azure DevOps work item, Deskmerit binds active telemetry directly to that work key. Completed session durations and work logs sync back into your project tickets automatically."
+            },
+            {
+              q: "Does Deskmerit have an official Model Context Protocol (MCP) server for AI assistants?",
+              a: "Yes. Deskmerit includes a native MCP server allowing AI tools like Claude Code and Cursor to query team bandwidth, active project progress, and sprint velocity via secure natural language."
+            },
+            {
+              q: "Are webhooks and REST APIs available on all plans?",
+              a: "REST API tokens and webhook events (time entry created, timer started, attendance finalized) are available on Pro and Enterprise tiers with high rate limits and comprehensive Swagger/OpenAPI specifications."
+            },
+            {
+              q: "How does Google Calendar and Outlook meeting detection work?",
+              a: "Deskmerit checks your authenticated corporate calendar for accepted meetings during scheduled shift hours. Meeting slots are automatically credited as active client work without manual clock-ins."
+            },
+            {
+              q: "Can we build a custom integration using Zapier or Make?",
+              a: "Yes. The Deskmerit Zapier and webhook connector lets you trigger custom automations in thousands of apps, such as posting daily team summaries to Slack or logging client time to QuickBooks."
+            }
+          ]}
+        />
 
         <DeskmeritCtaBand />
       </main>

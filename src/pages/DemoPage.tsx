@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import { CheckCircle2, Check, ArrowRight, ShieldCheck, Clock, User, Sparkles } from "lucide-react";
 
 export function DemoPage() {
@@ -224,7 +225,7 @@ export function DemoPage() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs transition-colors shadow flex items-center justify-center gap-2 mt-2"
+                    className="w-full py-3.5 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-white font-extrabold text-xs transition-colors shadow-md hover:shadow-glow-ember flex items-center justify-center gap-2 mt-2"
                   >
                     Book my demo →
                   </button>
@@ -237,6 +238,32 @@ export function DemoPage() {
             </div>
           </div>
         </section>
+
+        {/* Signature Split FAQ Section */}
+        <DeskmeritFaq
+          title="Demo & Evaluation FAQs"
+          category="FAQS"
+          helpTitle="Prefer to Test Immediately?"
+          helpDescription="You can start an instant 14-day self-serve trial right now with no credit card required and full enterprise feature access."
+          customFaqs={[
+            {
+              q: "How long does a typical product walkthrough call take?",
+              a: "Our product specialists tailor the call to your requirements in 25–30 minutes, covering Jira/Azure DevOps integration setup, attendance automation, and client billing reporting."
+            },
+            {
+              q: "Can other team leaders or stakeholders join the session?",
+              a: "Yes. Feel free to invite your CTO, Engineering Leads, HR Operations Managers, or delivery directors so all technical and compliance questions are answered together."
+            },
+            {
+              q: "Do we need IT involvement before booking the demo?",
+              a: "No IT preparation or server setup is required. We demonstrate the agent workflow and dashboard analytics in real-time using live sandbox workspaces."
+            },
+            {
+              q: "Can we test custom billing rates or local currency in the demo?",
+              a: "Yes. We configure sample timesheet rates in your local currency (INR, AUD, NZD, AED, SAR, or USD) and show you how project budgets and margins calculate automatically."
+            }
+          ]}
+        />
       </main>
 
       <DeskmeritFooter />
