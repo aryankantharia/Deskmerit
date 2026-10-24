@@ -1,140 +1,218 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import {
-  Timer,
-  Activity,
-  Layers,
-  CalendarCheck,
-  Receipt,
-  CalendarDays,
-  Coffee,
-  Camera,
-  FileSpreadsheet,
-  ArrowRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+
+interface FeatureCard {
+  title: string;
+  href: string;
+  description: string;
+  tag: string;
+  image: string;
+  highlight?: boolean;
+}
 
 export function DeskmeritFeatureGrid() {
-  const features = [
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const features: FeatureCard[] = [
     {
-      title: "Automatic time tracking",
-      href: "/features/automatic-time-tracking",
-      description: "Tracks computer time from the moment the agent starts. No timers to forget.",
-      icon: Timer,
-      tag: "Zero-effort",
-    },
-    {
-      title: "Productivity tracking",
-      href: "/features/productivity-tracking",
-      description: "App, URL and document-title tracking with a score per person, team and organisation.",
-      icon: Activity,
-      tag: "Role-aware",
-    },
-    {
-      title: "Tracker Plus",
+      title: "Tracker Plus for Jira & DevOps",
       href: "/features/tracker-plus",
-      description: "Start tracking from the PM task itself. No second login, no copy-paste.",
-      icon: Layers,
+      description:
+        "Start tracking directly from the PM task itself. Automatic bi-directional work log sync with zero second login.",
       tag: "Flagship ★",
+      image:
+        "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80",
       highlight: true,
     },
     {
-      title: "Attendance tracking",
+      title: "Automatic Time Tracking",
+      href: "/features/automatic-time-tracking",
+      description:
+        "Tracks computer time in the background from the moment the agent starts. No manual timers to forget.",
+      tag: "Zero-effort",
+      image:
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Productivity & App Analytics",
+      href: "/features/productivity-tracking",
+      description:
+        "App, URL, and document-title scoring per person, team, and organization with role-aware rubrics.",
+      tag: "Role-aware",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Attendance & Daily Presence",
       href: "/features/attendance-tracking",
-      description: "Daily presence from tracked work, calendar meetings and logged off-computer time.",
-      icon: CalendarCheck,
+      description:
+        "Daily presence from tracked computer work, calendar meetings, and logged offline time. Zero invasive biometrics.",
       tag: "No biometrics",
+      image:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
     },
     {
-      title: "Project time & billing",
+      title: "Project Time & Billing",
       href: "/features/project-time-tracking",
-      description: "Rates per person and project, cost totals and budget-versus-actual alerts.",
-      icon: Receipt,
+      description:
+        "Rates per person and project, defensible cost totals, budget-versus-actual alerts, and client invoices.",
       tag: "Defensible revenue",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     },
     {
-      title: "Shifts & leave",
+      title: "Shifts & Leave Scheduling",
       href: "/features/shift-scheduling",
-      description: "Shift templates, late and overtime flags, leave requests and a team calendar.",
-      icon: CalendarDays,
+      description:
+        "Overnight shift templates crossing midnight, late and overtime flags, leave requests, and a team calendar.",
       tag: "Rosters & holiday",
+      image:
+        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Live Team Status Feed",
+      href: "/features/live-status",
+      description:
+        "Real-time activity pulse updated every 60 seconds so managers see active tasks without micromanaging.",
+      tag: "60s refresh",
+      image:
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Document Tracking",
+      href: "/features/document-tracking",
+      description:
+        "Window title and document verification without keystroke logging, clipboard sniffing, or webcam recording.",
+      tag: "Privacy-first",
+      image:
+        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
     },
   ];
 
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -380, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 380, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="py-20 lg:py-28 bg-[#FBF9F5] border-b border-[#E6E2D8]/80 font-sans">
+    <section className="py-20 lg:py-28 bg-[#FBF9F5] border-b border-[#E6E2D8]/80 font-sans relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        {/* Header with Title and Scroll Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-3">
               Features
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#0F1730] tracking-[-0.03em] leading-[1.12]">
               Everything you'd expect.
-              <span className="block text-[#0F1730] mt-1">Plus one click that does three jobs.</span>
+              <span className="block text-[#0F1730] mt-1">
+                Plus one click that does three jobs.
+              </span>
             </h2>
           </div>
-          <Link
-            to="/features"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors shrink-0 mb-1 group"
-          >
-            <span>See all features</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+
+          {/* Navigation Controls: < [See all features] > */}
+          <div className="flex items-center gap-2.5 shrink-0 mb-1">
+            <button
+              type="button"
+              onClick={scrollLeft}
+              className="w-10 h-10 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] flex items-center justify-center text-[#0F1730] shadow-xs hover:shadow-sm transition-all"
+              aria-label="Previous feature"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <Link
+              to="/features"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] shadow-xs transition-all group"
+            >
+              <span>See all features</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+            <button
+              type="button"
+              onClick={scrollRight}
+              className="w-10 h-10 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] flex items-center justify-center text-[#0F1730] shadow-xs hover:shadow-sm transition-all"
+              aria-label="Next feature"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* 6 Feature Cards Grid Matching Screenshot 2 Reference */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {features.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
+        {/* Scrollable Track with Rich Image Cards (Matching Attached References) */}
+        <div className="relative">
+          {/* Subtle Left & Right Edge Gradient Fade Masks */}
+          <div className="absolute left-0 top-0 bottom-6 w-8 sm:w-16 bg-gradient-to-r from-[#FBF9F5] via-[#FBF9F5]/70 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-6 w-8 sm:w-16 bg-gradient-to-l from-[#FBF9F5] via-[#FBF9F5]/70 to-transparent z-10 pointer-events-none" />
+
+          {/* Horizontally Scrollable Cards Container */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 sm:gap-7 overflow-x-auto no-scrollbar scroll-smooth pb-6 pt-2 px-1"
+          >
+            {features.map((item) => (
+              <div
                 key={item.title}
-                to={item.href}
-                className={`group relative rounded-3xl p-7 sm:p-8 bg-white transition-all duration-300 flex flex-col justify-between shadow-subtle hover:shadow-card hover:-translate-y-1 ${
+                className={`group shrink-0 w-[300px] sm:w-[350px] lg:w-[380px] rounded-3xl p-5 sm:p-6 bg-white transition-all duration-300 flex flex-col justify-between shadow-subtle hover:shadow-card hover:-translate-y-1.5 ${
                   item.highlight
                     ? "border-2 border-[#FF5A36] ring-4 ring-[#FF5A36]/10"
-                    : "border border-slate-200/90 hover:border-[#4A5370]/40"
+                    : "border border-slate-200/90 hover:border-slate-300"
                 }`}
               >
                 <div>
-                  {/* Top Row: Icon Container Left, Pill Tag Right */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
-                        item.highlight
-                          ? "bg-[#FFE6DF] text-[#FF5A36]"
-                          : "bg-slate-50 border border-slate-100 text-[#0F1730] group-hover:bg-[#FFE6DF] group-hover:text-[#FF5A36]"
-                      }`}
-                    >
-                      <Icon className="w-5 h-5 stroke-[2.2]" />
+                  {/* Framed Feature Image with Floating Pill Tag (Matching Reference 2 & 3) */}
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-5 border border-slate-100 shadow-xs">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F1730]/40 via-transparent to-transparent opacity-60" />
+
+                    {/* Floating Pill Tag */}
+                    <div className="absolute top-3 right-3">
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-extrabold shadow-sm backdrop-blur-md ${
+                          item.highlight
+                            ? "bg-[#FFE6DF]/95 text-[#C2361A] border border-[#FFD4CA]"
+                            : "bg-white/95 text-[#0F1730] border border-slate-200/80"
+                        }`}
+                      >
+                        {item.tag}
+                      </span>
                     </div>
-                    <span
-                      className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                        item.highlight
-                          ? "bg-[#FFE6DF] text-[#C2361A] font-bold border border-[#FFD4CA]"
-                          : "bg-slate-100/80 text-[#4A5370] border border-slate-200/70"
-                      }`}
-                    >
-                      {item.tag}
-                    </span>
                   </div>
 
+                  {/* Card Title */}
                   <h3 className="text-xl font-extrabold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2.5">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-[#4A5370] leading-relaxed">
+
+                  {/* Card Description */}
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mb-6">
                     {item.description}
                   </p>
                 </div>
 
-                {/* Bottom Row: Clean Learn more on left, arrow on right (No dividing line) */}
-                <div className="mt-8 flex items-center justify-between text-xs sm:text-sm font-bold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors">
-                  <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </Link>
-            );
-          })}
+                {/* Bottom Pill Action Button (Exact Match with Reference 2: [ Learn More → ]) */}
+                <Link
+                  to={item.href}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 bg-white hover:bg-[#0F1730] hover:text-white hover:border-[#0F1730] text-xs font-bold text-[#0F1730] shadow-xs transition-all w-max group/btn"
+                >
+                  <span>Learn More</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
