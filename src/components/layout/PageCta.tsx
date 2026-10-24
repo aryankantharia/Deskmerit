@@ -42,10 +42,10 @@ export function PageCta({
           <div className="flex shrink-0 flex-wrap items-center gap-3 relative z-10">
             <Link
               to="/signup"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#FF5A36] hover:bg-[#E94A27] px-7 text-xs font-bold text-[#0F1730] shadow-sm hover:scale-105 transition-all cursor-pointer"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white hover:bg-slate-100 px-7 text-xs font-bold text-[#0F1730] shadow-md hover:scale-105 transition-all cursor-pointer"
             >
-              Start free trial
-              <ArrowRight size={14} />
+              <span>Start free trial</span>
+              <ArrowRight size={14} className="text-[#0F1730]" />
             </Link>
             <Link
               to="/demo"

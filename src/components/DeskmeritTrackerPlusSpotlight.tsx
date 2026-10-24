@@ -36,8 +36,8 @@ export function DeskmeritTrackerPlusSpotlight() {
                 "Identically named projects never merged: tasks are keyed by tool and ID",
               ].map((text, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-[#E6E2D8]">
-                  <span className="w-5 h-5 rounded-full bg-[#FF5A36]/20 text-[#FF5A36] flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5" />
+                  <span className="w-5 h-5 rounded-full bg-white text-[#0F1730] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </span>
                   <span>{text}</span>
                 </li>
@@ -47,10 +47,10 @@ export function DeskmeritTrackerPlusSpotlight() {
             <div className="pt-4">
               <Link
                 to="/features/tracker-plus"
-                className="inline-flex items-center justify-center text-sm font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow transition-all duration-200 group"
+                className="inline-flex items-center justify-center text-sm font-bold text-[#0F1730] bg-white hover:bg-slate-100 px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
               >
-                See how Tracker Plus works
-                <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
+                <span>See how Tracker Plus works</span>
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#0F1730]" />
               </Link>
             </div>
           </div>

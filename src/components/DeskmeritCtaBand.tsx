@@ -36,10 +36,10 @@ export function DeskmeritCtaBand({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4">
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center text-sm font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-8 py-3.5 rounded-[12px] shadow-sm hover:shadow-glow-ember transition-all group"
+              className="inline-flex items-center justify-center text-sm font-bold text-[#0F1730] bg-white hover:bg-slate-100 px-8 py-3.5 rounded-xl shadow-lg transition-all group"
             >
-              Start free 14-day trial
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
+              <span>Start free 14-day trial</span>
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#0F1730]" />
             </Link>
 
             <Link
