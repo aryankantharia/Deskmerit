@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
-import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Timer,
   Activity,
@@ -23,6 +23,8 @@ import {
   ArrowRight,
   Check,
   Minus,
+  Sparkles,
+  ShieldCheck,
 } from "lucide-react";
 
 export function FeaturesPage() {
@@ -167,46 +169,114 @@ export function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+    <div className="min-h-screen bg-[#FFFFFF] text-[#0F1730] font-sans">
       <DeskmeritHeader />
 
       <main>
-        {/* Hero Header */}
-        <div className="py-16 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] mb-6 shadow-sm">
-            <span className="pulse-dot" />
-            <span>Product capabilities</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
-            Every feature you need to understand work time.{" "}
-            <span className="text-[#4A5370] block font-normal">None you'll be embarrassed by.</span>
-          </h1>
-          <p className="text-lg text-[#4A5370] max-w-2xl mx-auto mb-8 font-normal">
-            Deskmerit brings employee time tracking, productivity insights, attendance and project billing into one lightweight desktop agent and one dashboard. Here is everything it does, grouped by the question it answers.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              to="/signup"
-              className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3 rounded-[12px] shadow-sm transition-all"
-            >
-              Start free 14-day trial →
-            </Link>
-            <Link
-              to="/demo"
-              className="inline-flex items-center justify-center text-xs font-semibold text-[#0F1730] bg-[#FFFFFF] hover:bg-[#E6E2D8]/50 border border-[#0F1730] px-6 py-3 rounded-[12px] transition-all"
-            >
-              Book a demo
-            </Link>
-          </div>
-        </div>
+        {/* ========================================================================= */}
+        {/* 1. DARK HERO SECTION (Exact Reference Image 2 Layout)                     */}
+        {/* ========================================================================= */}
+        <section className="bg-gradient-to-b from-[#0A1628] via-[#0D1D35] to-[#0A1628] text-white pt-8 pb-20 lg:pt-12 lg:pb-28 relative overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#20C997]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-[#FF5A36]/10 rounded-full blur-3xl pointer-events-none" />
 
-        {/* 5 Categorized Questions Sections */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Breadcrumb matching Reference */}
+            <div className="text-xs text-[#20C997] font-semibold flex items-center gap-2 mb-6">
+              <Link to="/" className="hover:underline text-slate-300">Home</Link>
+              <span className="text-slate-500">/</span>
+              <span className="text-slate-300">Product</span>
+              <span className="text-slate-500">/</span>
+              <span>All Features</span>
+            </div>
+
+            <div className="grid grid-cols-12 gap-10 lg:gap-12 items-center">
+              {/* Left Column: Headline, Overline, Description & CTAs */}
+              <div className="col-span-12 lg:col-span-6 space-y-6">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#20C997] bg-[#20C997]/10 px-3 py-1 rounded-full inline-block border border-[#20C997]/20">
+                  COMPLETE FEATURE CATALOGUE
+                </div>
+
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-tight text-white">
+                  Every feature you need to understand work time.
+                </h1>
+
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+                  Deskmerit brings automatic computer time tracking, Jira task binding, attendance and client billing into one lightweight desktop engine. Grouped by the questions they answer.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#20C997] hover:bg-[#12B886] text-[#0A1628] font-extrabold text-sm shadow-[0_4px_16px_rgba(32,201,151,0.3)] hover:shadow-[0_6px_22px_rgba(32,201,151,0.4)] transition-all"
+                  >
+                    <span>Start free trial</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    to="/demo"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-transparent hover:bg-white/10 text-white font-bold text-sm border border-slate-600 transition-all"
+                  >
+                    <span>Book a demo</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Browser Window Mockup with macOS Controls (Image 2 Match) */}
+              <div className="col-span-12 lg:col-span-6">
+                <div className="rounded-2xl border border-slate-700/80 bg-[#0F1E36] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                  <div className="bg-[#0A1628] px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-[#ED6A5E]" />
+                      <div className="w-3 h-3 rounded-full bg-[#F5BF4F]" />
+                      <div className="w-3 h-3 rounded-full bg-[#62C554]" />
+                    </div>
+                    <div className="text-[11px] font-mono text-slate-400 bg-slate-900/80 px-3 py-1 rounded-md border border-slate-800">
+                      app.deskmerit.com/features-cockpit
+                    </div>
+                    <div className="text-[11px] font-bold text-[#20C997]">● Active Engine</div>
+                  </div>
+
+                  <div className="p-6 space-y-4">
+                    <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-[#FFE6DF] text-[#FF5A36] flex items-center justify-center">
+                          <Layers className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-white">Tracker Plus Active</div>
+                          <div className="text-[10px] text-slate-400">Jira KMB-482 · API Refactor</div>
+                        </div>
+                      </div>
+                      <span className="font-mono text-xs font-bold text-[#20C997]">1h 42m</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="p-3.5 rounded-xl bg-slate-900/50 border border-slate-800 text-left">
+                        <div className="text-[10px] text-slate-400 font-bold uppercase">Attendance Today</div>
+                        <div className="text-sm font-bold text-white mt-1">6h 12m (Present)</div>
+                      </div>
+                      <div className="p-3.5 rounded-xl bg-slate-900/50 border border-slate-800 text-left">
+                        <div className="text-[10px] text-slate-400 font-bold uppercase">Surveillance Status</div>
+                        <div className="text-sm font-bold text-[#20C997] mt-1">Zero Keylogging</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* 2. CATEGORIZED FEATURE GROUPS (White background)                          */}
+        {/* ========================================================================= */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
           {groups.map((grp) => (
-            <div key={grp.num} className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card">
-              <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 mb-8 border-b border-[#E6E2D8] gap-4">
+            <div key={grp.num} className="bg-slate-50/70 rounded-[28px] p-8 sm:p-12 border border-slate-200 shadow-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 mb-8 border-b border-slate-200 gap-4">
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-extrabold text-[#C2361A] bg-[#FFE6DF] px-3 py-1 rounded-lg font-mono">
+                  <span className="text-xs font-extrabold text-[#0A1628] bg-white border border-slate-300 px-3 py-1 rounded-lg font-mono">
                     {grp.num}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
@@ -222,11 +292,11 @@ export function FeaturesPage() {
                     <Link
                       key={item.title}
                       to={item.href}
-                      className="group p-6 rounded-2xl bg-[#F7F4EE] hover:bg-[#FFFFFF] border border-[#E6E2D8] hover:border-[#FF5A36] transition-all hover:shadow-card flex flex-col justify-between"
+                      className="group p-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-[#20C997] transition-all hover:shadow-md flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-4">
-                          <div className="w-10 h-10 rounded-xl bg-[#FFFFFF] text-[#0F1730] group-hover:bg-[#FFE6DF] group-hover:text-[#C2361A] flex items-center justify-center transition-colors border border-[#E6E2D8]">
+                          <div className="w-10 h-10 rounded-xl bg-slate-100 text-[#0F1730] group-hover:bg-[#E8FBF5] group-hover:text-[#20C997] flex items-center justify-center transition-colors">
                             <Icon className="w-5 h-5" />
                           </div>
                           {item.badge && (
@@ -235,7 +305,7 @@ export function FeaturesPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="font-bold text-base text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2">
+                        <h3 className="font-bold text-base text-[#0F1730] group-hover:text-[#20C997] transition-colors mb-2">
                           {item.title}
                         </h3>
                         <p className="text-xs text-[#4A5370] leading-relaxed">
@@ -243,7 +313,7 @@ export function FeaturesPage() {
                         </p>
                       </div>
 
-                      <div className="mt-5 pt-3 border-t border-[#E6E2D8]/60 flex items-center justify-between text-xs font-semibold text-[#0F1730] group-hover:text-[#FF5A36]">
+                      <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#0F1730] group-hover:text-[#20C997]">
                         <span>Explore details</span>
                         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                       </div>
@@ -254,70 +324,92 @@ export function FeaturesPage() {
             </div>
           ))}
 
-          {/* Plan Comparison Strip */}
-          <div className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-[#E6E2D8] gap-4">
-              <div>
-                <h3 className="text-2xl font-extrabold text-[#0F1730]">
-                  What's included on every plan
-                </h3>
-                <p className="text-xs text-[#4A5370] mt-1">
-                  Simple transparent tiers tailored to your team size.
-                </p>
-              </div>
-              <Link
-                to="/pricing"
-                className="text-xs font-bold text-[#FF5A36] hover:underline flex items-center gap-1 shrink-0"
-              >
-                Compare plans on Pricing <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+          {/* Plan Comparison Table */}
+          <div className="bg-white rounded-[28px] p-8 sm:p-12 border border-slate-200 shadow-sm">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-2">
+              Feature Availability by Plan
+            </h2>
+            <p className="text-sm text-[#4A5370] mb-8">
+              Pick the tier that fits your pod size. Every plan includes our non-negotiable employee privacy guarantee.
+            </p>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-left text-xs sm:text-sm">
                 <thead>
-                  <tr className="border-b border-[#E6E2D8] text-[#4A5370]">
+                  <tr className="border-b border-slate-200 text-[#4A5370]">
                     <th className="py-3 pr-4 font-semibold">Capability</th>
                     <th className="py-3 px-3 font-bold text-[#0F1730] text-center">Starter</th>
-                    <th className="py-3 px-3 font-bold text-[#C2361A] text-center">Pro</th>
+                    <th className="py-3 px-3 font-bold text-[#FF5A36] text-center">Pro</th>
                     <th className="py-3 px-3 font-bold text-[#0F1730] text-center">Premium</th>
                     <th className="py-3 px-3 font-bold text-[#0F1730] text-center">Enterprise</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E6E2D8]/60 text-[#0F1730]">
+                <tbody className="divide-y divide-slate-100 text-[#0F1730]">
                   {planComparison.map((row, i) => (
-                    <tr key={i} className="hover:bg-[#F7F4EE]/60 transition-colors">
+                    <tr key={i} className="hover:bg-slate-50 transition-colors">
                       <td className="py-3.5 pr-4 font-medium">{row.feature}</td>
                       <td className="py-3.5 px-3 text-center">
-                        {row.starter ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />}
+                        {row.starter ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-slate-300 mx-auto" />}
                       </td>
-                      <td className="py-3.5 px-3 text-center bg-[#FFE6DF]/30">
-                        {row.pro ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />}
-                      </td>
-                      <td className="py-3.5 px-3 text-center">
-                        {row.premium ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />}
+                      <td className="py-3.5 px-3 text-center bg-orange-50/40">
+                        {row.pro ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-slate-300 mx-auto" />}
                       </td>
                       <td className="py-3.5 px-3 text-center">
-                        {row.enterprise ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />}
+                        {row.premium ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-slate-300 mx-auto" />}
+                      </td>
+                      <td className="py-3.5 px-3 text-center">
+                        {row.enterprise ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-slate-300 mx-auto" />}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-
-            <div className="mt-8 p-4 rounded-xl bg-[#F7F4EE] border border-[#E6E2D8] text-xs text-[#4A5370] flex items-center justify-between flex-wrap gap-3">
-              <span>
-                🔒 We never record keystroke content, webcam or audio. Employees see their own data first.
-              </span>
-              <Link to="/privacy-promise" className="font-bold text-[#C2361A] hover:underline">
-                Read our privacy promise →
-              </Link>
-            </div>
           </div>
         </div>
 
-        <DeskmeritCtaBand />
+        {/* ========================================================================= */}
+        {/* 3. SPLIT FAQ SECTION (Matching Reference Image 2)                         */}
+        {/* ========================================================================= */}
+        <DeskmeritFaq
+          title="Product Capabilities Frequently Asked Questions"
+          category="COMMON QUESTIONS"
+          helpTitle="Need Help Navigating Features?"
+          helpDescription="Our product specialists can walk you through the entire suite and recommend the right setup for your organization."
+        />
+
+        {/* ========================================================================= */}
+        {/* 4. BOTTOM PRE-FOOTER CTA BANNER (Matching Reference Image 2)              */}
+        {/* ========================================================================= */}
+        <section className="py-12 bg-white font-sans">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl bg-gradient-to-r from-[#0C5A4D] via-[#0E6C5C] to-[#0A4B40] p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="max-w-2xl space-y-2">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#A3F3D8]">
+                  GET STARTED IN 2 MINUTES
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.025em]">
+                  Ready to transform workforce operations with Deskmerit?
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <Link
+                  to="/signup"
+                  className="px-6 py-3.5 rounded-xl bg-white text-[#0A4B40] hover:bg-slate-100 font-extrabold text-xs sm:text-sm shadow-md transition-all whitespace-nowrap"
+                >
+                  Start free trial
+                </Link>
+                <Link
+                  to="/demo"
+                  className="px-6 py-3.5 rounded-xl bg-transparent hover:bg-white/10 text-white font-bold text-xs sm:text-sm border border-white/50 transition-all whitespace-nowrap"
+                >
+                  Book a demo
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <DeskmeritFooter />

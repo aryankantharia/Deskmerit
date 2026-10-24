@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
 import {
   Calendar,
   Clock,
@@ -314,75 +315,14 @@ export function AttendanceTrackingPage() {
           </div>
         </section>
 
-        {/* SECTION 4: Signature FAQ Layout (Left Dark Card + Right Accordion) */}
-        <section className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E6E2D8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              {/* Left Dark Card */}
-              <div className="lg:col-span-5 bg-[#0F1730] rounded-3xl p-8 sm:p-10 text-white relative overflow-hidden border border-[#24305A] shadow-2xl">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#38BDF8]/20 rounded-full blur-[80px] pointer-events-none" />
-                <div className="relative z-10 space-y-6">
-                  <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/20 text-[#38BDF8] flex items-center justify-center">
-                    <HelpCircle className="w-5 h-5" />
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                    Need Custom Roster or Shift Rules?
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
-                    Configure rotating contact center rosters, 24/7 support shifts, or regional Sunday–Thursday schedules in minutes.
-                  </p>
-
-                  <div className="pt-4">
-                    <Link
-                      to="/demo"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0F1730] hover:bg-[#F7F4EE] text-xs font-bold transition-all shadow"
-                    >
-                      <span>Talk to an attendance specialist</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Accordion */}
-              <div className="lg:col-span-7 space-y-4">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                  Frequently Asked Questions
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-8">
-                  Attendance Tracking FAQs
-                </h2>
-
-                <div className="divide-y divide-[#E6E2D8]">
-                  {faqs.map((faq, idx) => {
-                    const isOpen = openFaq === idx;
-                    return (
-                      <div key={idx} className="py-4">
-                        <button
-                          type="button"
-                          onClick={() => setOpenFaq(isOpen ? null : idx)}
-                          className="w-full flex items-center justify-between text-left py-2 font-bold text-sm sm:text-base text-[#0F1730] hover:text-[#FF5A36] transition-colors"
-                        >
-                          <span>{faq.q}</span>
-                          <span className="text-[#FF5A36] shrink-0 ml-4">
-                            {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mt-2 pt-2 pb-2">
-                            {faq.a}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* SECTION 4: Signature Split FAQ Layout (Matching Reference Image 2) */}
+        <DeskmeritFaq
+          title="Attendance Tracking FAQs"
+          category="COMMON QUESTIONS"
+          customFaqs={faqs}
+          helpTitle="Need Custom Roster or Shift Rules?"
+          helpDescription="Configure rotating contact center rosters, 24/7 support shifts, or regional Sunday–Thursday schedules in minutes."
+        />
 
         {/* SECTION 5: High-Impact Full-Width CTA Banner */}
         <section className="bg-[#0F1730] text-white py-16 lg:py-20 border-b border-[#24305A]">
