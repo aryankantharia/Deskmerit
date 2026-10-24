@@ -14,6 +14,8 @@ export function DeskmeritHowItWorks() {
       icon: MousePointerClick,
       detailBadge: "Zero second-login",
       previewText: "Jira task KMB-482 auto-fetched with client & rate pre-mapped",
+      image: "/images/how-it-works/step1-pick-task.jpg",
+      screenAlt: "Deskmerit Task Selection Modal showing Jira KMB-482 ticket with client billable rate",
     },
     {
       num: "2",
@@ -23,6 +25,8 @@ export function DeskmeritHowItWorks() {
       icon: PlayCircle,
       detailBadge: "Works 100% offline",
       previewText: "Desktop agent records title without inspecting inner document body",
+      image: "/images/how-it-works/step2-press-start.jpg",
+      screenAlt: "Deskmerit Live Desktop Tracker showing running timer, real-time app scoring, and Private Time toggle",
     },
     {
       num: "3",
@@ -32,6 +36,8 @@ export function DeskmeritHowItWorks() {
       icon: BarChart3,
       detailBadge: "3-in-1 automated",
       previewText: "Daily timesheet, attendance log, and client invoice totals ready",
+      image: "/images/how-it-works/step3-get-answers.jpg",
+      screenAlt: "Deskmerit Workforce Intelligence Dashboard with billable hours, team attendance, and Excel export",
     },
   ];
 
@@ -53,45 +59,61 @@ export function DeskmeritHowItWorks() {
         {/* 3 Step Interactive Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, idx) => {
-            const Icon = step.icon;
             const isSelected = activeStep === idx;
             return (
               <div
                 key={step.num}
                 onClick={() => setActiveStep(idx)}
-                className={`relative rounded-2xl p-8 border transition-all duration-300 cursor-pointer ${
+                className={`group relative rounded-3xl p-6 sm:p-7 border transition-all duration-300 cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? "bg-[#F7F4EE] border-[#FF5A36] shadow-card -translate-y-1"
-                    : "bg-[#FFFFFF] border-[#E6E2D8] hover:border-[#4A5370]/50 hover:bg-[#F7F4EE]/40"
+                    ? "bg-[#F7F4EE] border-[#FF5A36] shadow-card -translate-y-1.5 ring-2 ring-[#FF5A36]/15"
+                    : "bg-[#FFFFFF] border-[#E6E2D8] hover:border-[#4A5370]/50 hover:bg-[#F7F4EE]/40 hover:-translate-y-1"
                 }`}
               >
-                {/* Step Number Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <span
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center font-display font-extrabold text-base transition-colors ${
-                      isSelected
-                        ? "bg-[#FF5A36] text-[#0F1730]"
-                        : "bg-[#E6E2D8] text-[#0F1730]"
-                    }`}
-                  >
-                    {step.num}
-                  </span>
-                  <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#FFFFFF] text-[#4A5370] border border-[#E6E2D8]">
-                    {step.detailBadge}
-                  </span>
+                <div>
+                  {/* Step Number Badge (Secondary Lora Serif Font) & Pill */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span
+                      className={`w-11 h-11 rounded-2xl flex items-center justify-center font-human italic font-bold text-2xl transition-all shadow-xs ${
+                        isSelected
+                          ? "bg-[#FF5A36] text-white shadow-[0_4px_12px_rgba(255,90,54,0.3)]"
+                          : "bg-[#E6E2D8] text-[#0F1730] group-hover:bg-[#D6D1C5]"
+                      }`}
+                    >
+                      {step.num}
+                    </span>
+                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#FFFFFF] text-[#4A5370] border border-[#E6E2D8] shadow-xs">
+                      {step.detailBadge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-2.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mb-5">
+                    {step.description}
+                  </p>
+
+                  {/* High-Fidelity Product Screen Image */}
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5 border border-slate-200/90 bg-[#0F1730]/5 shadow-sm group-hover:shadow-md transition-all">
+                    <img
+                      src={step.image}
+                      alt={step.screenAlt}
+                      className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    {/* Subtle Corner Badge Indicator */}
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-[#0F1730]/75 backdrop-blur-xs text-[10px] font-medium text-white flex items-center gap-1 shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#12B886]" />
+                      <span>Live product UI</span>
+                    </div>
+                  </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#0F1730] mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-[#4A5370] leading-relaxed mb-6">
-                  {step.description}
-                </p>
-
                 {/* Micro preview snippet */}
-                <div className="p-3 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-xs text-[#0F1730] flex items-center gap-2">
+                <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-xs text-[#0F1730] flex items-center gap-2 shadow-2xs">
                   <CheckCircle2 className="w-4 h-4 text-[#12B886] shrink-0" />
-                  <span className="truncate">{step.previewText}</span>
+                  <span className="truncate font-medium">{step.previewText}</span>
                 </div>
               </div>
             );
@@ -99,7 +121,7 @@ export function DeskmeritHowItWorks() {
         </div>
 
         {/* Bottom CTA to feature detail */}
-        <div className="mt-12 text-center">
+        <div className="mt-14 text-center">
           <Link
             to="/features/tracker-plus"
             className="inline-flex items-center gap-2 text-sm font-bold text-[#C2361A] hover:text-[#FF5A36] group transition-colors"
