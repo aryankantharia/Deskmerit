@@ -107,11 +107,28 @@
   animation-play-state: paused;
 }
 
+/* Features marquee styles */
+@keyframes marqueeFeatures {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.features-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeFeatures 50s linear infinite;
+}
+
+.features-marquee:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pulse-dot {
     animation: none;
   }
-  .marquee-content {
+  .marquee-content,
+  .features-marquee {
     animation: none;
   }
 }

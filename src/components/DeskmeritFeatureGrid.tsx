@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface FeatureCard {
   title: string;
@@ -12,7 +12,6 @@ interface FeatureCard {
 }
 
 export function DeskmeritFeatureGrid() {
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const features: FeatureCard[] = [
     {
@@ -119,99 +118,81 @@ export function DeskmeritFeatureGrid() {
             </h2>
           </div>
 
-          {/* Navigation Controls: < [See all features] > */}
-          <div className="flex items-center gap-2.5 shrink-0 mb-1">
-            <button
-              type="button"
-              onClick={scrollLeft}
-              className="w-10 h-10 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] flex items-center justify-center text-[#0F1730] shadow-xs hover:shadow-sm transition-all"
-              aria-label="Previous feature"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
+          {/* Top Right: View all features CTA (no arrow inside per request) */}
+          <div className="shrink-0 mb-1">
             <Link
               to="/features"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] shadow-xs transition-all group"
+              className="inline-flex items-center px-5 py-2.5 rounded-full bg-white border border-slate-300 hover:border-[#0F1730] text-xs font-bold text-[#0F1730] hover:text-[#FF5A36] shadow-xs hover:shadow-sm transition-all"
             >
-              <span>See all features</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <span>View all features</span>
             </Link>
-            <button
-              type="button"
-              onClick={scrollRight}
-              className="w-10 h-10 rounded-full bg-white border border-slate-200/90 hover:border-[#0F1730] flex items-center justify-center text-[#0F1730] shadow-xs hover:shadow-sm transition-all"
-              aria-label="Next feature"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
           </div>
         </div>
 
-        {/* Scrollable Track with Rich Image Cards (Matching Attached References) */}
+        {/* Continuous Auto-Scrolling Cards Marquee (Screenshot Reference) */}
         <div className="relative">
           {/* Subtle Left & Right Edge Gradient Fade Masks */}
-          <div className="absolute left-0 top-0 bottom-6 w-8 sm:w-16 bg-gradient-to-r from-[#FBF9F5] via-[#FBF9F5]/70 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-6 w-8 sm:w-16 bg-gradient-to-l from-[#FBF9F5] via-[#FBF9F5]/70 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-6 w-10 sm:w-24 bg-gradient-to-r from-[#FBF9F5] via-[#FBF9F5]/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-6 w-10 sm:w-24 bg-gradient-to-l from-[#FBF9F5] via-[#FBF9F5]/80 to-transparent z-10 pointer-events-none" />
 
-          {/* Horizontally Scrollable Cards Container */}
-          <div
-            ref={scrollRef}
-            className="flex gap-6 sm:gap-7 overflow-x-auto no-scrollbar scroll-smooth pb-6 pt-2 px-1"
-          >
-            {features.map((item) => (
-              <div
-                key={item.title}
-                className={`group shrink-0 w-[300px] sm:w-[350px] lg:w-[380px] rounded-3xl p-5 sm:p-6 bg-white transition-all duration-300 flex flex-col justify-between shadow-subtle hover:shadow-card hover:-translate-y-1.5 ${
-                  item.highlight
-                    ? "border-2 border-[#FF5A36] ring-4 ring-[#FF5A36]/10"
-                    : "border border-slate-200/90 hover:border-slate-300"
-                }`}
-              >
-                <div>
-                  {/* Framed Feature Image with Floating Pill Tag (Matching Reference 2 & 3) */}
-                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-5 border border-slate-100 shadow-xs">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F1730]/40 via-transparent to-transparent opacity-60" />
+          {/* Horizontally Auto-Scrolling Marquee Container */}
+          <div className="flex overflow-hidden py-2 select-none">
+            <div className="features-marquee flex gap-6 sm:gap-7 shrink-0 pb-6 pt-2">
+              {[...features, ...features].map((item, idx) => (
+                <div
+                  key={`${item.title}-${idx}`}
+                  className={`group shrink-0 w-[300px] sm:w-[350px] lg:w-[380px] rounded-3xl p-5 sm:p-6 bg-white transition-all duration-300 flex flex-col justify-between shadow-subtle hover:shadow-card hover:-translate-y-1.5 ${
+                    item.highlight
+                      ? "border-2 border-[#FF5A36] ring-4 ring-[#FF5A36]/10"
+                      : "border border-slate-200/90 hover:border-slate-300"
+                  }`}
+                >
+                  <div>
+                    {/* Framed Feature Image with Floating Pill Tag */}
+                    <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-5 border border-slate-100 shadow-xs">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F1730]/40 via-transparent to-transparent opacity-60" />
 
-                    {/* Floating Pill Tag */}
-                    <div className="absolute top-3 right-3">
-                      <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-extrabold shadow-sm backdrop-blur-md ${
-                          item.highlight
-                            ? "bg-[#FFE6DF]/95 text-[#C2361A] border border-[#FFD4CA]"
-                            : "bg-white/95 text-[#0F1730] border border-slate-200/80"
-                        }`}
-                      >
-                        {item.tag}
-                      </span>
+                      {/* Floating Pill Tag */}
+                      <div className="absolute top-3 right-3">
+                        <span
+                          className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-extrabold shadow-sm backdrop-blur-md ${
+                            item.highlight
+                              ? "bg-[#FFE6DF]/95 text-[#C2361A] border border-[#FFD4CA]"
+                              : "bg-white/95 text-[#0F1730] border border-slate-200/80"
+                          }`}
+                        >
+                          {item.tag}
+                        </span>
+                      </div>
                     </div>
+
+                    {/* Card Title */}
+                    <h3 className="text-xl font-extrabold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2.5">
+                      {item.title}
+                    </h3>
+
+                    {/* Card Description */}
+                    <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mb-6">
+                      {item.description}
+                    </p>
                   </div>
 
-                  {/* Card Title */}
-                  <h3 className="text-xl font-extrabold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2.5">
-                    {item.title}
-                  </h3>
-
-                  {/* Card Description */}
-                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mb-6">
-                    {item.description}
-                  </p>
+                  {/* Bottom Pill Action Button */}
+                  <Link
+                    to={item.href}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 bg-white hover:bg-[#0F1730] hover:text-white hover:border-[#0F1730] text-xs font-bold text-[#0F1730] shadow-xs transition-all w-max group/btn"
+                  >
+                    <span>Learn More</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
-
-                {/* Bottom Pill Action Button (Exact Match with Reference 2: [ Learn More → ]) */}
-                <Link
-                  to={item.href}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 bg-white hover:bg-[#0F1730] hover:text-white hover:border-[#0F1730] text-xs font-bold text-[#0F1730] shadow-xs transition-all w-max group/btn"
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
