@@ -81,6 +81,7 @@ export const SOLUTIONS_MENU = {
         { name: "New Zealand (NZ$ NZD)", href: "/en-nz", description: "Privacy Act 2020 transparency, NZ$9/mo" },
         { name: "UAE (AED)", href: "/en-ae", description: "Dubai/Abu Dhabi attendance, Mon–Fri / Sun–Thu shifts" },
         { name: "Saudi Arabia (SAR)", href: "/en-sa", description: "Saudi PDPL readiness, SAR pricing, Sunday–Thursday" },
+        { name: "Arabic home (العربية)", href: "/ar", description: "برنامج مراقبة وتتبع وقت الموظفين" },
       ],
     },
   ],
@@ -173,6 +174,7 @@ export const FOOTER_SECTIONS = [
       { label: "New Zealand", href: "/en-nz" },
       { label: "UAE", href: "/en-ae" },
       { label: "Saudi Arabia", href: "/en-sa" },
+      { label: "Arabic home (العربية)", href: "/ar" },
     ],
   },
   {

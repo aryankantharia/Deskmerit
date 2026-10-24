@@ -71,17 +71,24 @@ export function App() {
           <Route path="/hrms-add-on" element={<HrmsAddonPage />} />
           <Route path="/partners/white-label" element={<PricingPage />} />
 
-          {/* Regional Variants */}
+          {/* Regional Variants (Exact Sitemap paths with & without trailing slashes) */}
           <Route path="/en-in" element={<IndiaPage />} />
+          <Route path="/en-in/" element={<IndiaPage />} />
           <Route path="/india" element={<IndiaPage />} />
           <Route path="/en-au" element={<IndiaPage />} />
+          <Route path="/en-au/" element={<IndiaPage />} />
           <Route path="/australia" element={<IndiaPage />} />
           <Route path="/en-nz" element={<IndiaPage />} />
+          <Route path="/en-nz/" element={<IndiaPage />} />
           <Route path="/new-zealand" element={<IndiaPage />} />
           <Route path="/en-ae" element={<IndiaPage />} />
+          <Route path="/en-ae/" element={<IndiaPage />} />
           <Route path="/uae" element={<IndiaPage />} />
           <Route path="/en-sa" element={<IndiaPage />} />
+          <Route path="/en-sa/" element={<IndiaPage />} />
           <Route path="/saudi-arabia" element={<IndiaPage />} />
+          <Route path="/ar" element={<IndiaPage />} />
+          <Route path="/ar/" element={<IndiaPage />} />
 
           {/* Comparisons */}
           <Route path="/compare" element={<DeskTimeAlternativePage />} />
@@ -97,6 +104,8 @@ export function App() {
           <Route path="/integrations/:slug" element={<IntegrationsPage />} />
           <Route path="/developers" element={<IntegrationsPage />} />
           <Route path="/developers/mcp-server" element={<IntegrationsPage />} />
+          <Route path="/docs" element={<Navigate to="/developers" replace />} />
+          <Route path="/status" element={<Navigate to="/" replace />} />
 
           {/* Editorial & Guides */}
           <Route path="/blog" element={<BlogPage />} />
@@ -121,6 +130,9 @@ export function App() {
           <Route path="/contact" element={<DemoPage />} />
           <Route path="/demo" element={<DemoPage />} />
           <Route path="/signup" element={<TrialSignupPage />} />
+          <Route path="/login" element={<TrialSignupPage />} />
+          <Route path="/app" element={<TrialSignupPage />} />
+          <Route path="/help" element={<Navigate to="/blog" replace />} />
 
           {/* Legal Pages */}
           <Route path="/legal/terms" element={<LegalPage />} />

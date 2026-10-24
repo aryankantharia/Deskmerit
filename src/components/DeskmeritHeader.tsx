@@ -163,6 +163,15 @@ export function DeskmeritHeader() {
                 />
               </button>
 
+              {/* Pricing Direct Link */}
+              <Link
+                to="/pricing"
+                onMouseEnter={() => handleMouseEnter("")}
+                className="px-3 py-2 rounded-lg text-[#0A2540] hover:text-[#FF5A36] hover:bg-slate-50 transition-colors"
+              >
+                Pricing
+              </Link>
+
               {/* Resources Mega Menu Trigger */}
               <button
                 type="button"
@@ -182,13 +191,13 @@ export function DeskmeritHeader() {
                 />
               </button>
 
-              {/* Pricing Direct Link */}
+              {/* Compare Direct Link (Sitemap Specification) */}
               <Link
-                to="/pricing"
+                to="/compare"
                 onMouseEnter={() => handleMouseEnter("")}
                 className="px-3 py-2 rounded-lg text-[#0A2540] hover:text-[#FF5A36] hover:bg-slate-50 transition-colors"
               >
-                Pricing
+                Compare
               </Link>
             </div>
           </div>
