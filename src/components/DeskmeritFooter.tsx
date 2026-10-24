@@ -57,63 +57,38 @@ export function DeskmeritFooter() {
 
         {/* All 7 Sitemap Columns Grid: Product, Solutions, Regions, Compare, Resources, Company, Legal */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-8 pb-12 border-b border-[#24305A]">
-          {FOOTER_SECTIONS.map((section) => {
-            const isCompany = section.title === "Company";
-            const isLegal = section.title === "Legal";
+          {FOOTER_SECTIONS.map((section) => (
+            <div key={section.title} className="space-y-3">
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#9AA1B2]">
+                {section.title}
+              </h4>
 
-            return (
-              <div key={section.title} className="space-y-3">
-                <div className="flex items-center gap-1.5">
-                  <h4
-                    className={`text-[11px] font-bold uppercase tracking-wider ${
-                      isCompany
-                        ? "text-[#FF5A36]"
-                        : isLegal
-                        ? "text-[#38BDF8]"
-                        : "text-[#9AA1B2]"
-                    }`}
-                  >
-                    {section.title}
-                  </h4>
-                  {isCompany && (
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#FF5A36]/20 text-[#FFA994] font-mono">
-                      8
-                    </span>
-                  )}
-                  {isLegal && (
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#38BDF8]/20 text-[#BAE6FD] font-mono">
-                      6
-                    </span>
-                  )}
-                </div>
-
-                <ul className="space-y-2 text-xs">
-                  {section.links.map((link) => (
-                    <li key={link.label}>
-                      {link.external ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors inline-flex items-center gap-1"
-                        >
-                          <span>{link.label}</span>
-                          <ExternalLink className="w-3 h-3 opacity-60" />
-                        </a>
-                      ) : (
-                        <Link
-                          to={link.href}
-                          className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors block"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+              <ul className="space-y-2 text-xs">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors inline-flex items-center gap-1"
+                      >
+                        <span>{link.label}</span>
+                        <ExternalLink className="w-3 h-3 opacity-60" />
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-[#9AA1B2] hover:text-[#FF5A36] transition-colors block"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Global Support Centers & Client Offices */}
