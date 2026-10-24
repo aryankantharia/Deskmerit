@@ -9,7 +9,6 @@ import { DeskmeritTrackerPlusSpotlight } from "../components/DeskmeritTrackerPlu
 import { DeskmeritTrustSection } from "../components/DeskmeritTrustSection";
 import { AiVsLegacySection } from "../components/AiVsLegacySection";
 import { DeskmeritTwoWaysToBuy } from "../components/DeskmeritTwoWaysToBuy";
-import { DeskmeritWhoItsFor } from "../components/DeskmeritWhoItsFor";
 import { DeskmeritIntegrationsSection } from "../components/DeskmeritIntegrationsSection";
 import { DeskmeritGlobalSection } from "../components/DeskmeritGlobalSection";
 import { DeskmeritTestimonials } from "../components/DeskmeritTestimonials";
@@ -51,10 +50,7 @@ export function Home() {
         {/* 10. Two Ways To Buy: Standalone vs Deskmerit for Sqalible HRMS */}
         <DeskmeritTwoWaysToBuy />
 
-        {/* 11. Who It's For: Built for teams that bill by the hour — or prove their hours. (6 industry cards) */}
-        <DeskmeritWhoItsFor />
-
-        {/* 12. Integrations: Works with the tools your team already lives in. + AI MCP server prompt */}
+        {/* 11. Integrations: Works with the tools your team already lives in. + AI MCP server prompt */}
         <DeskmeritIntegrationsSection />
 
         {/* 13. Global, Locally: Made for teams across India, Australia, New Zealand and the Gulf */}
