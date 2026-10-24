@@ -3,25 +3,22 @@ import { Link } from "react-router-dom";
 
 interface DeskmeritLogoProps {
   variant?: "horizontal" | "reverse" | "stacked" | "symbol";
-  endorsement?: boolean;
   className?: string;
   size?: "sm" | "md" | "lg";
 }
 
 export function DeskmeritLogo({
   variant = "horizontal",
-  endorsement = false,
   className = "",
   size = "md",
 }: DeskmeritLogoProps) {
   const isDark = variant === "reverse";
   const strokeColor = isDark ? "#FFFFFF" : "#0F1730";
   const textColor = isDark ? "#FFFFFF" : "#0F1730";
-  const subTextColor = isDark ? "#9AA1B2" : "#4A5370";
 
   // Scale configs based on size
-  const iconSize = size === "sm" ? 24 : size === "lg" ? 38 : 30;
-  const fontSize = size === "sm" ? "text-lg" : size === "lg" ? "text-2xl" : "text-xl";
+  const iconSize = size === "sm" ? 22 : size === "lg" ? 36 : 28;
+  const fontSize = size === "sm" ? "text-lg" : size === "lg" ? "text-2xl" : "text-[21px]";
 
   const symbolSvg = (
     <svg
@@ -59,52 +56,19 @@ export function DeskmeritLogo({
     );
   }
 
-  if (variant === "stacked") {
-    return (
-      <Link
-        to="/"
-        aria-label="Deskmerit home"
-        className={`group inline-flex flex-col items-center text-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember rounded-lg p-1 ${className}`}
-      >
-        {symbolSvg}
-        <span
-          className={`font-display font-bold tracking-[-0.03em] ${fontSize}`}
-          style={{ color: textColor }}
-        >
-          deskmerit
-        </span>
-        {endorsement && (
-          <span className="text-[11px] font-medium tracking-tight text-slate" style={{ color: subTextColor }}>
-            A Kombee Technologies product
-          </span>
-        )}
-      </Link>
-    );
-  }
-
   return (
     <Link
       to="/"
       aria-label="Deskmerit home"
-      className={`group inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember rounded-lg py-1 ${className}`}
+      className={`group inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5A36] rounded-lg py-1 ${className}`}
     >
       {symbolSvg}
-      <div className="flex flex-col">
-        <span
-          className={`font-display font-bold tracking-[-0.03em] leading-none ${fontSize}`}
-          style={{ color: textColor }}
-        >
-          deskmerit
-        </span>
-        {endorsement && (
-          <span
-            className="text-[11px] font-medium tracking-tight mt-0.5"
-            style={{ color: subTextColor }}
-          >
-            A Kombee Technologies product
-          </span>
-        )}
-      </div>
+      <span
+        className={`font-sans font-extrabold tracking-[-0.035em] leading-none ${fontSize}`}
+        style={{ color: textColor }}
+      >
+        deskmerit
+      </span>
     </Link>
   );
 }
