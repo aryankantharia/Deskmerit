@@ -2,17 +2,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
-import { BookOpen, Clock, ArrowRight, Mail, Search, Check } from "lucide-react";
+import {
+  BookOpen,
+  Clock,
+  ArrowRight,
+  Mail,
+  Search,
+  Check,
+  User,
+  Share2,
+  Bookmark,
+  Calendar,
+  Sparkles,
+  ArrowLeft,
+  X,
+} from "lucide-react";
 
 interface Article {
   id: number;
   slug: string;
-  category: "Productivity" | "IT services" | "Time tracking" | "HR" | "Integrations" | "Remote work" | "Product" | "Law";
+  category: "Productivity" | "IT services" | "Time tracking" | "HR" | "Integrations" | "Remote work" | "Legal";
   title: string;
   excerpt: string;
   readTime: string;
   date: string;
+  author: { name: string; role: string; avatar: string };
+  image: string;
   featured?: boolean;
+  content?: string[];
 }
 
 const ARTICLES: Article[] = [
@@ -21,303 +38,467 @@ const ARTICLES: Article[] = [
     slug: "best-employee-monitoring-software-india-2026",
     category: "Productivity",
     title: "Best employee monitoring software in India (2026): an honest comparison",
-    excerpt: "We compared seven tools on pricing in rupees, DPDP readiness, attendance and Jira support — including our own, with its limits.",
+    excerpt: "We compared seven tools on pricing in rupees, DPDP Act readiness, attendance and Jira support — including our own, with its explicit limits.",
     readTime: "12 min read",
     date: "20 Oct 2026",
+    author: { name: "Keyur Mehta", role: "Head of Product Strategy", avatar: "KM" },
+    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
     featured: true,
+    content: [
+      "Software delivery teams live and die by trust. When employees feel covertly surveilled by keystroke loggers and webcam snapshots, turnover surges and morale degrades.",
+      "The newly notified Digital Personal Data Protection (DPDP) Rules in India mandate explicit employee notice, purpose limitation, and the right to erasure. Most legacy trackers built in the 2010s simply cannot comply with these privacy thresholds.",
+      "Deskmerit was architected from day one to deliver the exact utilization and attendance insights that executive leadership requires, without storing single keystrokes or recording video feeds.",
+    ],
   },
   {
     id: 2,
-    slug: "how-to-track-employee-productivity-without-micromanaging",
-    category: "Productivity",
-    title: "How to track employee productivity without micromanaging",
-    excerpt: "Why keystroke loggers destroy trust, and how outcome-based activity scoring delivers real clarity.",
+    slug: "the-ai-native-architecture-scaling-global-workforce",
+    category: "Integrations",
+    title: "The Multi-Tier Statutory Payroll & Time Ledger: Eliminating Friday Scramble",
+    excerpt: "Why manual timesheet entry on Friday afternoon costs software teams up to 35% of defensible revenue, and how task-level linking fixes it.",
     readTime: "8 min read",
     date: "18 Oct 2026",
+    author: { name: "Ananya Sharma", role: "VP Engineering", avatar: "AS" },
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    content: [
+      "Developers spend an average of 42 minutes every Friday trying to recall what tickets they worked on four days prior.",
+      "With Tracker Plus, time records against the Jira or Azure DevOps issue the moment work begins. No timers to forget, no guessing at client billing allocations.",
+    ],
   },
   {
     id: 3,
     slug: "billable-utilisation-what-is-a-good-rate-for-it-services",
     category: "IT services",
-    title: "Billable utilisation: what’s a good rate for IT services firms?",
-    excerpt: "Benchmarks across junior devs, senior architects, and team leads to keep margins above 35%.",
+    title: "Billable utilisation: what’s a good target for modern IT services firms?",
+    excerpt: "Benchmarking senior architects, delivery leads, and developers to maintain healthy gross margins above 35% without team burnout.",
     readTime: "7 min read",
     date: "15 Oct 2026",
+    author: { name: "Marcus Taylor", role: "Delivery Director", avatar: "MT" },
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 4,
     slug: "timesheets-vs-automatic-time-tracking-accuracy",
     category: "Time tracking",
     title: "Timesheets vs automatic time tracking: which is more accurate?",
-    excerpt: "The cognitive cost of filling timesheets on Friday from memory versus background passive tracking.",
+    excerpt: "The cognitive cost of filling timesheets on Friday from memory versus background passive telemetry verified by task tokens.",
     readTime: "6 min read",
     date: "12 Oct 2026",
+    author: { name: "Wei Lin", role: "Lead Systems Architect", avatar: "WL" },
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 5,
     slug: "how-to-introduce-time-tracking-to-your-team-with-template",
     category: "HR",
     title: "How to introduce time tracking to your team (with an announcement template)",
-    excerpt: "A step-by-step communication plan and copy-paste email template that addresses surveillance anxiety.",
+    excerpt: "A copy-paste email and Slack announcement template emphasizing employee privacy, zero keystroke logging, and self-view transparency.",
     readTime: "9 min read",
     date: "10 Oct 2026",
+    author: { name: "Nikita Saxena", role: "Director of People Ops", avatar: "NS" },
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 6,
-    slug: "jira-time-tracking-native-vs-automatic-tools-compared",
+    slug: "jira-time-tracking-native-vs-automatic-tools",
     category: "Integrations",
-    title: "Jira time tracking: native vs automatic tools compared",
-    excerpt: "How Tracker Plus connects personal access tokens directly to issue keys without manual worklogs.",
+    title: "Jira time tracking: native worklogs vs automatic task trackers compared",
+    excerpt: "Why native Jira worklog fields are under-utilized by developers, and how desktop agents bridge the ticket-to-timesheet gap.",
     readTime: "10 min read",
     date: "06 Oct 2026",
+    author: { name: "Keyur Mehta", role: "Product Strategy", avatar: "KM" },
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 7,
     slug: "managing-remote-teams-across-india-australia-gulf",
     category: "Remote work",
-    title: "Managing remote teams across India, Australia and the Gulf",
-    excerpt: "Solving midnight boundaries, Sunday–Thursday shifts, and timezone fairness across distributed offices.",
+    title: "Managing distributed teams across India, Australia and the Gulf seamlessly",
+    excerpt: "Solving midnight shift overlaps, Sunday–Thursday work weeks, and local holiday calendars without administrative chaos.",
     readTime: "8 min read",
     date: "02 Oct 2026",
+    author: { name: "Tariq Al-Mansoor", role: "Operations Lead", avatar: "TM" },
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 8,
     slug: "idle-time-vs-private-time-why-the-difference-matters",
-    category: "Product",
-    title: "Idle time vs private time: why the difference matters",
-    excerpt: "A coffee break isn't slacking and a personal call isn't company time. How to separate them honestly.",
+    category: "Productivity",
+    title: "Idle time vs private time: why the distinction protects team morale",
+    excerpt: "A coffee break isn't slacking, and a personal call isn't company time. How Deskmerit keeps both clearly and honestly separated.",
     readTime: "5 min read",
     date: "28 Sep 2026",
+    author: { name: "Daniel Koch", role: "Senior Engineer", avatar: "DK" },
+    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 9,
-    slug: "is-employee-monitoring-legal-in-australia-plain-english-guide",
-    category: "Law",
+    slug: "is-employee-monitoring-legal-in-australia-guide",
+    category: "Legal",
     title: "Is employee monitoring legal in Australia? A plain-English guide",
-    excerpt: "NSW Workplace Surveillance Act 14-day written notice requirements and Privacy Act 1988 alignment.",
+    excerpt: "Navigating the NSW Workplace Surveillance Act 2005, 14-day written notice requirements, and the federal Privacy Act 1988.",
     readTime: "11 min read",
     date: "24 Sep 2026",
-  },
-  {
-    id: 10,
-    slug: "attendance-tracking-without-biometric-machines",
-    category: "HR",
-    title: "Attendance tracking without biometric machines",
-    excerpt: "Why computer presence signals and calendar events eliminate hardware turnstile maintenance bottlenecks.",
-    readTime: "7 min read",
-    date: "20 Sep 2026",
-  },
-  {
-    id: 11,
-    slug: "desktime-vs-hubstaff-vs-deskmerit-breakdown",
-    category: "Time tracking",
-    title: "DeskTime vs Hubstaff vs Deskmerit: 2026 comparison",
-    excerpt: "An objective feature-by-feature evaluation of pricing, PM task integration, and surveillance philosophy.",
-    readTime: "9 min read",
-    date: "16 Sep 2026",
-  },
-  {
-    id: 12,
-    slug: "how-staffing-firms-stop-revenue-leakage-from-unlogged-hours",
-    category: "IT services",
-    title: "How staffing firms can stop revenue leakage from unlogged hours",
-    excerpt: "Reclaiming the 35% of engineering work that slips into non-billable gaps during client projects.",
-    readTime: "8 min read",
-    date: "12 Sep 2026",
+    author: { name: "Marcus Taylor", role: "Delivery Director", avatar: "MT" },
+    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
+const CATEGORIES = [
+  "All",
+  "Productivity",
+  "Time tracking",
+  "IT services",
+  "HR",
+  "Integrations",
+  "Remote work",
+  "Legal",
+] as const;
+
 export function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [subscribed, setSubscribed] = useState(false);
-  const [email, setEmail] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeArticle, setActiveArticle] = useState<Article | null>(null);
 
-  const categories = [
-    "All",
-    "Productivity",
-    "IT services",
-    "Time tracking",
-    "HR",
-    "Integrations",
-    "Remote work",
-    "Product",
-    "Law",
-  ];
-
-  const featured = ARTICLES.find((a) => a.featured)!;
-  const filteredArticles = ARTICLES.filter((a) => {
-    if (activeCategory === "All") return true;
-    return a.category === activeCategory;
+  const filtered = ARTICLES.filter((art) => {
+    const matchesCat = selectedCategory === "All" || art.category === selectedCategory;
+    const matchesQuery =
+      art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      art.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCat && matchesQuery;
   });
 
+  const featured = ARTICLES[0];
+  const secondary = [ARTICLES[1], ARTICLES[2]];
+
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730] font-sans">
       <DeskmeritHeader />
 
       <main>
-        {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-          <div className="text-xs text-[#4A5370] flex items-center gap-1.5">
-            <Link to="/" className="hover:text-[#0F1730]">Home</Link>
-            <span>/</span>
-            <span className="font-semibold text-[#0F1730]">Blog</span>
+        {/* SECTION 1: Deep Navy Hero with Search & Filters (Sqalible Screenshot 3) */}
+        <section className="bg-[#0A0F1D] text-white pt-12 pb-20 border-b border-[#24305A] text-center relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#FF5A36]/10 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+              Blogs
+            </h1>
+            <p className="text-sm sm:text-base text-[#9AA1B2] max-w-2xl mx-auto mb-8 leading-relaxed">
+              Stay ahead of the curve with the latest insights, reviews, and benchmarks in workforce analytics, engineering billing, and privacy-first tracking.
+            </p>
+
+            {/* Search Input Bar */}
+            <div className="max-w-xl mx-auto relative mb-8">
+              <Search className="w-5 h-5 text-[#9AA1B2] absolute left-4 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles by title, category, or topic..."
+                className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#0F1730] border border-[#24305A] text-white placeholder-[#9AA1B2] text-xs sm:text-sm focus:outline-none focus:border-[#FF5A36] transition-colors"
+              />
+            </div>
+
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                    selectedCategory === cat
+                      ? "bg-[#FF5A36] text-[#0F1730] font-bold shadow-sm"
+                      : "bg-[#1A264F] text-[#9AA1B2] hover:text-white border border-[#2B3969]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Hero Section */}
-        <div className="py-12 sm:py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] mb-4 shadow-sm">
-            <BookOpen className="w-3.5 h-3.5 text-[#FF5A36]" />
-            <span>The Deskmerit Blog</span>
+        {/* SECTION 2: Recent Blog Posts (1 Large Featured + 2 Stacked Cards — Sqalible Screenshot 3) */}
+        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-1">
+              Highlights
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
+              Recent blog posts
+            </h2>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-4">
-            Better work weeks, backed by data.
-          </h1>
-
-          <p className="text-base sm:text-lg text-[#4A5370] max-w-2xl mx-auto font-normal">
-            Practical ideas on productivity, remote work, attendance and billing — for managers, HR and finance teams.
-          </p>
-        </div>
-
-        {/* Category Filter Tabs */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 bg-[#FFFFFF] rounded-2xl border border-[#E6E2D8] max-w-fit mx-auto shadow-subtle">
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setActiveCategory(c)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  activeCategory === c
-                    ? "bg-[#0F1730] text-white shadow-sm"
-                    : "text-[#4A5370] hover:text-[#0F1730]"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Featured Article Card */}
-        {activeCategory === "All" && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <div className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card hover:border-[#FF5A36] transition-all grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8 space-y-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#FFE6DF] text-[#C2361A]">
-                    Featured · Comparison
-                  </span>
-                  <span className="text-xs text-[#4A5370] flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> {featured.readTime} · {featured.date}
-                  </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20">
+            {/* Big Featured Article (Left 7 Cols) */}
+            <div
+              onClick={() => setActiveArticle(featured)}
+              className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-[#E6E2D8] hover:border-[#FF5A36] shadow-card hover:shadow-2xl transition-all cursor-pointer flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden mb-6 bg-slate-100">
+                  <img
+                    src={featured.image}
+                    alt={featured.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F1730] leading-snug">
+                <div className="flex items-center gap-3 text-xs text-[#4A5370] mb-3">
+                  <span className="font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-[#FFE6DF] text-[#C2361A]">
+                    {featured.category}
+                  </span>
+                  <span>·</span>
+                  <span>{featured.date}</span>
+                  <span>·</span>
+                  <span>{featured.readTime}</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors leading-tight mb-3">
                   {featured.title}
-                </h2>
-
-                <p className="text-sm sm:text-base text-[#4A5370] leading-relaxed">
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
                   {featured.excerpt}
                 </p>
+              </div>
 
-                <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF5A36] hover:underline">
-                    Read complete breakdown <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-8 pt-6 border-t border-[#E6E2D8] flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#0F1730] text-white font-bold text-xs flex items-center justify-center">
+                    {featured.author.avatar}
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-[#0F1730] block">{featured.author.name}</span>
+                    <span className="text-[10px] text-[#4A5370]">{featured.author.role}</span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-[#FF5A36] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  Read Article <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </div>
+
+            {/* 2 Stacked Horizontal Cards (Right 5 Cols) */}
+            <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
+              {secondary.map((art) => (
+                <div
+                  key={art.id}
+                  onClick={() => setActiveArticle(art)}
+                  className="bg-white rounded-3xl p-6 border border-[#E6E2D8] hover:border-[#FF5A36] shadow-card hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between group flex-1"
+                >
+                  <div>
+                    <div className="flex items-center gap-3 text-xs text-[#4A5370] mb-2">
+                      <span className="font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#FFE6DF] text-[#C2361A] text-[10px]">
+                        {art.category}
+                      </span>
+                      <span>·</span>
+                      <span className="text-[11px]">{art.date}</span>
+                    </div>
+                    <h4 className="text-base sm:text-lg font-bold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors leading-snug mb-2">
+                      {art.title}
+                    </h4>
+                    <p className="text-xs text-[#4A5370] line-clamp-2">
+                      {art.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-[#E6E2D8] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-[#0F1730] text-white font-bold text-[10px] flex items-center justify-center">
+                        {art.author.avatar}
+                      </div>
+                      <span className="text-xs font-medium text-[#0F1730]">{art.author.name}</span>
+                    </div>
+                    <span className="text-xs font-bold text-[#FF5A36] flex items-center gap-1">
+                      Read →
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* SECTION 3: All Blog Posts 3-Column Grid (Sqalible Screenshot 3) */}
+          <div>
+            <div className="mb-10">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
+                All Blog Posts
+              </h2>
+              <p className="text-xs text-[#4A5370] mt-1">
+                Showing {filtered.length} articles in {selectedCategory}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filtered.map((post) => (
+                <div
+                  key={post.id}
+                  onClick={() => setActiveArticle(post)}
+                  className="bg-white rounded-3xl p-6 border border-[#E6E2D8] hover:border-[#FF5A36] shadow-card hover:shadow-2xl transition-all cursor-pointer flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="w-full h-44 rounded-2xl overflow-hidden mb-4 bg-slate-100">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 text-[11px] text-[#4A5370] mb-2">
+                      <span className="font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FFE6DF] text-[#C2361A] text-[9px]">
+                        {post.category}
+                      </span>
+                      <span>·</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors leading-snug mb-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-[#4A5370] line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-[#E6E2D8] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-[#0F1730] text-white font-bold text-[10px] flex items-center justify-center">
+                        {post.author.avatar}
+                      </div>
+                      <span className="text-xs font-medium text-[#0F1730]">{post.author.name}</span>
+                    </div>
+                    <span className="text-xs font-bold text-[#FF5A36] flex items-center gap-1">
+                      Read <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 4: Dedicated Article Reader Modal (Sqalible Screenshot 4 Architecture) */}
+        {activeArticle && (
+          <div className="fixed inset-0 z-50 bg-[#0A0F1D]/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <div className="bg-[#FFFFFF] rounded-3xl max-w-4xl w-full border border-[#E6E2D8] shadow-2xl overflow-hidden my-8 max-h-[90vh] overflow-y-auto">
+              {/* Header Banner */}
+              <div className="bg-[#0A0F1D] text-white p-8 sm:p-12 relative">
+                <button
+                  type="button"
+                  onClick={() => setActiveArticle(null)}
+                  className="absolute right-6 top-6 p-2 rounded-full bg-[#1A264F] hover:bg-[#FF5A36] text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="max-w-2xl space-y-4">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#FF5A36]/20 text-[#FF5A36] border border-[#FF5A36]/30">
+                    {activeArticle.category}
                   </span>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                    {activeArticle.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-xs text-[#9AA1B2] pt-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-[#FF5A36] text-[#0F1730] font-bold text-xs flex items-center justify-center">
+                        {activeArticle.author.avatar}
+                      </div>
+                      <span className="text-white font-medium">{activeArticle.author.name}</span>
+                    </div>
+                    <span>·</span>
+                    <span>{activeArticle.date}</span>
+                    <span>·</span>
+                    <span>{activeArticle.readTime}</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-4 bg-[#F7F4EE] rounded-2xl p-6 border border-[#E6E2D8] text-xs text-[#4A5370] space-y-2">
-                <div className="font-bold text-[#0F1730] text-sm">Key comparison factors:</div>
-                <div>• INR pricing & GST compliance</div>
-                <div>• Digital Personal Data Protection (DPDP) Act rules</div>
-                <div>• Jira & Azure DevOps ticket synchronization</div>
-                <div>• Keystroke & webcam privacy policies compared</div>
+              {/* Body Content & Sidebar */}
+              <div className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10">
+                {/* Left: Article Narrative */}
+                <div className="lg:col-span-8 space-y-6 text-sm text-[#0F1730] leading-relaxed">
+                  <p className="text-base font-semibold text-[#4A5370]">
+                    {activeArticle.excerpt}
+                  </p>
+
+                  <div className="p-5 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] block">
+                      Executive Summary
+                    </span>
+                    <p className="text-xs text-[#4A5370]">
+                      Automatic task-level time capture with zero keystroke logging improves client invoice realization by 18% while maintaining full GDPR & DPDP compliance.
+                    </p>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-[#0F1730]">
+                    Why Legacy Spyware Destroys Engineering Productivity
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    When monitoring software covertly records screen snapshots or tracks individual keypresses, developers alter their natural workflow. Research indicates that engineers subjected to invasive tracking commit up to 24% less code and experience heightened attrition.
+                  </p>
+
+                  <h3 className="text-xl font-bold text-[#0F1730]">
+                    How Trust-First Architecture Resolves the Utilization Gap
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    Deskmerit bridges the divide between PM tools (Jira, Azure DevOps) and client invoicing. Because time is logged against verifiable ticket IDs rather than arbitrary activity meters, teams defend every hour without compromising personal dignity.
+                  </p>
+
+                  <div className="pt-4 border-t border-[#E6E2D8] flex items-center justify-between text-xs text-[#4A5370]">
+                    <span>Share this insight:</span>
+                    <div className="flex items-center gap-3">
+                      <button className="p-2 rounded-lg bg-[#F7F4EE] hover:bg-[#FFE6DF] text-[#0F1730]">
+                        <Share2 className="w-4 h-4" />
+                      </button>
+                      <button className="p-2 rounded-lg bg-[#F7F4EE] hover:bg-[#FFE6DF] text-[#0F1730]">
+                        <Bookmark className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Sticky Sidebar Highlights & CTA (Sqalible Screenshot 4) */}
+                <div className="lg:col-span-4 space-y-6">
+                  {/* Highlights Card */}
+                  <div className="p-6 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] space-y-3">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F1730]">
+                      Article Highlights
+                    </h4>
+                    <ul className="space-y-2 text-xs text-[#4A5370]">
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
+                        <span>Zero keystroke or webcam tracking</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
+                        <span>Direct Jira & Azure DevOps ticket linkage</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
+                        <span>DPDP Act 2023 & GDPR aligned architecture</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Dark CTA Box (Sqalible Screenshot 4) */}
+                  <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A] text-white space-y-4">
+                    <h4 className="text-base font-bold text-white">
+                      Ready to Modernise Your Workforce?
+                    </h4>
+                    <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                      Deploy Deskmerit in under 10 minutes. Includes free 14-day trial with full feature parity.
+                    </p>
+                    <Link
+                      to="/signup"
+                      className="block w-full py-2.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all"
+                    >
+                      Start Free Trial
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         )}
-
-        {/* All Articles Grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredArticles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-[#FFFFFF] rounded-2xl p-7 border border-[#E6E2D8] hover:border-[#FF5A36] hover:shadow-card transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF5A36] bg-[#FFE6DF] px-2.5 py-1 rounded-full">
-                      {article.category}
-                    </span>
-                    <span className="text-[11px] text-[#4A5370] flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {article.readTime}
-                    </span>
-                  </div>
-
-                  <h3 className="font-bold text-base text-[#0F1730] leading-snug mb-2 hover:text-[#FF5A36] transition-colors cursor-pointer">
-                    {article.title}
-                  </h3>
-
-                  <p className="text-xs text-[#4A5370] leading-relaxed line-clamp-3">
-                    {article.excerpt}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-[#E6E2D8]/60 flex items-center justify-between text-xs text-[#4A5370]">
-                  <span>{article.date}</span>
-                  <span className="font-bold text-[#0F1730] hover:text-[#FF5A36] flex items-center gap-1 cursor-pointer">
-                    Read article <ArrowRight className="w-3 h-3" />
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Newsletter Subscription Strip */}
-        <section className="bg-[#0F1730] text-white py-16">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-              One useful email a fortnight.
-            </h3>
-            <p className="text-xs sm:text-sm text-[#9AA1B2]">
-              Productivity research, templates and product news. No spam, ever.
-            </p>
-
-            {subscribed ? (
-              <div className="p-4 rounded-xl bg-[#12B886]/20 border border-[#12B886] text-xs text-[#12B886] flex items-center justify-center gap-2 max-w-md mx-auto font-semibold">
-                <Check className="w-4 h-4" /> You're on the list! First issue arriving next Tuesday.
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (email) setSubscribed(true);
-                }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto pt-2"
-              >
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your work email..."
-                  className="w-full sm:flex-1 px-4 py-3 rounded-[12px] bg-[#172348] border border-[#24305A] text-xs text-white placeholder-[#9AA1B2] focus:outline-none focus:border-[#FF5A36]"
-                />
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto px-6 py-3 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs transition-colors whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
-              </form>
-            )}
-          </div>
-        </section>
       </main>
 
       <DeskmeritFooter />

@@ -2,79 +2,148 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
-import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { useCurrency, CURRENCIES, CurrencyCode } from "../utils/currencyContext";
-import { Check, ArrowRight, Sparkles, Building2, HelpCircle, ChevronDown, Plus, Minus } from "lucide-react";
+import {
+  Check,
+  Minus,
+  ArrowRight,
+  Sparkles,
+  Building2,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  Sliders,
+  ShieldCheck,
+  CreditCard,
+} from "lucide-react";
 
 export function PricingPage() {
   const { currencyCode, setCurrencyCode, billingInterval, setBillingInterval, currency } = useCurrency();
-  const [teamSize, setTeamSize] = useState(15);
+  const [teamSize, setTeamSize] = useState(25);
+  const [selectedPlanForCalc, setSelectedPlanForCalc] = useState<"pro" | "premium">("pro");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const isAnnual = billingInterval === "annual";
   const proRate = isAnnual ? currency.annual.pro : currency.monthly.pro;
   const premiumRate = isAnnual ? currency.annual.premium : currency.monthly.premium;
 
-  const totalProMonthly = (teamSize * proRate).toFixed(0);
-  const totalPremiumMonthly = (teamSize * premiumRate).toFixed(0);
+  const activeRate = selectedPlanForCalc === "pro" ? proRate : premiumRate;
+  const totalCalculated = (teamSize * activeRate).toLocaleString();
 
   const billingFaqs = [
     {
-      q: "Can I change plans any time?",
-      a: "Yes. Upgrades and seat count changes are prorated automatically. Any unused credits apply toward your next invoice.",
+      q: "Can I change plans or seat count any time?",
+      a: "Yes. Upgrades and seat adjustments are prorated automatically. Any unused days apply directly toward your next billing cycle.",
     },
     {
       q: "What happens if a payment fails?",
-      a: "You get a 7-day grace period. After that, your account is paused — never deleted — and any tracking session in progress finishes and syncs safely first.",
+      a: "You get a 7-day grace period. After that, your workspace is paused — never deleted — and any active sessions in progress finish and sync safely first.",
     },
     {
-      q: "Do you offer annual invoicing?",
-      a: "Yes, on Enterprise and Premium with a fixed seat count or quarterly true-up. Bank transfers (wire/NEFT/RTGS) and purchase orders are accepted.",
+      q: "Do you offer annual invoicing and purchase orders?",
+      a: "Yes, available on Pro, Premium, and Enterprise. Enterprise accounts can be paid via annual bank wire (NEFT/RTGS/ACH/SWIFT) or quarterly true-ups.",
     },
     {
-      q: "Is there a discount for non-profits or education?",
-      a: "Yes, we offer up to a 30% discount for qualified non-profit organisations, universities, and open-source foundations. Reach out to our team at sales@deskmerit.io.",
+      q: "Do you provide GST-compliant invoices in India?",
+      a: "Yes. Indian companies receive automated GST-compliant tax invoices with GSTIN validation and reverse-charge accounting support.",
     },
     {
-      q: "Do you charge GST or VAT?",
-      a: "GST / VAT is applied based on your billing address at checkout. Indian customers receive fully GST-compliant invoices with GSTIN validation.",
+      q: "Is there a discount for non-profits or open-source projects?",
+      a: "Yes! We offer a 30% discount for registered non-profits, academic institutions, and open-source foundation teams. Contact sales@deskmerit.com.",
+    },
+  ];
+
+  const matrixSections = [
+    {
+      category: "Time & Activity Tracking",
+      features: [
+        { name: "Automatic background tracking", starter: true, pro: true, premium: true, ent: true },
+        { name: "App, URL & window title tracking", starter: true, pro: true, premium: true, ent: true },
+        { name: "Role-based productivity scoring", starter: "Basic", pro: "Advanced", premium: "Custom rules", ent: "Enterprise matrix" },
+        { name: "Private Time one-click pause", starter: true, pro: true, premium: true, ent: true },
+        { name: "Offline tracking & automatic queue", starter: true, pro: true, premium: true, ent: true },
+      ],
+    },
+    {
+      category: "Project & Task Management",
+      features: [
+        { name: "Tracker Plus (Jira, Azure DevOps, OpenProject)", starter: false, pro: true, premium: true, ent: true },
+        { name: "Multi-tenant engineer tokens", starter: false, pro: true, premium: true, ent: true },
+        { name: "Billable vs non-billable categorization", starter: false, pro: true, premium: true, ent: true },
+        { name: "Client billing rates per role/project", starter: false, pro: true, premium: true, ent: true },
+        { name: "Budget overrun alerts (90% & 100%)", starter: false, pro: true, premium: true, ent: true },
+      ],
+    },
+    {
+      category: "Attendance & Workforce",
+      features: [
+        { name: "Calendar-aware attendance (Google & Outlook)", starter: false, pro: true, premium: true, ent: true },
+        { name: "Overnight shift logic crossing midnight", starter: false, pro: true, premium: true, ent: true },
+        { name: "Leave request & team absence calendar", starter: false, pro: true, premium: true, ent: true },
+        { name: "Audited HR attendance corrections", starter: false, pro: true, premium: true, ent: true },
+      ],
+    },
+    {
+      category: "Security & Governance",
+      features: [
+        { name: "Optional screenshots (off by default)", starter: false, pro: "Blurred only", premium: "Configurable", ent: "Configurable + Audit" },
+        { name: "REST API & Claude MCP Server", starter: false, pro: true, premium: true, ent: true },
+        { name: "White-label & reseller branding", starter: false, false: false, premium: true, ent: true },
+        { name: "SAML 2.0 / OIDC SSO & SCIM", starter: false, pro: false, premium: false, ent: true },
+        { name: "Dedicated database & data residency choice", starter: false, pro: false, premium: false, ent: true },
+        { name: "99.9% Uptime SLA & 24/7 Priority Support", starter: false, pro: false, premium: false, ent: true },
+      ],
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730] font-sans">
       <DeskmeritHeader />
 
       <main>
-        {/* Header */}
-        <div className="py-16 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] mb-6 shadow-sm">
-            <span className="pulse-dot" />
-            <span>Pricing</span>
+        {/* SECTION 1: Deep Navy Hero Matching Sqalible Screenshot 2 */}
+        <section className="bg-[#0A0F1D] text-white pt-10 pb-20 border-b border-[#24305A] text-center relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#FF5A36]/10 rounded-full blur-[140px] pointer-events-none" />
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Breadcrumb */}
+            <div className="text-xs text-[#9AA1B2] flex items-center justify-center gap-1.5 mb-6">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <span className="font-semibold text-white">Pricing</span>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] border border-[#2E3C6B] text-xs font-semibold text-[#38BDF8] mb-6">
+              <span className="pulse-dot mr-1" />
+              <span>Transparent, Predictable Pricing</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-tight mb-4">
+              Simple plans, predictable pricing.
+            </h1>
+            <p className="text-base sm:text-lg text-[#9AA1B2] max-w-2xl mx-auto">
+              Every plan starts with a 14-day full trial with every feature included. No credit card required.
+            </p>
           </div>
+        </section>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
-            Simple pricing.{" "}
-            <span className="text-[#FF5A36] block sm:inline font-normal">
-              Every plan starts with a 14-day full trial.
-            </span>
-          </h1>
+        {/* SECTION 2: 3-Tier Cards with Highlighted Pro Tier (Sqalible Screenshot 2) */}
+        <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+              Flexible Subscriptions
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730]">
+              Plans that scale with your workforce
+            </h2>
 
-          <p className="text-lg text-[#4A5370] max-w-2xl mx-auto mb-8 font-normal">
-            No credit card needed. After the trial you move to the free Starter plan unless you choose a paid plan.
-          </p>
-
-          {/* Toggle Controls: Monthly/Annual + Currency Selector */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            {/* Billing interval toggle */}
-            <div className="bg-[#FFFFFF] p-1.5 rounded-xl border border-[#E6E2D8] flex items-center shadow-subtle">
+            {/* Monthly / Annual Toggle */}
+            <div className="mt-6 inline-flex items-center p-1.5 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] shadow-sm">
               <button
                 type="button"
                 onClick={() => setBillingInterval("monthly")}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  !isAnnual
-                    ? "bg-[#0F1730] text-white shadow-sm"
-                    : "text-[#4A5370] hover:text-[#0F1730]"
+                className={`px-5 py-2 text-xs font-bold rounded-xl transition-all ${
+                  !isAnnual ? "bg-[#0F1730] text-white shadow-sm" : "text-[#4A5370] hover:text-[#0F1730]"
                 }`}
               >
                 Monthly
@@ -82,77 +151,46 @@ export function PricingPage() {
               <button
                 type="button"
                 onClick={() => setBillingInterval("annual")}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  isAnnual
-                    ? "bg-[#0F1730] text-white shadow-sm"
-                    : "text-[#4A5370] hover:text-[#0F1730]"
+                className={`px-5 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 ${
+                  isAnnual ? "bg-[#0F1730] text-white shadow-sm" : "text-[#4A5370] hover:text-[#0F1730]"
                 }`}
               >
                 <span>Annual</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#FF5A36] text-[#0F1730] font-extrabold">
-                  save 20%
+                <span className="px-2 py-0.5 rounded-md text-[10px] bg-[#FFE6DF] text-[#C2361A] font-bold">
+                  Save 20%
                 </span>
               </button>
             </div>
-
-            {/* Currency selector */}
-            <div className="flex items-center gap-1 bg-[#FFFFFF] p-1.5 rounded-xl border border-[#E6E2D8] shadow-subtle">
-              {(["USD", "INR", "AUD", "NZD", "AED", "SAR"] as CurrencyCode[]).map((code) => {
-                const item = CURRENCIES[code];
-                const active = currencyCode === code;
-                return (
-                  <button
-                    key={code}
-                    type="button"
-                    onClick={() => setCurrencyCode(code)}
-                    className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      active
-                        ? "bg-[#FFE6DF] text-[#C2361A]"
-                        : "text-[#4A5370] hover:text-[#0F1730]"
-                    }`}
-                  >
-                    <span>{item.flag} </span>
-                    <span>{code}</span>
-                  </button>
-                );
-              })}
-            </div>
           </div>
 
-          <div className="text-xs text-[#4A5370] mt-3">
-            {currency.taxNotice}
-          </div>
-        </div>
-
-        {/* 4 Pricing Cards Grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Starter */}
-            <div className="bg-[#FFFFFF] rounded-2xl p-7 border border-[#E6E2D8] shadow-subtle flex flex-col justify-between">
+          {/* 3 Main Tier Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {/* 1. Starter */}
+            <div className="rounded-3xl p-8 bg-white border border-[#E6E2D8] shadow-card flex flex-col justify-between">
               <div>
-                <div className="text-base font-bold text-[#0F1730]">Starter</div>
-                <div className="text-xs text-[#4A5370] mt-1 mb-5">
-                  For freelancers and small teams
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A5370] bg-[#F7F4EE] px-3 py-1 rounded-full border border-[#E6E2D8] inline-block mb-4">
+                  Starter Plan
+                </span>
+                <h3 className="text-2xl font-extrabold text-[#0F1730]">Free</h3>
+                <p className="text-xs text-[#4A5370] mt-1 mb-6">
+                  For freelancers and small bootstrapped teams up to 5 seats.
+                </p>
+
+                <div className="mb-6 pb-6 border-b border-[#E6E2D8]">
+                  <span className="text-4xl font-extrabold text-[#0F1730]">Free</span>
+                  <span className="text-xs text-[#4A5370] ml-2">up to 5 users forever</span>
                 </div>
 
-                <div className="pb-6 border-b border-[#E6E2D8]">
-                  <div className="text-3xl font-extrabold text-[#0F1730]">
-                    Free
-                  </div>
-                  <div className="text-xs text-[#4A5370] mt-1">up to 5 users permanently</div>
-                </div>
-
-                <ul className="space-y-3 py-6 text-xs text-[#0F1730]">
+                <ul className="space-y-3 text-xs text-[#0F1730] mb-8">
                   {[
-                    "Automatic time tracking",
-                    "Productivity scores",
-                    "Idle & Private Time",
-                    "Attendance tracking",
-                    "Basic reports & CSV export",
-                    "Windows, macOS & Linux",
+                    "Automatic background time tracking",
+                    "Productivity scoring per app and URL",
+                    "Private Time one-click pause",
+                    "Basic attendance presence tracking",
+                    "Windows, macOS & Linux agents",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0" />
+                    <li key={i} className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#12B886] shrink-0" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -161,142 +199,93 @@ export function PricingPage() {
 
               <Link
                 to="/signup"
-                className="w-full py-3 rounded-[12px] bg-[#FFFFFF] border border-[#0F1730] text-[#0F1730] font-bold text-xs text-center hover:bg-[#F7F4EE] transition-colors"
+                className="w-full py-3.5 rounded-xl border border-[#0F1730] hover:bg-[#F7F4EE] text-[#0F1730] font-bold text-xs text-center transition-all"
               >
-                Start free
+                Start free forever
               </Link>
             </div>
 
-            {/* Pro (Highlighted) */}
-            <div className="bg-[#FFFFFF] rounded-2xl p-7 border-2 border-[#FF5A36] shadow-elevated relative flex flex-col justify-between ring-1 ring-[#FF5A36]/30">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FF5A36] text-[#0F1730] text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                Most popular
+            {/* 2. Pro (Highlighted Middle Card with Sqalible Styling) */}
+            <div className="rounded-3xl p-8 bg-white border-2 border-[#FF5A36] shadow-2xl relative flex flex-col justify-between">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#FF5A36] text-[#0F1730] text-[10px] font-extrabold uppercase tracking-wider px-4 py-1 rounded-full shadow-md">
+                ★ Most Popular
               </div>
 
               <div>
-                <div className="text-base font-bold text-[#0F1730]">Pro</div>
-                <div className="text-xs text-[#4A5370] mt-1 mb-5">
-                  For growing teams that bill time
-                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] bg-[#FFE6DF] px-3 py-1 rounded-full inline-block mb-4 mt-2">
+                  Pro Plan
+                </span>
+                <h3 className="text-2xl font-extrabold text-[#0F1730]">Growing Teams</h3>
+                <p className="text-xs text-[#4A5370] mt-1 mb-6">
+                  For agencies and engineering teams that bill client time.
+                </p>
 
-                <div className="pb-6 border-b border-[#E6E2D8]">
+                <div className="mb-6 pb-6 border-b border-[#E6E2D8]">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-extrabold text-[#0F1730] font-display tnum">
-                      {currency.symbol}{proRate}
-                    </span>
-                    <span className="text-xs text-[#4A5370]">/ user / mo</span>
+                    <span className="text-4xl font-extrabold text-[#0F1730]">{currency.symbol}{proRate}</span>
+                    <span className="text-xs text-[#4A5370]">/ user / month</span>
                   </div>
-                  <div className="text-xs text-[#C2361A] font-semibold mt-1">
-                    {isAnnual ? "Billed annually" : "Billed monthly"}
-                  </div>
+                  <span className="text-[11px] text-[#FF5A36] font-semibold mt-1 block">
+                    Billed {isAnnual ? "annually (20% off)" : "monthly"}
+                  </span>
                 </div>
 
-                <ul className="space-y-3 py-6 text-xs text-[#0F1730]">
-                  <li className="font-bold text-[#0F1730] flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0" />
-                    <span>Everything in Starter, plus:</span>
-                  </li>
+                <ul className="space-y-3 text-xs text-[#0F1730] mb-8">
                   {[
-                    "Tracker Plus: Jira, Azure DevOps, OpenProject",
-                    "Google & Outlook calendar sync",
-                    "Optional screenshots (blurred by default)",
-                    "Project billing, shifts & leave",
-                    "Slack, Teams, Zapier & Make",
-                    "REST API & MCP server for AI queries",
+                    "Everything in Starter, plus:",
+                    "Tracker Plus (Jira, Azure DevOps, OpenProject)",
+                    "Calendar integration (Google & Outlook)",
+                    "Optional blurred screenshots with notifications",
+                    "Project billing, rates & budget alerts",
+                    "Shifts scheduling & leave calendar",
+                    "Slack, Teams, Zapier & Make integrations",
+                    "REST API & Claude MCP server",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0 mt-0.5" />
-                      <span>{feat}</span>
+                    <li key={i} className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#12B886] shrink-0" />
+                      <span className={i === 0 ? "font-bold text-[#FF5A36]" : ""}>{feat}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <Link
-                to="/signup?plan=pro"
-                className="w-full py-3 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center shadow transition-colors"
+                to="/signup"
+                className="w-full py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-md hover:shadow-glow-ember"
               >
-                Start 14-day trial
+                Start 14-day free trial →
               </Link>
             </div>
 
-            {/* Premium */}
-            <div className="bg-[#FFFFFF] rounded-2xl p-7 border border-[#E6E2D8] shadow-subtle flex flex-col justify-between">
+            {/* 3. Enterprise */}
+            <div className="rounded-3xl p-8 bg-white border border-[#E6E2D8] shadow-card flex flex-col justify-between">
               <div>
-                <div className="text-base font-bold text-[#0F1730]">Premium</div>
-                <div className="text-xs text-[#4A5370] mt-1 mb-5">
-                  For agencies, IT services & resellers
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A5370] bg-[#F7F4EE] px-3 py-1 rounded-full border border-[#E6E2D8] inline-block mb-4">
+                  Enterprise
+                </span>
+                <h3 className="text-2xl font-extrabold text-[#0F1730]">Regulated & Large</h3>
+                <p className="text-xs text-[#4A5370] mt-1 mb-6">
+                  For 200+ seat organizations requiring governance & compliance.
+                </p>
+
+                <div className="mb-6 pb-6 border-b border-[#E6E2D8]">
+                  <span className="text-4xl font-extrabold text-[#0F1730]">Custom</span>
+                  <span className="text-xs text-[#4A5370] ml-2">Annual invoice billing</span>
                 </div>
 
-                <div className="pb-6 border-b border-[#E6E2D8]">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-extrabold text-[#0F1730] font-display tnum">
-                      {currency.symbol}{premiumRate}
-                    </span>
-                    <span className="text-xs text-[#4A5370]">/ user / mo</span>
-                  </div>
-                  <div className="text-xs text-[#4A5370] mt-1">
-                    {isAnnual ? "Billed annually" : "Billed monthly"}
-                  </div>
-                </div>
-
-                <ul className="space-y-3 py-6 text-xs text-[#0F1730]">
-                  <li className="font-bold text-[#0F1730] flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0" />
-                    <span>Everything in Pro, plus:</span>
-                  </li>
+                <ul className="space-y-3 text-xs text-[#0F1730] mb-8">
                   {[
-                    "Advanced profitability reporting",
-                    "White-label & reseller sub-organisations",
-                    "Custom client portal branding",
-                    "Priority support with dedicated Slack channel",
-                  ].map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Link
-                to="/signup?plan=premium"
-                className="w-full py-3 rounded-[12px] bg-[#FFFFFF] border border-[#0F1730] text-[#0F1730] font-bold text-xs text-center hover:bg-[#F7F4EE] transition-colors"
-              >
-                Start 14-day trial
-              </Link>
-            </div>
-
-            {/* Enterprise */}
-            <div className="bg-[#0F1730] text-white rounded-2xl p-7 border border-[#24305A] shadow-subtle flex flex-col justify-between">
-              <div>
-                <div className="text-base font-bold text-white">Enterprise</div>
-                <div className="text-xs text-[#9AA1B2] mt-1 mb-5">
-                  For 200+ seats & regulated teams
-                </div>
-
-                <div className="pb-6 border-b border-[#24305A]">
-                  <div className="text-3xl font-extrabold text-white">
-                    Custom
-                  </div>
-                  <div className="text-xs text-[#9AA1B2] mt-1">Annual PO invoice billing</div>
-                </div>
-
-                <ul className="space-y-3 py-6 text-xs text-[#E6E2D8]">
-                  <li className="font-bold text-white flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0" />
-                    <span>Everything in Premium, plus:</span>
-                  </li>
-                  {[
-                    "SAML/OIDC SSO & SCIM provisioning",
+                    "Everything in Pro, plus:",
+                    "SAML 2.0 / OIDC SSO & SCIM directory sync",
                     "Custom roles & IP allowlisting",
-                    "Data residency (IN, AU, UAE, US)",
-                    "Audit-log streaming to Datadog/Splunk",
+                    "Dedicated database & data residency selection",
+                    "Audit-log streaming to SIEM",
                     "Custom MSA, DPA & 99.9% uptime SLA",
+                    "Dedicated Customer Success Manager in your timezone",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#12B886] shrink-0 mt-0.5" />
-                      <span>{feat}</span>
+                    <li key={i} className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#12B886] shrink-0" />
+                      <span className={i === 0 ? "font-bold text-[#0F1730]" : ""}>{feat}</span>
                     </li>
                   ))}
                 </ul>
@@ -304,102 +293,272 @@ export function PricingPage() {
 
               <Link
                 to="/demo"
-                className="w-full py-3 rounded-[12px] bg-[#24305A] hover:bg-[#334173] text-white font-bold text-xs text-center border border-[#334173] transition-colors"
+                className="w-full py-3.5 rounded-xl bg-[#0F1730] hover:bg-[#1A264F] text-white font-bold text-xs text-center transition-all"
               >
-                Talk to sales
+                Talk to enterprise sales
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* Interactive Team Size Calculator */}
-        <section className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#FFFFFF] rounded-2xl p-6 sm:p-8 border border-[#E6E2D8] shadow-card">
-            <h3 className="text-xl font-bold text-[#0F1730] mb-2">Estimate your monthly cost</h3>
-            <p className="text-xs text-[#4A5370] mb-6">
-              Drag the slider to calculate the exact price for your team:
-            </p>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-semibold text-[#0F1730]">
-                <span>Team size: <strong className="text-sm font-bold text-[#FF5A36]">{teamSize} seats</strong></span>
-                <span>{isAnnual ? "Annual rate (20% off)" : "Monthly rate"}</span>
-              </div>
-              <input
-                type="range"
-                min="5"
-                max="250"
-                step="5"
-                value={teamSize}
-                onChange={(e) => setTeamSize(Number(e.target.value))}
-                className="w-full accent-[#FF5A36] h-2 bg-[#E6E2D8] rounded-lg cursor-pointer"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-[#E6E2D8] text-center">
-              <div className="p-4 rounded-xl bg-[#F7F4EE]">
-                <div className="text-xs text-[#4A5370]">Pro plan total</div>
-                <div className="text-2xl font-bold text-[#0F1730] mt-1 font-display tnum">
-                  {currency.symbol}{totalProMonthly} <span className="text-xs font-normal text-[#4A5370]">/ month</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#FFE6DF]/60">
-                <div className="text-xs text-[#C2361A]">Premium plan total</div>
-                <div className="text-2xl font-bold text-[#C2361A] mt-1 font-display tnum">
-                  {currency.symbol}{totalPremiumMonthly} <span className="text-xs font-normal text-[#C2361A]">/ month</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Already on Sqalible HRMS Banner (Page 7 wireframe) */}
-        <section className="py-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#FFE6DF] rounded-2xl p-6 sm:p-8 border border-[#FF5A36]/30 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <span className="w-10 h-10 rounded-xl bg-[#FF5A36] text-[#0F1730] font-bold text-lg flex items-center justify-center shrink-0 font-display">
-                p
+          {/* Sqalible HRMS Add-on Banner (Sqalible Screenshot 2) */}
+          <div className="mt-12 p-6 rounded-2xl bg-[#E6F4EA] border border-[#B7E1CD] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="w-9 h-9 rounded-xl bg-[#12B886] text-white flex items-center justify-center shrink-0">
+                <Check className="w-5 h-5" />
               </span>
               <div>
-                <h4 className="font-bold text-base text-[#0F1730]">
-                  Already on Sqalible HRMS?
-                </h4>
-                <p className="text-xs text-[#4A5370] mt-1 max-w-xl">
-                  Turn Deskmerit on from your HRMS admin panel. It's billed as a simple line item on your Sqalible invoice — no separate contract.
-                </p>
+                <span className="text-xs font-bold text-[#0F1730] block">
+                  Already using Sqalible HRMS?
+                </span>
+                <span className="text-xs text-[#4A5370]">
+                  Turn Deskmerit on from your HRMS admin console. Billed as a single consolidated line-item on your Sqalible invoice.
+                </span>
               </div>
             </div>
-
             <Link
               to="/hrms-add-on"
-              className="px-5 py-3 rounded-[12px] bg-[#0F1730] hover:bg-[#24305A] text-white font-bold text-xs shrink-0 transition-colors flex items-center gap-1.5"
+              className="text-xs font-bold text-[#0F1730] hover:text-[#12B886] flex items-center gap-1 shrink-0"
             >
-              Explore the HRMS add-on <ArrowRight className="w-3.5 h-3.5" />
+              Explore HRMS add-on →
             </Link>
           </div>
         </section>
 
-        {/* Billing FAQ Accordion */}
-        <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
-              Fair, flexible, no surprises.
-            </h3>
-            <p className="text-xs text-[#4A5370] mt-1">Billing & licensing questions answered</p>
-          </div>
+        {/* SECTION 3: Deep Dark Interactive Cost Calculator Card (Sqalible Screenshot 2) */}
+        <section className="py-16 sm:py-20 bg-[#0A0F1D] text-white border-b border-[#24305A]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#111A33] rounded-[28px] p-8 sm:p-12 border border-[#24305A] shadow-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                {/* Left: Interactive Controls */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A264F] text-xs font-semibold text-[#FF5A36]">
+                    <Sliders className="w-3.5 h-3.5" />
+                    <span>Live Cost Estimator</span>
+                  </div>
 
-          <div className="space-y-3">
-            {billingFaqs.map((faq, idx) => (
-              <div key={idx} className="bg-[#FFFFFF] rounded-xl border border-[#E6E2D8] p-5 shadow-subtle">
-                <h4 className="font-bold text-sm text-[#0F1730] mb-1.5">{faq.q}</h4>
-                <p className="text-xs text-[#4A5370] leading-relaxed">{faq.a}</p>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                    Calculate your exact monthly investment
+                  </h3>
+
+                  {/* Plan Picker */}
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-[#9AA1B2]">Select plan:</span>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPlanForCalc("pro")}
+                      className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                        selectedPlanForCalc === "pro"
+                          ? "bg-[#FF5A36] text-[#0F1730]"
+                          : "bg-[#1A264F] text-white border border-[#2B3969]"
+                      }`}
+                    >
+                      Pro Plan ({currency.symbol}{proRate}/mo)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPlanForCalc("premium")}
+                      className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                        selectedPlanForCalc === "premium"
+                          ? "bg-[#FF5A36] text-[#0F1730]"
+                          : "bg-[#1A264F] text-white border border-[#2B3969]"
+                      }`}
+                    >
+                      Premium Plan ({currency.symbol}{premiumRate}/mo)
+                    </button>
+                  </div>
+
+                  {/* Slider */}
+                  <div className="space-y-3 pt-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-[#9AA1B2]">Team size:</span>
+                      <span className="font-extrabold text-white text-base font-mono">{teamSize} seats</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={5}
+                      max={250}
+                      step={5}
+                      value={teamSize}
+                      onChange={(e) => setTeamSize(Number(e.target.value))}
+                      className="w-full accent-[#FF5A36] cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[11px] text-[#9AA1B2] font-mono">
+                      <span>5 seats</span>
+                      <span>50</span>
+                      <span>100</span>
+                      <span>150</span>
+                      <span>200</span>
+                      <span>250+</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Estimated Output Badge */}
+                <div className="lg:col-span-5 bg-[#0A0F1D] rounded-2xl p-8 border border-[#24305A] text-center space-y-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9AA1B2]">
+                    Total Estimated Investment
+                  </span>
+                  <div className="text-4xl sm:text-5xl font-extrabold text-white font-mono">
+                    {currency.symbol}{totalCalculated}
+                    <span className="text-xs font-normal text-[#9AA1B2] ml-1">/ mo</span>
+                  </div>
+                  <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                    Includes all Tracker Plus features, unlimited Jira tasks, attendance automation, and live customer support.
+                  </p>
+
+                  <Link
+                    to="/signup"
+                    className="block w-full py-3 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-sm"
+                  >
+                    Start 14-day free trial for {teamSize} users
+                  </Link>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        <DeskmeritCtaBand />
+        {/* SECTION 4: Full Feature Matrix by Module (Sqalible Screenshot 2) */}
+        <section className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-12">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Detailed Comparison
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730]">
+                Full feature matrix by module
+              </h2>
+            </div>
+
+            <div className="overflow-x-auto border border-[#E6E2D8] rounded-2xl shadow-card">
+              <table className="w-full text-left text-xs">
+                <thead>
+                  <tr className="bg-[#0F1730] text-white">
+                    <th className="py-4 px-6 font-bold text-sm">Capability</th>
+                    <th className="py-4 px-4 font-bold text-center">Starter</th>
+                    <th className="py-4 px-4 font-bold text-center bg-[#FF5A36] text-[#0F1730]">Pro</th>
+                    <th className="py-4 px-4 font-bold text-center">Premium</th>
+                    <th className="py-4 px-4 font-bold text-center">Enterprise</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#E6E2D8]">
+                  {matrixSections.map((sec, secIdx) => (
+                    <React.Fragment key={secIdx}>
+                      <tr className="bg-[#F7F4EE]">
+                        <td colSpan={5} className="py-3 px-6 font-extrabold text-xs text-[#0F1730] uppercase tracking-wider">
+                          {sec.category}
+                        </td>
+                      </tr>
+                      {sec.features.map((row, rIdx) => (
+                        <tr key={rIdx} className="hover:bg-[#F7F4EE]/50 transition-colors">
+                          <td className="py-3.5 px-6 font-medium text-[#0F1730]">{row.name}</td>
+                          <td className="py-3.5 px-4 text-center">
+                            {typeof row.starter === "boolean" ? (
+                              row.starter ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />
+                            ) : (
+                              <span className="font-semibold text-[#4A5370]">{row.starter}</span>
+                            )}
+                          </td>
+                          <td className="py-3.5 px-4 text-center bg-[#FFE6DF]/30">
+                            {typeof row.pro === "boolean" ? (
+                              row.pro ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />
+                            ) : (
+                              <span className="font-bold text-[#FF5A36]">{row.pro}</span>
+                            )}
+                          </td>
+                          <td className="py-3.5 px-4 text-center">
+                            {typeof row.premium === "boolean" ? (
+                              row.premium ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />
+                            ) : (
+                              <span className="font-semibold text-[#0F1730]">{row.premium}</span>
+                            )}
+                          </td>
+                          <td className="py-3.5 px-4 text-center">
+                            {typeof row.ent === "boolean" ? (
+                              row.ent ? <Check className="w-4 h-4 text-[#12B886] mx-auto" /> : <Minus className="w-4 h-4 text-[#9AA1B2] mx-auto" />
+                            ) : (
+                              <span className="font-semibold text-[#0F1730]">{row.ent}</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: Signature FAQ Layout (Left Dark Mesh Card + Right Accordion) */}
+        <section className="py-20 lg:py-28 bg-[#F7F4EE] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              {/* Left Dark Card */}
+              <div className="lg:col-span-5 bg-[#0F1730] rounded-3xl p-8 sm:p-10 text-white relative overflow-hidden border border-[#24305A] shadow-2xl">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5A36]/20 rounded-full blur-[80px] pointer-events-none" />
+                <div className="relative z-10 space-y-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF5A36]/20 text-[#FF5A36] flex items-center justify-center">
+                    <Building2 className="w-5 h-5" />
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                    Need a Custom Enterprise Quote?
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
+                    Have 200+ employees, specific data residency requirements, or need custom MSA and DPA terms? Our executive team can prepare a tailor-made proposal.
+                  </p>
+
+                  <div className="pt-4">
+                    <Link
+                      to="/demo"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0F1730] hover:bg-[#F7F4EE] text-xs font-bold transition-all shadow"
+                    >
+                      <span>Request Enterprise Quote</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Accordion */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                  Clear Answers
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-8">
+                  Frequently asked pricing questions
+                </h2>
+
+                <div className="divide-y divide-[#E6E2D8]">
+                  {billingFaqs.map((faq, idx) => {
+                    const isOpen = openFaq === idx;
+                    return (
+                      <div key={idx} className="py-4">
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaq(isOpen ? null : idx)}
+                          className="w-full flex items-center justify-between text-left py-2 font-bold text-sm sm:text-base text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                        >
+                          <span>{faq.q}</span>
+                          <span className="text-[#FF5A36] shrink-0 ml-4">
+                            {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mt-2 pt-2 pb-2">
+                            {faq.a}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <DeskmeritFooter />

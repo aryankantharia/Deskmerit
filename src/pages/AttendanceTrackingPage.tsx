@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
-import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Calendar,
   Clock,
@@ -13,11 +12,17 @@ import {
   FileCheck,
   AlertCircle,
   ArrowRight,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  MapPin,
+  Check,
 } from "lucide-react";
 
 export function AttendanceTrackingPage() {
   const [selectedDay, setSelectedDay] = useState<number | null>(18);
   const [minPresentHours, setMinPresentHours] = useState(6);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   // June 2026 calendar days: 1 is Monday, 30 days total
   const calendarDays = [
@@ -61,222 +66,357 @@ export function AttendanceTrackingPage() {
     { city: "Auckland", zone: "Pacific/Auckland", week: "Mon–Fri · DST aware · closes 00:00" },
   ];
 
+  const faqs = [
+    {
+      q: "Do we need biometric thumb scanners or punch cards?",
+      a: "No hardware required. Attendance is calculated automatically from actual computer activity, accepted calendar events, and manual entries for client travel.",
+    },
+    {
+      q: "Does Deskmerit feed attendance directly into our HRMS?",
+      a: "Yes. Deskmerit is built directly into Sqalible HRMS with 1-click provisioning. It also offers a versioned REST API for BambooHR, Darwinbox, Workday, and Zoho People.",
+    },
+    {
+      q: "How does Deskmerit handle night shifts crossing midnight?",
+      a: "An overnight shift session (e.g. 21:00 to 03:00) is evaluated as a contiguous shift against your daily threshold so employees aren't unfairly marked absent on either day.",
+    },
+    {
+      q: "Can HR administrators manually correct attendance?",
+      a: "Yes. Every correction is audited with timestamp, author, previous status, and justification reason. Historical logs can never be silently overwritten.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730] font-sans">
       <DeskmeritHeader />
 
       <main>
-        {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-          <div className="text-xs text-[#4A5370] flex items-center gap-1.5">
-            <Link to="/" className="hover:text-[#0F1730]">Home</Link>
-            <span>/</span>
-            <Link to="/features" className="hover:text-[#0F1730]">Features</Link>
-            <span>/</span>
-            <span className="font-semibold text-[#0F1730]">Attendance tracking</span>
-          </div>
-        </div>
+        {/* SECTION 1: Deep Navy Hero (Sqalible Screenshot 1) */}
+        <section className="bg-[#0A0F1D] text-white pt-10 pb-20 lg:pt-16 lg:pb-28 border-b border-[#24305A] relative overflow-hidden">
+          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#38BDF8]/10 rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Hero Section */}
-        <section className="py-12 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] shadow-sm">
-                <span className="pulse-dot" />
-                <span>Fair Attendance</span>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Breadcrumb */}
+            <div className="text-xs text-[#9AA1B2] flex items-center gap-1.5 mb-6">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <Link to="/features" className="hover:text-white transition-colors">Features</Link>
+              <span>/</span>
+              <span className="font-semibold text-white">Attendance Tracking</span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Copy */}
+              <div className="lg:col-span-6 space-y-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] border border-[#2E3C6B] text-xs font-semibold text-[#38BDF8]">
+                  <span className="pulse-dot mr-1" />
+                  <span>Workforce Presence · Zero Biometrics</span>
+                </div>
+
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.1]">
+                  Attendance that reflects real work,{" "}
+                  <span className="text-[#FF5A36] block">not just a login.</span>
+                </h1>
+
+                <p className="text-base sm:text-lg text-[#9AA1B2] leading-relaxed max-w-xl">
+                  Deskmerit computes daily attendance from tracked work, accepted calendar meetings, and manually logged off-computer sessions — so team members in client workshops all day are never marked absent.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center justify-center text-xs sm:text-sm font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-7 py-3.5 rounded-xl shadow-sm transition-all"
+                  >
+                    Start free 14-day trial →
+                  </Link>
+                  <Link
+                    to="/demo"
+                    className="inline-flex items-center justify-center text-xs sm:text-sm font-semibold text-white bg-[#1A264F] hover:bg-[#243363] border border-[#2E3C6B] px-6 py-3.5 rounded-xl transition-all"
+                  >
+                    Book a live walkthrough
+                  </Link>
+                </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight">
-                Attendance that reflects real work,{" "}
-                <span className="text-[#FF5A36] block font-normal">not just a login.</span>
-              </h1>
+              {/* Right Framed App Mockup (macOS Window + June 2026 Calendar) */}
+              <div className="lg:col-span-6">
+                <div className="rounded-2xl border border-[#24305A] bg-[#0F1730] shadow-2xl overflow-hidden">
+                  <div className="bg-[#0A0F1D] px-4 py-3 border-b border-[#24305A] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
+                      <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
+                      <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                    </div>
+                    <span className="text-[11px] font-mono text-[#9AA1B2]">
+                      Attendance · Ananya R. (Asia/Kolkata)
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#12B886]/20 text-[#12B886]">
+                      21 Present · 2 Leave
+                    </span>
+                  </div>
 
-              <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                Deskmerit computes daily attendance from tracked work, accepted calendar meetings and manually logged off-computer time — so someone in client workshops all day is never marked absent. No biometric fingerprint machines needed.
-              </p>
+                  <div className="p-6 bg-white text-[#0F1730]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold text-[#0F1730]">June 2026</span>
+                      <span className="text-[11px] text-[#4A5370]">Min. 6h present threshold</span>
+                    </div>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+                    <div className="grid grid-cols-7 gap-1.5 text-center text-[10px]">
+                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                        <div key={d} className="font-bold text-[#4A5370] py-1">{d}</div>
+                      ))}
+                      {calendarDays.map((item) => {
+                        const isSelected = selectedDay === item.day;
+                        let bg = "bg-[#F7F4EE] text-[#0F1730]";
+                        if (item.status === "Present") bg = "bg-[#E6F4EA] text-[#0D652D] font-bold";
+                        if (item.status === "Leave") bg = "bg-[#FEF7E0] text-[#B06000]";
+                        if (item.status === "Corrected") bg = "bg-[#E8F0FE] text-[#1967D2] font-bold border border-[#1967D2]/40";
+                        if (item.status === "Weekend") bg = "bg-transparent text-[#9AA1B2]";
+
+                        return (
+                          <button
+                            key={item.day}
+                            type="button"
+                            onClick={() => setSelectedDay(item.day)}
+                            className={`p-2 rounded-lg transition-all ${bg} ${
+                              isSelected ? "ring-2 ring-[#FF5A36]" : ""
+                            }`}
+                          >
+                            <span className="block font-semibold">{item.day}</span>
+                            <span className="text-[8px] block opacity-80">{item.status}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-[#E6E2D8] text-[11px] text-[#4A5370]">
+                      <span className="font-bold text-[#0F1730]">Selected Day Note:</span>{" "}
+                      {calendarDays.find((d) => d.day === selectedDay)?.note || "Normal 7h 45m tracked working day."}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 2: Key Capabilities (Sqalible Screenshot 1) */}
+        <section className="py-20 lg:py-24 bg-[#FFFFFF] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-14">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Core Capabilities
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-tight">
+                Key Capabilities of Attendance Tracking
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <Globe2 className="w-6 h-6 text-[#FF5A36]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    Every Employee's Own Timezone
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    Days close at each person's local midnight. Teams distributed across Bengaluru, Dubai, Riyadh, Sydney, and Auckland get accurate days for everyone.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#12B886]">
+                  DST Aware · Multi-Region
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <Moon className="w-6 h-6 text-[#12B886]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    Fair for Late Nights & Shifts
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    A session crossing midnight is judged as a whole against your shift minimum — so a 6-hour night shift counts as present, never two separate absences.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#12B886]">
+                  Overnight Shift Integrity
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <FileCheck className="w-6 h-6 text-[#38BDF8]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    Audited HR Corrections
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    Set the minimum threshold for a present day. Every admin correction is logged with author, reason, and before/after values that are never overwritten.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#12B886]">
+                  Immutable Audit Trail
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 3: Deep Dark Section "How Attendance Operates in Practice" */}
+        <section className="py-20 lg:py-28 bg-[#0A0F1D] text-white border-b border-[#24305A]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-16">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Automated Verification
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                How Attendance Operates in Practice
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A]">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">01</span>
+                <h3 className="text-base font-bold text-white mb-2">Passive Work Ingestion</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Desktop agent detects first user input in employee's local timezone and begins passive tally.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A]">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">02</span>
+                <h3 className="text-base font-bold text-white mb-2">Calendar Meeting Blend</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Accepted Google & Outlook meetings merge seamlessly so off-keyboard Zoom/client calls count as work.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A]">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">03</span>
+                <h3 className="text-base font-bold text-white mb-2">Threshold Evaluation</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  At local midnight, engine compares total active + meeting minutes against team policy (e.g. 6h minimum).
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A]">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">04</span>
+                <h3 className="text-base font-bold text-white mb-2">HRMS & Payroll Feed</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Validated status (Present, Half-Day, Leave) pushes directly to Sqalible HRMS or payroll REST API.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 4: Signature FAQ Layout (Left Dark Card + Right Accordion) */}
+        <section className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              {/* Left Dark Card */}
+              <div className="lg:col-span-5 bg-[#0F1730] rounded-3xl p-8 sm:p-10 text-white relative overflow-hidden border border-[#24305A] shadow-2xl">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#38BDF8]/20 rounded-full blur-[80px] pointer-events-none" />
+                <div className="relative z-10 space-y-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/20 text-[#38BDF8] flex items-center justify-center">
+                    <HelpCircle className="w-5 h-5" />
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                    Need Custom Roster or Shift Rules?
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
+                    Configure rotating contact center rosters, 24/7 support shifts, or regional Sunday–Thursday schedules in minutes.
+                  </p>
+
+                  <div className="pt-4">
+                    <Link
+                      to="/demo"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0F1730] hover:bg-[#F7F4EE] text-xs font-bold transition-all shadow"
+                    >
+                      <span>Talk to an attendance specialist</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Accordion */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                  Frequently Asked Questions
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-8">
+                  Attendance Tracking FAQs
+                </h2>
+
+                <div className="divide-y divide-[#E6E2D8]">
+                  {faqs.map((faq, idx) => {
+                    const isOpen = openFaq === idx;
+                    return (
+                      <div key={idx} className="py-4">
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaq(isOpen ? null : idx)}
+                          className="w-full flex items-center justify-between text-left py-2 font-bold text-sm sm:text-base text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                        >
+                          <span>{faq.q}</span>
+                          <span className="text-[#FF5A36] shrink-0 ml-4">
+                            {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mt-2 pt-2 pb-2">
+                            {faq.a}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: High-Impact Full-Width CTA Banner */}
+        <section className="bg-[#0F1730] text-white py-16 lg:py-20 border-b border-[#24305A]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 bg-[#172348] p-8 sm:p-12 rounded-[24px] border border-[#2B3969] shadow-2xl">
+              <div className="space-y-2 max-w-2xl">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
+                  Deploy In Minutes
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+                  Attendance without the punch clock or biometric queues.
+                </h3>
+                <p className="text-xs sm:text-sm text-[#9AA1B2]">
+                  Set up in under 10 minutes. Windows, macOS & Linux supported.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
                 <Link
                   to="/signup"
-                  className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-sm transition-all"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-sm"
                 >
-                  Start free 14-day trial →
+                  Start free trial
                 </Link>
                 <Link
                   to="/demo"
-                  className="inline-flex items-center justify-center text-xs font-semibold text-[#0F1730] bg-[#FFFFFF] hover:bg-[#E6E2D8]/50 border border-[#0F1730] px-6 py-3.5 rounded-[12px] transition-all"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#24305A] hover:bg-[#334173] text-white font-semibold text-xs text-center border border-[#384574] transition-all"
                 >
                   Book a demo
                 </Link>
               </div>
             </div>
-
-            {/* Right: Ananya R. June 2026 Attendance Calendar */}
-            <div className="lg:col-span-6 bg-[#FFFFFF] rounded-[24px] p-6 sm:p-8 border border-[#E6E2D8] shadow-card">
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E6E2D8]">
-                <div>
-                  <h3 className="font-bold text-base text-[#0F1730]">Ananya R. · June 2026</h3>
-                  <div className="text-xs text-[#4A5370]">Asia/Kolkata · Mon–Fri · min. 6h present day</div>
-                </div>
-                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FFE6DF] text-[#C2361A]">
-                  21 present · 2 leave
-                </span>
-              </div>
-
-              {/* Day Headers */}
-              <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-[#4A5370] mb-2 uppercase">
-                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-              </div>
-
-              {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-1.5 text-center">
-                {calendarDays.map((d) => {
-                  const isSelected = selectedDay === d.day;
-                  return (
-                    <button
-                      key={d.day}
-                      type="button"
-                      onClick={() => setSelectedDay(d.day)}
-                      className={`p-2 rounded-xl text-xs transition-all flex flex-col items-center justify-between min-h-[50px] border ${
-                        d.status === "Weekend"
-                          ? "bg-[#F7F4EE]/50 border-transparent text-[#9AA1B2]"
-                          : d.status === "Leave"
-                          ? "bg-amber-50 border-amber-200 text-amber-800"
-                          : d.status === "Corrected"
-                          ? "bg-[#FFE6DF] border-[#FF5A36] text-[#C2361A] font-bold ring-2 ring-[#FF5A36]/30"
-                          : "bg-[#FFFFFF] border-[#E6E2D8] text-[#0F1730] hover:border-[#12B886]"
-                      } ${isSelected ? "ring-2 ring-[#0F1730]" : ""}`}
-                    >
-                      <span className="font-semibold text-[11px]">{d.day}</span>
-                      <span className="text-[9px] mt-1 font-medium">
-                        {d.status === "Weekend" ? "" : d.status}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Correction Log Banner */}
-              <div className="mt-4 p-3.5 rounded-xl bg-[#FFE6DF]/60 border border-[#FF5A36]/30 text-xs text-[#C2361A] flex items-start gap-2">
-                <FileCheck className="w-4 h-4 shrink-0 mt-0.5" />
-                <div className="leading-relaxed">
-                  <strong>18 Jun · corrected by HR (Nikita S.):</strong> client workshop logged as other work · before: <em>Absent</em> → after: <em>Present</em>. Full audit trail logged with reason.
-                </div>
-              </div>
-            </div>
           </div>
         </section>
-
-        {/* Every Timezone & Overnight Work Sections */}
-        <section className="py-20 bg-[#FFFFFF] border-y border-[#E6E2D8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Left: Timezones handled */}
-              <div className="space-y-6">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
-                  Every time zone
-                </div>
-                <h2 className="text-3xl font-extrabold text-[#0F1730]">
-                  Every employee’s own day.
-                </h2>
-                <p className="text-sm text-[#4A5370] leading-relaxed">
-                  Days close at each person’s local midnight, so a team split across Bengaluru, Dubai, Riyadh, Sydney and Auckland gets accurate days for everyone — not one office’s clock.
-                </p>
-
-                <div className="space-y-2.5">
-                  {timezones.map((tz) => (
-                    <div
-                      key={tz.city}
-                      className="p-3.5 rounded-xl bg-[#F7F4EE] border border-[#E6E2D8] flex items-center justify-between text-xs"
-                    >
-                      <div>
-                        <span className="font-bold text-[#0F1730]">{tz.city}</span>
-                        <span className="text-[#4A5370] ml-2">({tz.zone})</span>
-                      </div>
-                      <span className="text-[#4A5370] font-medium">{tz.week}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right: Overnight work, judged fairly */}
-              <div className="space-y-6">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
-                  Fair for late nights
-                </div>
-                <h2 className="text-3xl font-extrabold text-[#0F1730]">
-                  Overnight work, judged fairly.
-                </h2>
-                <p className="text-sm text-[#4A5370] leading-relaxed">
-                  A session crossing midnight is split across both calendar days, and an overnight shift is judged as a whole against your minimum threshold — so a 6-hour night shift counts as present work, not two absences.
-                </p>
-
-                <div className="bg-[#F7F4EE] rounded-2xl p-6 border border-[#E6E2D8] space-y-4">
-                  <div className="flex items-center justify-between text-xs font-semibold text-[#0F1730]">
-                    <span>Mon 21:00</span>
-                    <span className="text-[#FF5A36] font-bold">00:00 (Midnight boundary)</span>
-                    <span>Tue 03:00</span>
-                  </div>
-
-                  {/* Visual timeline bar crossing midnight */}
-                  <div className="h-6 rounded-full bg-[#E6E2D8] overflow-hidden flex items-center">
-                    <div className="h-full bg-[#12B886] w-1/2 flex items-center justify-center text-[10px] text-white font-bold">
-                      Mon · 3h
-                    </div>
-                    <div className="h-full bg-[#12B886]/80 w-1/2 flex items-center justify-center text-[10px] text-white font-bold">
-                      Tue · 3h
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-xs text-[#0F1730] flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#12B886] shrink-0" />
-                    <span>Session 21:00–03:00 meets the 6h threshold as a whole across the shift.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Attendance Rules HR Can Stand Behind */}
-        <section className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730]">
-              Corrections HR can stand behind.
-            </h3>
-            <p className="text-sm text-[#4A5370] mt-2">
-              Set the minimum time that counts as a present day. Admins can correct any day; every correction is logged with before and after values and is never silently overwritten.
-            </p>
-          </div>
-
-          <div className="bg-[#FFFFFF] rounded-2xl p-6 sm:p-8 border border-[#E6E2D8] shadow-card space-y-4">
-            <div className="flex items-center justify-between py-2 border-b border-[#E6E2D8] text-xs">
-              <span className="font-semibold text-[#0F1730]">Minimum present day</span>
-              <span className="font-bold text-[#0F1730]">{minPresentHours}h 00m</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#E6E2D8] text-xs">
-              <span className="font-semibold text-[#0F1730]">Count calendar meetings</span>
-              <span className="text-[#12B886] font-semibold">Accepted only</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#E6E2D8] text-xs">
-              <span className="font-semibold text-[#0F1730]">All-day calendar events</span>
-              <span className="text-[#4A5370]">Excluded by default</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#E6E2D8] text-xs">
-              <span className="font-semibold text-[#0F1730]">Offline detection</span>
-              <span className="text-[#4A5370]">3 missed 60s check-ins</span>
-            </div>
-            <div className="flex items-center justify-between py-2 text-xs">
-              <span className="font-semibold text-[#0F1730]">Manual corrections</span>
-              <span className="text-[#C2361A] font-bold">Logged · never overwritten</span>
-            </div>
-          </div>
-        </section>
-
-        <DeskmeritCtaBand
-          title="Attendance without the punch clock."
-          subtitle="Install in minutes, start from a task, and get your first report this week."
-        />
       </main>
 
       <DeskmeritFooter />

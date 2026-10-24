@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeskmeritHeader } from "../components/DeskmeritHeader";
 import { DeskmeritFooter } from "../components/DeskmeritFooter";
-import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { InteractiveTrackerWidget } from "../components/InteractiveTrackerWidget";
 import {
   Check,
@@ -14,13 +13,20 @@ import {
   Plus,
   Play,
   RotateCw,
+  Cpu,
+  KeyRound,
+  Database,
+  Users2,
+  Briefcase,
+  Calculator,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 export function TrackerPlusPage() {
   const [billableOnly, setBillableOnly] = useState(false);
-  const [manualProject, setManualProject] = useState("Client workshop prep");
-  const [manualTask, setManualTask] = useState("Slides for Northwind QBR");
-  const [manualTrackingStarted, setManualTrackingStarted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const timesheetData = [
     { client: "Acme Retail", task: "Checkout API refactor", source: "Jira", time: "42h 10m", value: "$2,530", billable: true },
@@ -34,275 +40,411 @@ export function TrackerPlusPage() {
     ? timesheetData.filter((item) => item.billable)
     : timesheetData;
 
+  const faqs = [
+    {
+      q: "Does Tracker Plus write anything back to Jira or Azure DevOps?",
+      a: "At default configuration, Tracker Plus reads your assigned issues and tasks with read-only scopes. It never modifies, transitions, or edits your Jira/Azure DevOps tickets without explicit admin write-back configuration.",
+    },
+    {
+      q: "What happens if a personal access token is revoked mid-session?",
+      a: "The desktop agent preserves your current tracked session locally with zero data loss. It prompts the engineer with a non-intrusive re-auth modal while offline queuing preserves the exact start and end timestamps.",
+    },
+    {
+      q: "Can two engineers link the same Jira or Azure DevOps account?",
+      a: "No. Each external token is cryptographically bound to a single Deskmerit employee account to ensure strict audit integrity and prevent double-counting of working hours.",
+    },
+    {
+      q: "Which plans include Tracker Plus?",
+      a: "Tracker Plus is included on Pro, Premium, Enterprise, and the Sqalible HRMS native add-on.",
+    },
+    {
+      q: "How does Tracker Plus prevent duplicate project names across tools?",
+      a: "Tasks are indexed by tool protocol and unique database ID (e.g., `jira:KMB-482` vs `ado:9412`), never by display name. Two projects both called 'Website' across different clients remain completely separate.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
+    <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730] font-sans">
       <DeskmeritHeader />
 
       <main>
-        {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-          <div className="text-xs text-[#4A5370] flex items-center gap-1.5">
-            <Link to="/" className="hover:text-[#0F1730]">Home</Link>
-            <span>/</span>
-            <Link to="/features" className="hover:text-[#0F1730]">Features</Link>
-            <span>/</span>
-            <span className="font-semibold text-[#0F1730]">Tracker Plus</span>
-          </div>
-        </div>
+        {/* SECTION 1: Deep Navy Hero Matching Sqalible Screenshot 1 */}
+        <section className="bg-[#0A0F1D] text-white pt-10 pb-20 lg:pt-16 lg:pb-28 border-b border-[#24305A] relative overflow-hidden">
+          {/* Subtle glow / mesh in background */}
+          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#FF5A36]/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute -bottom-20 right-0 w-[400px] h-[400px] bg-[#38BDF8]/10 rounded-full blur-[120px] pointer-events-none" />
 
-        {/* Hero Section */}
-        <section className="py-12 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] shadow-sm">
-                <span className="pulse-dot" />
-                <span>Tracker Plus Feature</span>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Breadcrumb */}
+            <div className="text-xs text-[#9AA1B2] flex items-center gap-1.5 mb-6">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <Link to="/features" className="hover:text-white transition-colors">Features</Link>
+              <span>/</span>
+              <span className="font-semibold text-white">Tracker Plus</span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left Copy */}
+              <div className="lg:col-span-6 space-y-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A264F] border border-[#2E3C6B] text-xs font-semibold text-[#38BDF8]">
+                  <span className="pulse-dot mr-1" />
+                  <span>Flagship Innovation · Multi-Tool Tracker</span>
+                </div>
+
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[-0.03em] leading-[1.1]">
+                  Pick a task. Press Start.{" "}
+                  <span className="text-[#FF5A36] block">Everything else is automatic.</span>
+                </h1>
+
+                <p className="text-base sm:text-lg text-[#9AA1B2] leading-relaxed max-w-xl">
+                  Other trackers treat Jira as an afterthought. Tracker Plus lets your team start time straight from the Jira, Azure DevOps, or OpenProject ticket. One click logs time, marks attendance, and updates billable reports.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center justify-center text-xs sm:text-sm font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-7 py-3.5 rounded-xl shadow-sm transition-all"
+                  >
+                    Start free 14-day trial →
+                  </Link>
+                  <Link
+                    to="/demo"
+                    className="inline-flex items-center justify-center text-xs sm:text-sm font-semibold text-white bg-[#1A264F] hover:bg-[#243363] border border-[#2E3C6B] px-6 py-3.5 rounded-xl transition-all"
+                  >
+                    Book a live walkthrough
+                  </Link>
+                </div>
+
+                <div className="flex items-center gap-6 text-xs text-[#9AA1B2] pt-2">
+                  <span className="flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-[#12B886]" /> No second login
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-[#12B886]" /> Works 100% offline
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-[#12B886]" /> Multi-tenant tokens
+                  </span>
+                </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight">
-                Pick a task. Press Start.{" "}
-                <span className="text-[#FF5A36] block font-normal">Everything else is automatic.</span>
-              </h1>
+              {/* Right Framed App Mockup with macOS Header Dots */}
+              <div className="lg:col-span-6">
+                <div className="rounded-2xl border border-[#24305A] bg-[#0F1730] shadow-2xl overflow-hidden">
+                  {/* macOS Window Title Bar */}
+                  <div className="bg-[#0A0F1D] px-4 py-3 border-b border-[#24305A] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
+                      <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
+                      <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                    </div>
+                    <span className="text-[11px] font-mono text-[#9AA1B2]">
+                      deskmerit-agent · v2.4.0 (Rust engine)
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#12B886]/20 text-[#12B886]">
+                      ● Live Sync
+                    </span>
+                  </div>
 
-              <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                Other trackers can log time against a Jira issue; Tracker Plus goes further. Your people choose the task they’re working on straight from your project-management tool, inside the Deskmerit agent. One click logs time, fills attendance and updates billing — with no extra login.
+                  <div className="p-6">
+                    <InteractiveTrackerWidget />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 2: Key Capabilities (Matching Sqalible Screenshot 1) */}
+        <section className="py-20 lg:py-24 bg-[#FFFFFF] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-14">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Core Architecture
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-tight">
+                Key Capabilities of Tracker Plus
+              </h2>
+              <p className="text-base text-[#4A5370] mt-3">
+                Built specifically for software engineers, digital agencies, and IT services teams who bill by the ticket.
               </p>
+            </div>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Card 1 */}
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] hover:border-[#FF5A36] transition-all hover:shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <Layers className="w-6 h-6 text-[#FF5A36]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    Multi-Tool Live Sync
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    Connect Jira, Azure DevOps, and OpenProject simultaneously. Each engineer connects with their own scoped token, seeing only tickets assigned to them.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#0F1730] flex items-center justify-between">
+                  <span>Jira & Azure DevOps</span>
+                  <span className="text-[#12B886]">Zero cross-tenant leaks</span>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] hover:border-[#FF5A36] transition-all hover:shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <FileSpreadsheet className="w-6 h-6 text-[#12B886]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    3-in-1 Automated Ledger
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    A single Start button press automatically populates the engineering timesheet, registers daily attendance, and updates project cost versus budget.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#0F1730] flex items-center justify-between">
+                  <span>Timesheet + Attendance + Billing</span>
+                  <span className="text-[#12B886]">1 Click</span>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="p-8 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8] hover:border-[#FF5A36] transition-all hover:shadow-card flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#E6E2D8] text-[#0F1730] flex items-center justify-center mb-6 shadow-sm">
+                    <ShieldCheck className="w-6 h-6 text-[#38BDF8]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0F1730] mb-3">
+                    Collision & Duplicate Shield
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                    Identically named tasks across different clients are indexed strictly by tool protocol and task ID. Reports never merge separate client engagements.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#E6E2D8] text-xs font-semibold text-[#0F1730] flex items-center justify-between">
+                  <span>Audit-grade keying</span>
+                  <span className="text-[#12B886]">100% separate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 3: Deep Dark Section "How Tracker Plus Operates In Practice" (Sqalible Screenshot 1) */}
+        <section className="py-20 lg:py-28 bg-[#0A0F1D] text-white border-b border-[#24305A]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-16">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Technical Execution Pipeline
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                How Tracker Plus Operates in Practice
+              </h2>
+              <p className="text-base text-[#9AA1B2] mt-3">
+                From engineer authorization to defensible invoice export: an immutable, four-step pipeline.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Step 1 */}
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A] relative">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">01</span>
+                <h3 className="text-base font-bold text-white mb-2">Trigger / Initiation</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Admin enables Jira or Azure DevOps connector once. Employee pastes personal token verified securely via OAuth/PAT.
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A] relative">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">02</span>
+                <h3 className="text-base font-bold text-white mb-2">Policy Validation & Routing</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Assigned issues fetch in real-time. System enforces project billable rate limits and verifies user access rights.
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A] relative">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">03</span>
+                <h3 className="text-base font-bold text-white mb-2">Execution & Offline Telemetry</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Rust desktop daemon logs active intervals. Offline queue protects against spotty Wi-Fi with automatic local ledger sync.
+                </p>
+              </div>
+
+              {/* Step 4 */}
+              <div className="p-6 rounded-2xl bg-[#0F1730] border border-[#24305A] relative">
+                <span className="text-2xl font-black text-[#FF5A36] font-mono block mb-4">04</span>
+                <h3 className="text-base font-bold text-white mb-2">Central Sync & Ledger Stamp</h3>
+                <p className="text-xs text-[#9AA1B2] leading-relaxed">
+                  Hours land against client billing codes. Timesheet lock prevents retroactive tampering and prepares audited invoices.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 4: Value Delivered Across Your Organization (Sqalible Screenshot 1) */}
+        <section className="py-20 lg:py-24 bg-[#F7F4EE] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mb-14">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                Business Impact
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-tight">
+                Value Delivered Across Your Organization
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Persona 1: Engineering */}
+              <div className="p-8 rounded-2xl bg-white border border-[#E6E2D8] shadow-card">
+                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#FFE6DF] text-[#C2361A] mb-4 inline-block">
+                  For Engineering Teams
+                </span>
+                <h3 className="text-xl font-bold text-[#0F1730] mb-2">
+                  Zero Friday Timesheet Anxiety
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                  Developers hate filling timesheets from fuzzy memory. Tracker Plus runs in the background of their IDE and Jira tickets with zero micromanagement.
+                </p>
+              </div>
+
+              {/* Persona 2: Delivery */}
+              <div className="p-8 rounded-2xl bg-white border border-[#E6E2D8] shadow-card">
+                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#E0F2FE] text-[#0369A1] mb-4 inline-block">
+                  For Delivery Leads
+                </span>
+                <h3 className="text-xl font-bold text-[#0F1730] mb-2">
+                  Real-Time Burn-Down Clarity
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                  Spot over-servicing before client budgets overrun. If a sprint ticket reaches 90% of estimated hours, team leads receive instant notifications.
+                </p>
+              </div>
+
+              {/* Persona 3: Finance */}
+              <div className="p-8 rounded-2xl bg-white border border-[#E6E2D8] shadow-card">
+                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#D1FAE5] text-[#065F46] mb-4 inline-block">
+                  For Finance & Billing
+                </span>
+                <h3 className="text-xl font-bold text-[#0F1730] mb-2">
+                  100% Defensible Invoices
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed">
+                  Deliver itemized client invoices backed by verified ticket IDs and active working time. Clients approve billing cycles in days, not weeks.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: Signature FAQ Layout (Sqalible Screenshot 1: Left Dark Card + Right Accordion) */}
+        <section className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E6E2D8]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              {/* Left Side: Dark High-Contrast Mesh Card */}
+              <div className="lg:col-span-5 bg-[#0F1730] rounded-3xl p-8 sm:p-10 text-white relative overflow-hidden border border-[#24305A] shadow-2xl">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF5A36]/20 rounded-full blur-[80px] pointer-events-none" />
+                <div className="relative z-10 space-y-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF5A36]/20 text-[#FF5A36] flex items-center justify-center">
+                    <HelpCircle className="w-5 h-5" />
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                    Need Help Choosing the Right Setup?
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#9AA1B2] leading-relaxed">
+                    Our solutions engineers can show you how Tracker Plus maps onto your Jira boards, Azure DevOps pipelines, or Sqalible HRMS directory in minutes.
+                  </p>
+
+                  <div className="pt-4">
+                    <Link
+                      to="/demo"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#0F1730] hover:bg-[#F7F4EE] text-xs font-bold transition-all shadow"
+                    >
+                      <span>Talk to an expert</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side: Accordion FAQ */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+                  Frequently Asked Questions
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] mb-8">
+                  Tracker Plus FAQs
+                </h2>
+
+                <div className="divide-y divide-[#E6E2D8]">
+                  {faqs.map((faq, idx) => {
+                    const isOpen = openFaq === idx;
+                    return (
+                      <div key={idx} className="py-4">
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaq(isOpen ? null : idx)}
+                          className="w-full flex items-center justify-between text-left py-2 font-bold text-sm sm:text-base text-[#0F1730] hover:text-[#FF5A36] transition-colors"
+                        >
+                          <span>{faq.q}</span>
+                          <span className="text-[#FF5A36] shrink-0 ml-4">
+                            {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <p className="text-xs sm:text-sm text-[#4A5370] leading-relaxed mt-2 pt-2 pb-2">
+                            {faq.a}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 6: High-Impact Full-Width CTA Banner (Sqalible Screenshot 1) */}
+        <section className="bg-[#0F1730] text-white py-16 lg:py-20 border-b border-[#24305A]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 bg-[#172348] p-8 sm:p-12 rounded-[24px] border border-[#2B3969] shadow-2xl">
+              <div className="space-y-2 max-w-2xl">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
+                  Get Started Today
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+                  Experience Tracker Plus in action with your own Jira tasks.
+                </h3>
+                <p className="text-xs sm:text-sm text-[#9AA1B2]">
+                  Set up in under 10 minutes. No credit card required. Cancel anytime.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
                 <Link
                   to="/signup"
-                  className="inline-flex items-center justify-center text-xs font-bold text-[#0F1730] bg-[#FF5A36] hover:bg-[#E94A27] px-6 py-3.5 rounded-[12px] shadow-sm transition-all"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs text-center transition-all shadow-sm"
                 >
-                  Start free 14-day trial →
+                  Start free trial
                 </Link>
                 <Link
                   to="/demo"
-                  className="inline-flex items-center justify-center text-xs font-semibold text-[#0F1730] bg-[#FFFFFF] hover:bg-[#E6E2D8]/50 border border-[#0F1730] px-6 py-3.5 rounded-[12px] transition-all"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#24305A] hover:bg-[#334173] text-white font-semibold text-xs text-center border border-[#384574] transition-all"
                 >
                   Book a demo
                 </Link>
               </div>
-
-              <div className="pt-2 text-xs text-[#4A5370] flex items-center gap-4">
-                <span className="flex items-center gap-1.5 font-medium text-[#0fa678]">
-                  <Check className="w-4 h-4 text-[#12B886]" /> Live tasks from Jira, Azure DevOps & OpenProject
-                </span>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex justify-center">
-              <InteractiveTrackerWidget />
             </div>
           </div>
         </section>
-
-        {/* 4-Step Process Section */}
-        <section className="py-20 bg-[#FFFFFF] border-y border-[#E6E2D8]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                How it works
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-[-0.025em]">
-                From ticket to timesheet in four steps.
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  step: "1",
-                  title: "Connect once",
-                  desc: "Your admin enables Jira, Azure DevOps or OpenProject with one consent click. No tenant-side setup.",
-                },
-                {
-                  step: "2",
-                  title: "Add your token",
-                  desc: "Each employee pastes a personal access token. Deskmerit shows which account it belongs to before saving.",
-                },
-                {
-                  step: "3",
-                  title: "Pick & start",
-                  desc: "The agent lists your assigned tasks, live. Choose one and press Start — even offline.",
-                },
-                {
-                  step: "4",
-                  title: "Everything fills in",
-                  desc: "Time lands on the task, client and rate. Attendance and billing update in the background.",
-                },
-              ].map((s) => (
-                <div key={s.step} className="p-6 rounded-2xl bg-[#F7F4EE] border border-[#E6E2D8]">
-                  <span className="w-9 h-9 rounded-xl bg-[#FF5A36] text-[#0F1730] font-extrabold text-sm flex items-center justify-center font-display mb-4">
-                    {s.step}
-                  </span>
-                  <h3 className="text-base font-bold text-[#0F1730] mb-2">{s.title}</h3>
-                  <p className="text-xs text-[#4A5370] leading-relaxed">{s.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Timesheet Table & No Duplicates Section */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Interactive Timesheet Table */}
-            <div className="lg:col-span-7 bg-[#FFFFFF] rounded-[24px] p-6 sm:p-8 border border-[#E6E2D8] shadow-card">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-[#E6E2D8] gap-3">
-                <div>
-                  <h3 className="font-bold text-base text-[#0F1730]">Project time · this week</h3>
-                  <p className="text-xs text-[#4A5370]">Live rollup across Jira, Azure DevOps, and OpenProject</p>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setBillableOnly(!billableOnly)}
-                    className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition-colors ${
-                      billableOnly
-                        ? "bg-[#FFE6DF] text-[#C2361A] border-[#FF5A36]/40"
-                        : "bg-[#F7F4EE] text-[#0F1730] border-[#E6E2D8]"
-                    }`}
-                  >
-                    {billableOnly ? "✓ Billable only" : "All tasks"}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => alert("Simulated CSV exported: 5 line items downloaded.")}
-                    className="text-xs px-3 py-1.5 rounded-lg bg-[#0F1730] text-white font-semibold hover:bg-[#24305A] transition-colors"
-                  >
-                    Export CSV
-                  </button>
-                </div>
-              </div>
-
-              {/* Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead>
-                    <tr className="border-b border-[#E6E2D8] text-[#4A5370] uppercase tracking-wider text-[10px]">
-                      <th className="py-2.5">Client</th>
-                      <th className="py-2.5">Task</th>
-                      <th className="py-2.5">Source</th>
-                      <th className="py-2.5">Time</th>
-                      <th className="py-2.5">Value</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#E6E2D8]/60 text-[#0F1730]">
-                    {filteredTimesheet.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-[#F7F4EE]/60 transition-colors">
-                        <td className="py-3 font-semibold">{row.client}</td>
-                        <td className="py-3">
-                          <div className="font-medium truncate max-w-[170px]">{row.task}</div>
-                          {row.alert && (
-                            <span className="text-[10px] text-[#C2361A] font-bold block mt-0.5">
-                              {row.alert}
-                            </span>
-                          )}
-                        </td>
-                        <td className="py-3">
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#F7F4EE] text-[#4A5370] border border-[#E6E2D8]">
-                            {row.source}
-                          </span>
-                        </td>
-                        <td className="py-3 font-mono font-semibold tnum">{row.time}</td>
-                        <td className="py-3 font-semibold text-[#12B886]">{row.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Right: Duplicate Protection Logic */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36]">
-                No duplicates
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F1730] leading-tight">
-                Two projects called “Website”?{" "}
-                <span className="text-[#FF5A36]">Never merged.</span>
-              </h3>
-              <p className="text-sm text-[#4A5370] leading-relaxed">
-                Tasks are stored by connected tool and canonical ID, never by loose display name. So identically named projects in different client tools stay strictly segregated in every report and invoice.
-              </p>
-
-              {/* Manual Entry Fallback Widget */}
-              <div className="bg-[#FFFFFF] rounded-2xl p-6 border border-[#E6E2D8] shadow-subtle space-y-3">
-                <div className="text-xs font-bold text-[#0F1730] uppercase tracking-wider">
-                  Manual, always: No ticket? No problem.
-                </div>
-                <p className="text-xs text-[#4A5370]">
-                  Working on something outside your PM tools? Type a project and task name and track just the same.
-                </p>
-
-                <div className="space-y-2 pt-1">
-                  <input
-                    type="text"
-                    value={manualProject}
-                    onChange={(e) => setManualProject(e.target.value)}
-                    placeholder="Project name"
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E6E2D8] bg-[#F7F4EE] text-[#0F1730] focus:outline-none focus:border-[#FF5A36]"
-                  />
-                  <input
-                    type="text"
-                    value={manualTask}
-                    onChange={(e) => setManualTask(e.target.value)}
-                    placeholder="Task name"
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E6E2D8] bg-[#F7F4EE] text-[#0F1730] focus:outline-none focus:border-[#FF5A36]"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setManualTrackingStarted(true);
-                      setTimeout(() => setManualTrackingStarted(false), 2500);
-                    }}
-                    className="w-full py-2.5 rounded-[10px] bg-[#FF5A36] text-[#0F1730] font-bold text-xs hover:bg-[#E94A27] transition-colors flex items-center justify-center gap-1.5"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    {manualTrackingStarted ? "Tracking manually..." : "Start tracking"}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Tracker Plus FAQ */}
-        <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-2xl font-bold text-[#0F1730] mb-6">Tracker Plus questions</h3>
-          <div className="space-y-3">
-            {[
-              {
-                q: "Does Tracker Plus write anything back to Jira?",
-                a: "At launch it reads assigned projects and tasks only. It never modifies, updates or deletes your tickets.",
-              },
-              {
-                q: "What if a token is revoked mid-session?",
-                a: "The session keeps tracking safely offline and prompts the employee to reconnect. No logged work time is lost.",
-              },
-              {
-                q: "Can two employees link the same Jira account?",
-                a: "No. Each external PM account can be claimed by one authenticated employee only, ensuring audit integrity.",
-              },
-              {
-                q: "Which plans include Tracker Plus?",
-                a: "Pro, Premium, Enterprise and the native Sqalible HRMS add-on.",
-              },
-            ].map((faq, i) => (
-              <div key={i} className="p-5 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8]">
-                <h4 className="font-bold text-sm text-[#0F1730] mb-1.5">{faq.q}</h4>
-                <p className="text-xs text-[#4A5370] leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <DeskmeritCtaBand
-          title="Your team already works in tickets. Now time does too."
-          subtitle="Install in minutes, start from a task, and get your first report this week."
-        />
       </main>
 
       <DeskmeritFooter />
