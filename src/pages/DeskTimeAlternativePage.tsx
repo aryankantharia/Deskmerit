@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { Check, Minus, ArrowRight, ShieldCheck, RefreshCw, Smartphone } from "lucide-react";
 
 export function DeskTimeAlternativePage() {
@@ -27,7 +27,7 @@ export function DeskTimeAlternativePage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -53,7 +53,7 @@ export function DeskTimeAlternativePage() {
           </h1>
 
           <p className="text-base sm:text-lg text-[#4A5370] max-w-2xl mx-auto mb-8 font-normal">
-            DeskTime is a solid automatic tracker. PulseTrack matches its core features and adds Tracker Plus, attendance that counts meetings, a free Starter plan, and a deeper API with an MCP server.
+            DeskTime is a solid automatic tracker. Deskmerit matches its core features and adds Tracker Plus, attendance that counts meetings, a free Starter plan, and a deeper API with an MCP server.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -123,7 +123,7 @@ export function DeskTimeAlternativePage() {
                   <tr className="border-b border-[#E6E2D8] text-[#4A5370]">
                     <th className="py-3 pr-4 font-semibold">Feature / Capability</th>
                     <th className="py-3 px-4 font-extrabold text-[#C2361A] bg-[#FFE6DF]/40 text-center rounded-t-lg">
-                      PulseTrack
+                      Deskmerit
                     </th>
                     <th className="py-3 px-4 font-bold text-[#0F1730] text-center">DeskTime</th>
                   </tr>
@@ -155,7 +155,7 @@ export function DeskTimeAlternativePage() {
                 <span>When DeskTime is the better choice</span>
               </div>
               <p className="text-xs text-[#4A5370] leading-relaxed">
-                If you need a mobile phone tracking app for field workers or delivery drivers, DeskTime offers one and PulseTrack does not. PulseTrack focuses 100% on computer work and desktop knowledge workers.
+                If you need a mobile phone tracking app for field workers or delivery drivers, DeskTime offers one and Deskmerit does not. Deskmerit focuses 100% on computer work and desktop knowledge workers.
               </p>
             </div>
 
@@ -182,13 +182,13 @@ export function DeskTimeAlternativePage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Try the tracker that starts from the task."
           subtitle="Install in minutes, start from a task, and get your first report this week."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

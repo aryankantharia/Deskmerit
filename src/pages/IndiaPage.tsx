@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { useCurrency } from "../utils/currencyContext";
 import {
   ShieldCheck,
@@ -31,7 +31,7 @@ export function IndiaPage() {
     },
     {
       title: "Ready for the DPDP Act",
-      desc: "The DPDP Rules were notified on 13 Nov 2025; core obligations apply from May 2027. PulseTrack ships clear employee notices and erasure on request.",
+      desc: "The DPDP Rules were notified on 13 Nov 2025; core obligations apply from May 2027. Deskmerit ships clear employee notices and erasure on request.",
       icon: ShieldCheck,
     },
     {
@@ -41,7 +41,7 @@ export function IndiaPage() {
     },
     {
       title: "Built into Sqalible HRMS",
-      desc: "Already on Sqalible? Turn PulseTrack on in one click from your admin console and keep a single consolidated vendor invoice.",
+      desc: "Already on Sqalible? Turn Deskmerit on in one click from your admin console and keep a single consolidated vendor invoice.",
       icon: Check,
     },
     {
@@ -58,7 +58,7 @@ export function IndiaPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -84,7 +84,7 @@ export function IndiaPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                From IT services in Bengaluru and Pune to agencies in Mumbai and BPOs in Gurugram, PulseTrack gives Indian companies accurate attendance, billable utilisation and productivity data — priced in rupees and designed for India’s new data protection rules.
+                From IT services in Bengaluru and Pune to agencies in Mumbai and BPOs in Gurugram, Deskmerit gives Indian companies accurate attendance, billable utilisation and productivity data — priced in rupees and designed for India’s new data protection rules.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -150,12 +150,12 @@ export function IndiaPage() {
           </div>
         </section>
 
-        {/* 6 Reasons Indian Teams Choose PulseTrack */}
+        {/* 6 Reasons Indian Teams Choose Deskmerit */}
         <section className="py-20 bg-[#FFFFFF] border-y border-[#E6E2D8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
-                Why Indian teams choose PulseTrack
+                Why Indian teams choose Deskmerit
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730] tracking-[-0.025em]">
                 Local where it matters.{" "}
@@ -217,7 +217,7 @@ export function IndiaPage() {
             {[
               {
                 q: "Is employee monitoring legal in India?",
-                a: "Generally yes, when employees are properly informed and tracking is limited strictly to legitimate work purposes. PulseTrack provides clear DPDP-compliant notice templates.",
+                a: "Generally yes, when employees are properly informed and tracking is limited strictly to legitimate work purposes. Deskmerit provides clear DPDP-compliant notice templates.",
               },
               {
                 q: "Do you offer INR billing and GST tax invoices?",
@@ -225,7 +225,7 @@ export function IndiaPage() {
               },
               {
                 q: "Does it work for work-from-home teams?",
-                a: "Yes! PulseTrack's Rust-based agent queues sessions on the computer and syncs when broadband or mobile hotspots reconnect.",
+                a: "Yes! Deskmerit's Rust-based agent queues sessions on the computer and syncs when broadband or mobile hotspots reconnect.",
               },
               {
                 q: "Can we host data in India?",
@@ -240,13 +240,13 @@ export function IndiaPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Start tracking in rupees today."
           subtitle="14-day free trial, GST invoices, support in IST."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

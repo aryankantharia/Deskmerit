@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Calculator,
   Download,
@@ -56,7 +56,7 @@ export function ToolsAndTemplatesPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -186,7 +186,7 @@ export function ToolsAndTemplatesPage() {
 
               <div className="pt-4 border-t border-[#E6E2D8] flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-xs text-[#4A5370]">
-                  Tired of manual formulas? PulseTrack tracks billable rates automatically from Jira.
+                  Tired of manual formulas? Deskmerit tracks billable rates automatically from Jira.
                 </div>
                 <Link
                   to="/signup"
@@ -287,7 +287,7 @@ export function ToolsAndTemplatesPage() {
                   Free weekly timesheet template.
                 </h1>
                 <p className="text-xs sm:text-sm text-[#4A5370] mt-2">
-                  Clean, printable and formula-ready Excel & Google Sheets template — or let PulseTrack fill it for you.
+                  Clean, printable and formula-ready Excel & Google Sheets template — or let Deskmerit fill it for you.
                 </p>
               </div>
 
@@ -356,7 +356,7 @@ export function ToolsAndTemplatesPage() {
                   A fair employee monitoring policy you can adapt.
                 </h1>
                 <p className="text-xs sm:text-sm text-[#4A5370] mt-2">
-                  Aligned with PulseTrack's privacy promise, India DPDP Act, and NSW Workplace Surveillance rules.
+                  Aligned with Deskmerit's privacy promise, India DPDP Act, and NSW Workplace Surveillance rules.
                 </p>
               </div>
 
@@ -400,10 +400,10 @@ export function ToolsAndTemplatesPage() {
           )}
         </section>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

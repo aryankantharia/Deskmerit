@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { Check, ArrowRight, ToggleLeft, ToggleRight, Sparkles, ShieldCheck } from "lucide-react";
 
 export function HrmsAddonPage() {
@@ -10,7 +10,7 @@ export function HrmsAddonPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -37,7 +37,7 @@ export function HrmsAddonPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                If you run Sqalible, PulseTrack is one toggle away. No new vendor, no new login, no new invoice — attendance and work-time data flow straight into the HRMS you already use.
+                If you run Sqalible, Deskmerit is one toggle away. No new vendor, no new login, no new invoice — attendance and work-time data flow straight into the HRMS you already use.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
@@ -76,7 +76,7 @@ export function HrmsAddonPage() {
                     p
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-[#0F1730]">PulseTrack</h4>
+                    <h4 className="font-bold text-sm text-[#0F1730]">Deskmerit</h4>
                     <p className="text-xs text-[#4A5370]">Automatic time tracking & attendance</p>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export function HrmsAddonPage() {
                   className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
                     addonEnabled ? "bg-[#FF5A36]" : "bg-[#9AA1B2]"
                   }`}
-                  aria-label="Toggle PulseTrack Add-on"
+                  aria-label="Toggle Deskmerit Add-on"
                 >
                   <span
                     className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
@@ -146,7 +146,7 @@ export function HrmsAddonPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { step: "01", title: "Enable", desc: "Your HRMS admin switches PulseTrack on in Sqalible settings." },
+                { step: "01", title: "Enable", desc: "Your HRMS admin switches Deskmerit on in Sqalible settings." },
                 { step: "02", title: "Provision", desc: "Employees are created automatically from your existing directory." },
                 { step: "03", title: "Install", desc: "Staff sign in to the desktop agent with their regular HRMS login." },
                 { step: "04", title: "Report", desc: "Attendance, productivity and project time appear inside Sqalible." },
@@ -180,14 +180,14 @@ export function HrmsAddonPage() {
                 <tr className="bg-[#F7F4EE] border-b border-[#E6E2D8] text-[#4A5370]">
                   <th className="py-3 px-6 font-semibold">Aspect</th>
                   <th className="py-3 px-6 font-bold text-[#C2361A]">Inside Sqalible HRMS</th>
-                  <th className="py-3 px-6 font-bold text-[#0F1730]">PulseTrack standalone</th>
+                  <th className="py-3 px-6 font-bold text-[#0F1730]">Deskmerit standalone</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E6E2D8]/60 text-[#0F1730]">
                 <tr>
                   <td className="py-4 px-6 font-semibold">Sign-in</td>
                   <td className="py-4 px-6">Your regular HRMS credentials</td>
-                  <td className="py-4 px-6">PulseTrack login or company SAML SSO</td>
+                  <td className="py-4 px-6">Deskmerit login or company SAML SSO</td>
                 </tr>
                 <tr>
                   <td className="py-4 px-6 font-semibold">Employees</td>
@@ -197,7 +197,7 @@ export function HrmsAddonPage() {
                 <tr>
                   <td className="py-4 px-6 font-semibold">Reports</td>
                   <td className="py-4 px-6">Inside Sqalible dashboards</td>
-                  <td className="py-4 px-6">PulseTrack web dashboard</td>
+                  <td className="py-4 px-6">Deskmerit web dashboard</td>
                 </tr>
                 <tr>
                   <td className="py-4 px-6 font-semibold">Billing</td>
@@ -214,13 +214,13 @@ export function HrmsAddonPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Already on Sqalible? Switch it on today."
-          subtitle="Talk to your Kombee account manager or enable PulseTrack from your admin panel."
+          subtitle="Talk to your Kombee account manager or enable Deskmerit from your admin panel."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

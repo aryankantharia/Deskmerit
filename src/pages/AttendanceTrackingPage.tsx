@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Calendar,
   Clock,
@@ -63,7 +63,7 @@ export function AttendanceTrackingPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -92,7 +92,7 @@ export function AttendanceTrackingPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                PulseTrack computes daily attendance from tracked work, accepted calendar meetings and manually logged off-computer time — so someone in client workshops all day is never marked absent. No biometric fingerprint machines needed.
+                Deskmerit computes daily attendance from tracked work, accepted calendar meetings and manually logged off-computer time — so someone in client workshops all day is never marked absent. No biometric fingerprint machines needed.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
@@ -273,13 +273,13 @@ export function AttendanceTrackingPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Attendance without the punch clock."
           subtitle="Install in minutes, start from a task, and get your first report this week."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

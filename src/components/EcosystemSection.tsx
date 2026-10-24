@@ -25,7 +25,7 @@ export function EcosystemSection() {
       { title: "Australia (A$ AUD)", href: "/en-au", desc: "NSW Workplace Surveillance Act 14-day notice generator and Privacy Act 1988 alignment.", icon: Briefcase, metric: "A$8/mo Pro" },
       { title: "New Zealand (NZ$ NZD)", href: "/en-nz", desc: "Transparent tracking in line with Privacy Act 2020 openness principles.", icon: Users2, metric: "NZ$9/mo Pro" },
       { title: "UAE & Saudi Arabia", href: "/en-ae", desc: "Sunday–Thursday and Monday–Friday week support with regional cloud data residency.", icon: PhoneCall, metric: "AED 19/mo" },
-      { title: "Sqalible HRMS Add-on", href: "/hrms-add-on", desc: "Already on Sqalible? Turn on PulseTrack in one click from your admin console.", icon: Code2, metric: "Single invoice" },
+      { title: "Sqalible HRMS Add-on", href: "/hrms-add-on", desc: "Already on Sqalible? Turn on Deskmerit in one click from your admin console.", icon: Code2, metric: "Single invoice" },
     ],
   };
 

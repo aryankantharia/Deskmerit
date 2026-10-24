@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { Shield, FileText, CheckCircle2, Lock } from "lucide-react";
 
 export function LegalPage() {
@@ -9,7 +9,7 @@ export function LegalPage() {
   const path = location.pathname;
 
   let title = "Terms of Service";
-  let content = "These terms govern your subscription to PulseTrack services.";
+  let content = "These terms govern your subscription to Deskmerit services.";
 
   if (path.includes("privacy")) {
     title = "Privacy Policy";
@@ -34,7 +34,7 @@ export function LegalPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -52,7 +52,7 @@ export function LegalPage() {
           <div className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card space-y-6">
             <div className="border-b border-[#E6E2D8] pb-6">
               <span className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] block mb-2">
-                PulseTrack Legal Documentation
+                Deskmerit Legal Documentation
               </span>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730]">{title}</h1>
               <p className="text-xs text-[#4A5370] mt-2">
@@ -63,7 +63,7 @@ export function LegalPage() {
             {path.includes("subprocessors") ? (
               <div className="space-y-4">
                 <p className="text-xs text-[#4A5370] leading-relaxed">
-                  PulseTrack utilizes the following third-party infrastructure and sub-processors to deliver high-availability services. Each vendor undergoes strict security and DPA reviews:
+                  Deskmerit utilizes the following third-party infrastructure and sub-processors to deliver high-availability services. Each vendor undergoes strict security and DPA reviews:
                 </p>
                 <div className="overflow-x-auto pt-2">
                   <table className="w-full text-left text-xs border border-[#E6E2D8] rounded-xl overflow-hidden">
@@ -90,7 +90,7 @@ export function LegalPage() {
               <div className="space-y-4 text-xs text-[#4A5370] leading-relaxed">
                 <h3 className="text-base font-bold text-[#0F1730]">99.9% Uptime Commitment</h3>
                 <p>
-                  PulseTrack commits to providing 99.9% availability for the cloud syncing API and web reporting platform across any given calendar month.
+                  Deskmerit commits to providing 99.9% availability for the cloud syncing API and web reporting platform across any given calendar month.
                 </p>
                 <h3 className="text-base font-bold text-[#0F1730] pt-2">Recovery Point & Recovery Time</h3>
                 <p>
@@ -100,14 +100,14 @@ export function LegalPage() {
                 </p>
                 <h3 className="text-base font-bold text-[#0F1730] pt-2">Offline Resilience</h3>
                 <p>
-                  Because the PulseTrack desktop agent operates fully offline, local time recording and task capture continue without interruption even during upstream cloud network outages.
+                  Because the Deskmerit desktop agent operates fully offline, local time recording and task capture continue without interruption even during upstream cloud network outages.
                 </p>
               </div>
             ) : (
               <div className="space-y-4 text-xs text-[#4A5370] leading-relaxed">
                 <h3 className="text-base font-bold text-[#0F1730]">1. Trust and Purpose Limitation</h3>
                 <p>
-                  PulseTrack software is licensed solely for legitimate work-time accounting, project billing, and attendance tracking. The software contains zero facilities for covert keylogging, microphone snooping, or webcam access.
+                  Deskmerit software is licensed solely for legitimate work-time accounting, project billing, and attendance tracking. The software contains zero facilities for covert keylogging, microphone snooping, or webcam access.
                 </p>
                 <h3 className="text-base font-bold text-[#0F1730] pt-2">2. Data Ownership and Portability</h3>
                 <p>
@@ -115,7 +115,7 @@ export function LegalPage() {
                 </p>
                 <h3 className="text-base font-bold text-[#0F1730] pt-2">3. Statutory Notice Compliance</h3>
                 <p>
-                  PulseTrack complies with applicable jurisdictional workplace regulations including the India DPDP Act 2023, Australia NSW Workplace Surveillance Act 2005, and New Zealand Privacy Act 2020.
+                  Deskmerit complies with applicable jurisdictional workplace regulations including the India DPDP Act 2023, Australia NSW Workplace Surveillance Act 2005, and New Zealand Privacy Act 2020.
                 </p>
               </div>
             )}
@@ -123,7 +123,7 @@ export function LegalPage() {
         </section>
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { useCurrency, CURRENCIES, CurrencyCode } from "../utils/currencyContext";
 import { Check, ArrowRight, Sparkles, Building2, HelpCircle, ChevronDown, Plus, Minus } from "lucide-react";
 
@@ -33,7 +33,7 @@ export function PricingPage() {
     },
     {
       q: "Is there a discount for non-profits or education?",
-      a: "Yes, we offer up to a 30% discount for qualified non-profit organisations, universities, and open-source foundations. Reach out to our team at sales@pulsetrack.io.",
+      a: "Yes, we offer up to a 30% discount for qualified non-profit organisations, universities, and open-source foundations. Reach out to our team at sales@deskmerit.io.",
     },
     {
       q: "Do you charge GST or VAT?",
@@ -43,7 +43,7 @@ export function PricingPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Header */}
@@ -366,7 +366,7 @@ export function PricingPage() {
                   Already on Sqalible HRMS?
                 </h4>
                 <p className="text-xs text-[#4A5370] mt-1 max-w-xl">
-                  Turn PulseTrack on from your HRMS admin panel. It's billed as a simple line item on your Sqalible invoice — no separate contract.
+                  Turn Deskmerit on from your HRMS admin panel. It's billed as a simple line item on your Sqalible invoice — no separate contract.
                 </p>
               </div>
             </div>
@@ -399,10 +399,10 @@ export function PricingPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

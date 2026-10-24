@@ -112,7 +112,7 @@ export const RESOURCES_MENU = {
     },
   ],
   bottomLinks: [
-    { label: "Help centre ↗", href: "https://help.pulsetrack.io", external: true },
+    { label: "Help centre ↗", href: "https://help.deskmerit.io", external: true },
     { label: "Developers (REST API & MCP) →", href: "/developers" },
   ],
 };
@@ -148,7 +148,7 @@ export const FOOTER_SECTIONS = [
       { label: "Security", href: "/security" },
       { label: "Privacy promise", href: "/privacy-promise" },
       { label: "Changelog", href: "/changelog" },
-      { label: "Status", href: "https://status.pulsetrack.io", external: true },
+      { label: "Status", href: "https://status.deskmerit.io", external: true },
     ],
   },
   {
@@ -198,7 +198,7 @@ export const FOOTER_SECTIONS = [
       { label: "Templates hub", href: "/templates" },
       { label: "Developers & REST API", href: "/developers" },
       { label: "MCP server", href: "/developers/mcp-server" },
-      { label: "Help centre", href: "https://help.pulsetrack.io", external: true },
+      { label: "Help centre", href: "https://help.deskmerit.io", external: true },
       { label: "Glossary", href: "/glossary" },
     ],
   },

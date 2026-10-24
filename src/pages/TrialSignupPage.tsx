@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { Check, ArrowRight, ShieldCheck, Download, CheckCircle2, Clock } from "lucide-react";
 import { useCurrency } from "../utils/currencyContext";
 
@@ -28,7 +28,7 @@ export function TrialSignupPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main className="py-12 lg:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FFFFFF] rounded-[24px] p-8 sm:p-12 border border-[#E6E2D8] shadow-card">
@@ -40,7 +40,7 @@ export function TrialSignupPage() {
                   <span>14-day full feature trial</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F1730]">
-                  Start your PulseTrack workspace.
+                  Start your Deskmerit workspace.
                 </h1>
                 <p className="text-xs sm:text-sm text-[#4A5370] mt-2">
                   No credit card required. Includes Tracker Plus (Jira, Azure DevOps, OpenProject), attendance tracking, and REST/MCP API.
@@ -184,7 +184,7 @@ export function TrialSignupPage() {
         </div>
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

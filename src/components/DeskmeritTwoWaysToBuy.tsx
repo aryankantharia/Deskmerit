@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Laptop, Building2, ToggleRight } from "lucide-react";
 
-export function PulseTrackTwoWaysToBuy() {
+export function DeskmeritTwoWaysToBuy() {
   return (
     <section className="py-20 lg:py-28 bg-[#F7F4EE] border-b border-[#E6E2D8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +30,7 @@ export function PulseTrackTwoWaysToBuy() {
               </div>
 
               <h3 className="text-2xl font-bold text-[#0F1730] mb-3">
-                PulseTrack on its own
+                Deskmerit on its own
               </h3>
               <p className="text-sm text-[#4A5370] leading-relaxed mb-6">
                 Sign up, invite your team and start tracking today. Your own web dashboard and login, with single sign-on and SCIM on Enterprise.
@@ -73,10 +73,10 @@ export function PulseTrackTwoWaysToBuy() {
               </div>
 
               <h3 className="text-2xl font-bold text-white mb-3">
-                PulseTrack for Sqalible HRMS
+                Deskmerit for Sqalible HRMS
               </h3>
               <p className="text-sm text-[#9AA1B2] leading-relaxed mb-6">
-                Already on Sqalible? Switch PulseTrack on from your HRMS admin panel. Employees are auto-provisioned from your directory and reports appear inside the HRMS — on the same invoice.
+                Already on Sqalible? Switch Deskmerit on from your HRMS admin panel. Employees are auto-provisioned from your directory and reports appear inside the HRMS — on the same invoice.
               </p>
 
               <ul className="space-y-3 mb-8">

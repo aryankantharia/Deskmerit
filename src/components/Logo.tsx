@@ -1,5 +1,5 @@
 import React from "react";
-import { PulseTrackLogo } from "./PulseTrackLogo";
+import { DeskmeritLogo } from "./DeskmeritLogo";
 
 export function Logo({
   inverted = false,
@@ -11,7 +11,7 @@ export function Logo({
   endorsement?: boolean;
 }) {
   return (
-    <PulseTrackLogo
+    <DeskmeritLogo
       variant={inverted ? "reverse" : "horizontal"}
       endorsement={endorsement}
       className={className}

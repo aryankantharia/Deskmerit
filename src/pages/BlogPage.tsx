@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { BookOpen, Clock, ArrowRight, Mail, Search, Check } from "lucide-react";
 
 interface Article {
@@ -109,9 +109,9 @@ const ARTICLES: Article[] = [
   },
   {
     id: 11,
-    slug: "desktime-vs-hubstaff-vs-pulsetrack-breakdown",
+    slug: "desktime-vs-hubstaff-vs-deskmerit-breakdown",
     category: "Time tracking",
-    title: "DeskTime vs Hubstaff vs PulseTrack: 2026 comparison",
+    title: "DeskTime vs Hubstaff vs Deskmerit: 2026 comparison",
     excerpt: "An objective feature-by-feature evaluation of pricing, PM task integration, and surveillance philosophy.",
     readTime: "9 min read",
     date: "16 Sep 2026",
@@ -152,7 +152,7 @@ export function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -168,7 +168,7 @@ export function BlogPage() {
         <div className="py-12 sm:py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] mb-4 shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-[#FF5A36]" />
-            <span>The PulseTrack Blog</span>
+            <span>The Deskmerit Blog</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-4">
@@ -320,7 +320,7 @@ export function BlogPage() {
         </section>
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Code2,
   TrendingUp,
@@ -25,7 +25,7 @@ export function ItServicesPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -53,7 +53,7 @@ export function ItServicesPage() {
             </h1>
 
             <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-              IT services firms live and die by utilisation. PulseTrack starts time from the Jira or Azure DevOps ticket, so every hour lands on the right client, project and rate — with reports your clients won’t argue with.
+              IT services firms live and die by utilisation. Deskmerit starts time from the Jira or Azure DevOps ticket, so every hour lands on the right client, project and rate — with reports your clients won’t argue with.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
@@ -143,21 +143,21 @@ export function ItServicesPage() {
             {/* Testimonial Quote */}
             <div className="p-8 rounded-2xl bg-[#FFE6DF]/60 border border-[#FF5A36]/30 text-center max-w-3xl mx-auto">
               <blockquote className="font-human text-xl sm:text-2xl text-[#0F1730] italic mb-3">
-                “We built PulseTrack because our own delivery teams needed it: timesheets, trackers and invoices kept disagreeing.”
+                “We built Deskmerit because our own delivery teams needed it: timesheets, trackers and invoices kept disagreeing.”
               </blockquote>
               <div className="text-xs font-bold text-[#0F1730]">Kombee Technologies</div>
-              <div className="text-[11px] text-[#4A5370]">The engineering team behind PulseTrack</div>
+              <div className="text-[11px] text-[#4A5370]">The engineering team behind Deskmerit</div>
             </div>
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Turn every engineering hour into defensible revenue."
           subtitle="Install in minutes, start from a task, and get your first report this week."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

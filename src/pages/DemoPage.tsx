@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
 import { CheckCircle2, Check, ArrowRight, ShieldCheck, Clock, User, Sparkles } from "lucide-react";
 
 export function DemoPage() {
@@ -23,7 +23,7 @@ export function DemoPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -45,7 +45,7 @@ export function DemoPage() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight">
-                See PulseTrack with your own workflow in 20 minutes.
+                See Deskmerit with your own workflow in 20 minutes.
               </h1>
 
               <p className="text-sm sm:text-base text-[#4A5370] leading-relaxed">
@@ -217,7 +217,7 @@ export function DemoPage() {
                       onChange={(e) => setFormData({ ...formData, isSqalibleUser: e.target.value })}
                       className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#E6E2D8] bg-[#F7F4EE] text-[#0F1730] focus:outline-none focus:border-[#FF5A36]"
                     >
-                      <option value="No">No, evaluating standalone PulseTrack</option>
+                      <option value="No">No, evaluating standalone Deskmerit</option>
                       <option value="Yes">Yes, want to activate the HRMS add-on</option>
                     </select>
                   </div>
@@ -239,7 +239,7 @@ export function DemoPage() {
         </section>
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

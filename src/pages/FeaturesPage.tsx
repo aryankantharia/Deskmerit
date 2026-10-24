@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Timer,
   Activity,
@@ -168,7 +168,7 @@ export function FeaturesPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Hero Header */}
@@ -182,7 +182,7 @@ export function FeaturesPage() {
             <span className="text-[#4A5370] block font-normal">None you'll be embarrassed by.</span>
           </h1>
           <p className="text-lg text-[#4A5370] max-w-2xl mx-auto mb-8 font-normal">
-            PulseTrack brings employee time tracking, productivity insights, attendance and project billing into one lightweight desktop agent and one dashboard. Here is everything it does, grouped by the question it answers.
+            Deskmerit brings employee time tracking, productivity insights, attendance and project billing into one lightweight desktop agent and one dashboard. Here is everything it does, grouped by the question it answers.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
@@ -317,10 +317,10 @@ export function FeaturesPage() {
           </div>
         </div>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

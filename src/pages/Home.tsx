@@ -1,45 +1,77 @@
 import React from "react";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { Hero } from "../components/Hero";
-import { ProofStrip } from "../components/ProofStrip";
-import { LifecycleStepper } from "../components/LifecycleStepper";
-import { InterviewFeature } from "../components/InterviewFeature";
-import { DashboardShowcase } from "../components/DashboardShowcase";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritHero } from "../components/DeskmeritHero";
+import { DeskmeritTrustBar } from "../components/DeskmeritTrustBar";
+import { DeskmeritProblemSection } from "../components/DeskmeritProblemSection";
+import { DeskmeritHowItWorks } from "../components/DeskmeritHowItWorks";
+import { DeskmeritFeatureGrid } from "../components/DeskmeritFeatureGrid";
+import { DeskmeritTrackerPlusSpotlight } from "../components/DeskmeritTrackerPlusSpotlight";
+import { DeskmeritTrustSection } from "../components/DeskmeritTrustSection";
 import { AiVsLegacySection } from "../components/AiVsLegacySection";
-import { EcosystemSection } from "../components/EcosystemSection";
-import { PageCta } from "../components/layout/PageCta";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
+import { DeskmeritTwoWaysToBuy } from "../components/DeskmeritTwoWaysToBuy";
+import { DeskmeritWhoItsFor } from "../components/DeskmeritWhoItsFor";
+import { DeskmeritIntegrationsSection } from "../components/DeskmeritIntegrationsSection";
+import { DeskmeritGlobalSection } from "../components/DeskmeritGlobalSection";
+import { DeskmeritTestimonials } from "../components/DeskmeritTestimonials";
+import { DeskmeritFaq } from "../components/DeskmeritFaq";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
 
 export function Home() {
   return (
     <div className="min-h-screen w-full bg-[#F7F4EE] font-sans text-[#0F1730]">
-      <PulseTrackHeader />
+      {/* 1. Header with top announcement banner & mega-menu */}
+      <DeskmeritHeader />
+
       <main>
-        {/* Beat 1: Hero with headline, 2 CTAs, floating SaaS cards cluster */}
-        <Hero />
+        {/* 2. Hero: Know where the work goes. Without watching over shoulders. + Team Live Overview & Desktop Tracker Simulation */}
+        <DeskmeritHero />
 
-        {/* Beat 2: Slim trust bar / proof strip directly under hero */}
-        <ProofStrip />
+        {/* 3. Proof / Trust Bar: No keystrokes, no webcam, screenshots off by default, data residency, offline */}
+        <DeskmeritTrustBar />
 
-        {/* Beat 3: Lifecycle stepper: Track → Connect → Verify → Bill → Trust */}
-        <LifecycleStepper />
+        {/* 4. The Problem: Your timesheets say one thing. Your invoices say another. (357h gap, ~35% non-billable) */}
+        <DeskmeritProblemSection />
 
-        {/* Beat 4: Signature moment: interactive Tracker Plus simulation demo */}
-        <InterviewFeature />
+        {/* 5. How It Works: One click. Three answers. (1. Pick task, 2. Press Start, 3. Get answers) */}
+        <DeskmeritHowItWorks />
 
-        {/* Beat 5: Dashboard / analytics with live module callouts */}
-        <DashboardShowcase />
+        {/* 6. Features Grid: Everything you'd expect. Plus one click that does three jobs. (9 cards) */}
+        <DeskmeritFeatureGrid />
 
-        {/* Beat 6: Trust-First vs Legacy Trackers 3-column benchmark */}
+        {/* 7. Tracker Plus Spotlight: Start the timer from the task. That's it. (Interactive ticket picker) */}
+        <DeskmeritTrackerPlusSpotlight />
+
+        {/* 8. Built For Trust: Time tracking employees don't resent. (4 pillars + human accent) */}
+        <DeskmeritTrustSection />
+
+        {/* 9. Comparison Benchmark: Deskmerit Trust-First vs Legacy Trackers (Sqalible table) */}
         <AiVsLegacySection />
 
-        {/* Beat 7: Solutions tabs (Industry, Team, Region) + integrations marquee */}
-        <EcosystemSection />
+        {/* 10. Two Ways To Buy: Standalone vs Deskmerit for Sqalible HRMS */}
+        <DeskmeritTwoWaysToBuy />
 
-        {/* Beat 8: Reused PageCta card matching application standard */}
-        <PageCta title="See your team's real week by Friday." />
+        {/* 11. Who It's For: Built for teams that bill by the hour — or prove their hours. (6 industry cards) */}
+        <DeskmeritWhoItsFor />
+
+        {/* 12. Integrations: Works with the tools your team already lives in. + AI MCP server prompt */}
+        <DeskmeritIntegrationsSection />
+
+        {/* 13. Global, Locally: Made for teams across India, Australia, New Zealand and the Gulf */}
+        <DeskmeritGlobalSection />
+
+        {/* 14. Testimonials: Pilot stories, coming soon */}
+        <DeskmeritTestimonials />
+
+        {/* 15. FAQ: Questions, answered honestly (6 interactive accordion items) */}
+        <DeskmeritFaq />
+
+        {/* 16. Final CTA Band: See your team's real week by Friday */}
+        <DeskmeritCtaBand />
       </main>
-      <PulseTrackFooter />
+
+      {/* 17. Comprehensive 7-column Footer */}
+      <DeskmeritFooter />
     </div>
   );
 }

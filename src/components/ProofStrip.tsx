@@ -11,12 +11,12 @@ export function ProofStrip() {
   ];
 
   return (
-    <section className="border-b border-[#24305A] bg-[#0F1730] py-4 text-white" aria-label="PulseTrack Trust & Compliance Guarantees">
+    <section className="border-b border-[#24305A] bg-[#0F1730] py-4 text-white" aria-label="Deskmerit Trust & Compliance Guarantees">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6 w-full whitespace-nowrap overflow-x-auto scrollbar-none py-0.5">
           <div className="flex items-center gap-2 text-xs font-semibold text-[#9AA1B2] uppercase tracking-wider shrink-0">
             <span className="h-2 w-2 rounded-full bg-[#FF5A36] shrink-0 animate-pulse" />
-            <span>PulseTrack Trust & Privacy Guarantees:</span>
+            <span>Deskmerit Trust & Privacy Guarantees:</span>
           </div>
 
           <div className="flex items-center gap-x-5 xl:gap-x-7 text-xs text-[#E6E2D8] shrink-0">

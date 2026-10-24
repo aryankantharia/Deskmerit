@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { ChevronDown, Plus, Minus, HelpCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export function PulseTrackFaq() {
+export function DeskmeritFaq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [
     {
-      q: "What is PulseTrack?",
-      a: "PulseTrack is automatic time tracking and productivity software for teams. A light desktop agent records time on apps, websites and tasks, then turns it into attendance, billable hours and productivity reports — without keystroke logging, webcam feeds or covert surveillance.",
+      q: "What is Deskmerit?",
+      a: "Deskmerit is automatic time tracking and productivity software for teams. A light desktop agent records time on apps, websites and tasks, then turns it into attendance, billable hours and productivity reports — without keystroke logging, webcam feeds or covert surveillance.",
     },
     {
-      q: "Does PulseTrack record keystrokes or use the webcam?",
-      a: "No. PulseTrack never captures keystroke content, webcam video or audio, under any configuration. Idle detection uses only whether input happened, not what was typed.",
+      q: "Does Deskmerit record keystrokes or use the webcam?",
+      a: "No. Deskmerit never captures keystroke content, webcam video or audio, under any configuration. Idle detection uses only whether input happened, not what was typed.",
     },
     {
       q: "Are screenshots mandatory?",
@@ -27,8 +27,8 @@ export function PulseTrackFaq() {
       a: "Yes. Tracking starts locally and instantly even without an internet connection. Sessions queue securely on the device and sync automatically when you are back online with zero data gaps.",
     },
     {
-      q: "Can I use PulseTrack with my HRMS?",
-      a: "Yes! PulseTrack is built directly into Sqalible HRMS as a 1-click native add-on (unified login, directory provisioning, single invoice). Other HRMS systems can connect seamlessly through our versioned REST API.",
+      q: "Can I use Deskmerit with my HRMS?",
+      a: "Yes! Deskmerit is built directly into Sqalible HRMS as a 1-click native add-on (unified login, directory provisioning, single invoice). Other HRMS systems can connect seamlessly through our versioned REST API.",
     },
     {
       q: "How long is the free trial?",

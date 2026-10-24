@@ -91,7 +91,7 @@ const stages: LifecycleStage[] = [
     name: "5. Trust",
     badge: "Dignity & Privacy",
     title: "Employee-First Data & Private Time Protection",
-    desc: "Monitoring fails when people feel watched. PulseTrack gives employees a self-view of their day and a one-click Private Time pause that is never mislabelled as idle.",
+    desc: "Monitoring fails when people feel watched. Deskmerit gives employees a self-view of their day and a one-click Private Time pause that is never mislabelled as idle.",
     metric: "Zero Keystroke Keylogging",
     link: "/privacy-promise",
     bullets: [
@@ -198,7 +198,7 @@ export function LifecycleStepper() {
               {activeStage.metric}
             </div>
             <p className="text-xs text-[#4A5370] leading-relaxed">
-              Standardized across all {activeStage.name.split(". ")[1].toLowerCase()} workflows in PulseTrack desktop and cloud sync.
+              Standardized across all {activeStage.name.split(". ")[1].toLowerCase()} workflows in Deskmerit desktop and cloud sync.
             </p>
             <div className="pt-2">
               <Link

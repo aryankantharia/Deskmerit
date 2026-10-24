@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface PulseTrackLogoProps {
+interface DeskmeritLogoProps {
   variant?: "horizontal" | "reverse" | "stacked" | "symbol";
   endorsement?: boolean;
   className?: string;
   size?: "sm" | "md" | "lg";
 }
 
-export function PulseTrackLogo({
+export function DeskmeritLogo({
   variant = "horizontal",
   endorsement = false,
   className = "",
   size = "md",
-}: PulseTrackLogoProps) {
+}: DeskmeritLogoProps) {
   const isDark = variant === "reverse";
   const strokeColor = isDark ? "#FFFFFF" : "#0F1730";
   const textColor = isDark ? "#FFFFFF" : "#0F1730";
@@ -53,7 +53,7 @@ export function PulseTrackLogo({
 
   if (variant === "symbol") {
     return (
-      <Link to="/" aria-label="PulseTrack home" className={`inline-flex items-center ${className}`}>
+      <Link to="/" aria-label="Deskmerit home" className={`inline-flex items-center ${className}`}>
         {symbolSvg}
       </Link>
     );
@@ -63,7 +63,7 @@ export function PulseTrackLogo({
     return (
       <Link
         to="/"
-        aria-label="PulseTrack home"
+        aria-label="Deskmerit home"
         className={`group inline-flex flex-col items-center text-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember rounded-lg p-1 ${className}`}
       >
         {symbolSvg}

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ShieldCheck, Eye, EyeOff, UserCheck, ArrowRight, Lock } from "lucide-react";
 
-export function PulseTrackTrustSection() {
+export function DeskmeritTrustSection() {
   const pillars = [
     {
       title: "No keystrokes",
@@ -42,7 +42,7 @@ export function PulseTrackTrustSection() {
             </h2>
 
             <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-              Monitoring software fails when people feel watched. PulseTrack is designed the other way round.
+              Monitoring software fails when people feel watched. Deskmerit is designed the other way round.
               Screenshots stay off unless an admin turns them on — and even then they are blurred and announced.
               We are the colleague who keeps good notes, not the supervisor behind the glass.
             </p>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Boxes,
   ArrowRight,
@@ -33,7 +33,7 @@ const INTEGRATIONS_LIST: IntegrationItem[] = [
     category: "pm",
     tagline: "Tracker Plus",
     badge: "Direct PM sync",
-    description: "Pick Jira issues in the PulseTrack desktop agent and press Start. Time logs against that issue's project and client with no Jira timers.",
+    description: "Pick Jira issues in the Deskmerit desktop agent and press Start. Time logs against that issue's project and client with no Jira timers.",
     linkText: "View Jira integration →",
     href: "/integrations/jira",
     initials: "J",
@@ -93,7 +93,7 @@ const INTEGRATIONS_LIST: IntegrationItem[] = [
     category: "chat",
     tagline: "Summaries & /status",
     badge: "Bot",
-    description: "Daily and weekly summaries posted to your team channels, and a convenient `/pulsetrack status` command to look up anyone's live state.",
+    description: "Daily and weekly summaries posted to your team channels, and a convenient `/deskmerit status` command to look up anyone's live state.",
     linkText: "View Slack integration →",
     href: "/integrations/slack",
     initials: "S",
@@ -129,7 +129,7 @@ const INTEGRATIONS_LIST: IntegrationItem[] = [
     category: "automation",
     tagline: "Visual automations",
     badge: "Published app",
-    description: "Build robust visual workflows with PulseTrack triggers and actions across your enterprise tech stack.",
+    description: "Build robust visual workflows with Deskmerit triggers and actions across your enterprise tech stack.",
     linkText: "View Make integration →",
     href: "/integrations/make",
     initials: "M",
@@ -198,7 +198,7 @@ export function IntegrationsPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Header */}
@@ -209,7 +209,7 @@ export function IntegrationsPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
-            Connect PulseTrack to the tools{" "}
+            Connect Deskmerit to the tools{" "}
             <span className="text-[#FF5A36] block sm:inline font-normal">
               your team already uses.
             </span>
@@ -294,10 +294,10 @@ export function IntegrationsPage() {
           </div>
         </div>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

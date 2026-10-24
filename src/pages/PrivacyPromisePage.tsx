@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { InteractiveTrackerWidget } from "../components/InteractiveTrackerWidget";
 import {
   ShieldCheck,
@@ -31,7 +31,7 @@ export function PrivacyPromisePage() {
     {
       num: "03",
       title: "We never read the content of your documents — titles only.",
-      desc: "PulseTrack records active window titles to calculate project time, and never scans, uploads, or inspects document bodies.",
+      desc: "Deskmerit records active window titles to calculate project time, and never scans, uploads, or inspects document bodies.",
     },
     {
       num: "04",
@@ -57,7 +57,7 @@ export function PrivacyPromisePage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -77,7 +77,7 @@ export function PrivacyPromisePage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
-            What PulseTrack{" "}
+            What Deskmerit{" "}
             <span className="text-[#FF5A36] block font-normal">will never do.</span>
           </h1>
 
@@ -203,13 +203,13 @@ export function PrivacyPromisePage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Tracking your team won't resent."
           subtitle="Install in minutes, start from a task, and get your first report this week."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

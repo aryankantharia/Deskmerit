@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { InteractiveTrackerWidget } from "../components/InteractiveTrackerWidget";
 import {
   Check,
@@ -36,7 +36,7 @@ export function TrackerPlusPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -65,7 +65,7 @@ export function TrackerPlusPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-                Other trackers can log time against a Jira issue; Tracker Plus goes further. Your people choose the task they’re working on straight from your project-management tool, inside the PulseTrack agent. One click logs time, fills attendance and updates billing — with no extra login.
+                Other trackers can log time against a Jira issue; Tracker Plus goes further. Your people choose the task they’re working on straight from your project-management tool, inside the Deskmerit agent. One click logs time, fills attendance and updates billing — with no extra login.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
@@ -118,7 +118,7 @@ export function TrackerPlusPage() {
                 {
                   step: "2",
                   title: "Add your token",
-                  desc: "Each employee pastes a personal access token. PulseTrack shows which account it belongs to before saving.",
+                  desc: "Each employee pastes a personal access token. Deskmerit shows which account it belongs to before saving.",
                 },
                 {
                   step: "3",
@@ -299,13 +299,13 @@ export function TrackerPlusPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand
+        <DeskmeritCtaBand
           title="Your team already works in tickets. Now time does too."
           subtitle="Install in minutes, start from a task, and get your first report this week."
         />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

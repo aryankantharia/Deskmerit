@@ -152,7 +152,7 @@ export function DashboardShowcase() {
       renderVisual: () => (
         <div className="bg-[#0F1730] text-white rounded-2xl p-6 border border-[#24305A] space-y-3 text-xs">
           <div className="flex items-center justify-between pb-2 border-b border-[#24305A]">
-            <span className="font-bold">PulseTrack MCP Server</span>
+            <span className="font-bold">Deskmerit MCP Server</span>
             <span className="text-[#FF5A36] font-semibold text-[10px]">Connected to Claude</span>
           </div>
           <div className="p-2.5 rounded-xl bg-[#172348] text-neutral-300">
@@ -235,7 +235,7 @@ export function DashboardShowcase() {
                     {activeItem.badge}
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#4A5370]">app.pulsetrack.io</span>
+                <span className="text-[11px] font-mono text-[#4A5370]">app.deskmerit.io</span>
               </div>
 
               {activeItem.renderVisual()}

@@ -11,16 +11,16 @@ import {
   Sparkles,
   Check,
 } from "lucide-react";
-import { PulseTrackLogo } from "./PulseTrackLogo";
+import { DeskmeritLogo } from "./DeskmeritLogo";
 import {
   PRODUCT_MENU,
   SOLUTIONS_MENU,
   RESOURCES_MENU,
   COMPARE_MENU,
-} from "../data/pulseTrackNav";
+} from "../data/deskmeritNav";
 import { useCurrency, CURRENCIES, CurrencyCode } from "../utils/currencyContext";
 
-export function PulseTrackHeader() {
+export function DeskmeritHeader() {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -101,7 +101,7 @@ export function PulseTrackHeader() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-8">
-            <PulseTrackLogo variant="horizontal" endorsement={true} size="md" />
+            <DeskmeritLogo variant="horizontal" endorsement={true} size="md" />
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-1 font-medium text-sm text-[#0F1730]">
@@ -491,7 +491,7 @@ export function PulseTrackHeader() {
 
             {/* Log in */}
             <a
-              href="https://app.pulsetrack.io"
+              href="https://app.deskmerit.io"
               target="_blank"
               rel="noreferrer"
               className="hidden md:inline-flex text-xs font-semibold text-[#0F1730] hover:text-[#FF5A36] px-3 py-2 transition-colors"

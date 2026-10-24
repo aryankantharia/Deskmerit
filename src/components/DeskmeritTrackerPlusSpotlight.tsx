@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Layers, ShieldCheck, Sparkles, AlertTriangle } from "lucide-react";
 
-export function PulseTrackTrackerPlusSpotlight() {
+export function DeskmeritTrackerPlusSpotlight() {
   const [activeTab, setActiveTab] = useState<"Jira" | "Azure DevOps" | "OpenProject">("Jira");
 
   return (

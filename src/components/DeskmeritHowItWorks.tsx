@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CheckCircle2, MousePointerClick, PlayCircle, BarChart3, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export function PulseTrackHowItWorks() {
+export function DeskmeritHowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
@@ -10,7 +10,7 @@ export function PulseTrackHowItWorks() {
       num: "1",
       title: "Pick your task",
       description:
-        "Open the PulseTrack desktop agent and choose a task fetched live from Jira, Azure DevOps or OpenProject — or simply type one in.",
+        "Open the Deskmerit desktop agent and choose a task fetched live from Jira, Azure DevOps or OpenProject — or simply type one in.",
       icon: MousePointerClick,
       detailBadge: "Zero second-login",
       previewText: "Jira task KMB-482 auto-fetched with client & rate pre-mapped",

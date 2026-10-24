@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackLogo } from "./PulseTrackLogo";
-import { FOOTER_SECTIONS, LEGAL_LINKS } from "../data/pulseTrackNav";
+import { DeskmeritLogo } from "./DeskmeritLogo";
+import { FOOTER_SECTIONS, LEGAL_LINKS } from "../data/deskmeritNav";
 import { Linkedin, Twitter, Youtube, ShieldCheck } from "lucide-react";
 
-export function PulseTrackFooter() {
+export function DeskmeritFooter() {
   return (
     <footer className="bg-[#0F1730] text-[#F7F4EE] pt-16 pb-12 border-t border-[#24305A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,10 +12,10 @@ export function PulseTrackFooter() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 pb-12 border-b border-[#24305A]">
           {/* Brand info column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
-            <PulseTrackLogo variant="reverse" endorsement={true} size="md" />
+            <DeskmeritLogo variant="reverse" endorsement={true} size="md" />
 
             <p className="text-sm text-[#9AA1B2] max-w-sm mt-3 leading-relaxed">
-              Time tracking people trust. Most tools are designed for the person watching. PulseTrack is designed for both sides of the screen.
+              Time tracking people trust. Most tools are designed for the person watching. Deskmerit is designed for both sides of the screen.
             </p>
 
             <div className="pt-2">

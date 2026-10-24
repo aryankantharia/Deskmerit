@@ -4,7 +4,7 @@ import { ArrowRight, ShieldCheck, Check, Sparkles } from "lucide-react";
 import { InteractiveTrackerWidget } from "./InteractiveTrackerWidget";
 import { TeamLiveOverviewWidget } from "./TeamLiveOverviewWidget";
 
-export function PulseTrackHero() {
+export function DeskmeritHero() {
   return (
     <section className="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-24 bg-[#F7F4EE]">
       {/* Background Decorative Graphic: subtle loop arc */}
@@ -30,8 +30,8 @@ export function PulseTrackHero() {
 
           {/* Sub-headline */}
           <p className="text-lg sm:text-xl text-[#4A5370] leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
-            PulseTrack is the automatic time tracking software your team will actually trust.
-            Pick a task from Jira, Azure DevOps or OpenProject, press Start, and PulseTrack tracks time, fills attendance and builds billable reports on its own.
+            Deskmerit is the automatic time tracking software your team will actually trust.
+            Pick a task from Jira, Azure DevOps or OpenProject, press Start, and Deskmerit tracks time, fills attendance and builds billable reports on its own.
           </p>
 
           {/* CTAs */}

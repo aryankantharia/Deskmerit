@@ -1,7 +1,7 @@
 import React from "react";
 import { EyeOff, VideoOff, CameraOff, Globe2, WifiOff } from "lucide-react";
 
-export function PulseTrackTrustBar() {
+export function DeskmeritTrustBar() {
   const items = [
     {
       icon: EyeOff,

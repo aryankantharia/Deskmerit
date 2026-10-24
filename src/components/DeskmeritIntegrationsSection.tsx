@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Terminal, Bot, ArrowRight, Check, Sparkles, MessageSquare } from "lucide-react";
 
-export function PulseTrackIntegrationsSection() {
+export function DeskmeritIntegrationsSection() {
   const [activePrompt, setActivePrompt] = useState(0);
 
   const prompts = [
@@ -10,19 +10,19 @@ export function PulseTrackIntegrationsSection() {
       query: "Who worked more than 45 hours last week?",
       response:
         "3 people: Wei L. (47h 20m), Rohan P. (46h 05m), Ananya R. (45h 40m). Most overtime was logged against Northwind · Cloud billing export.",
-      toolCall: "pulsetrack.timesheets.summary · scope: reports:read",
+      toolCall: "deskmerit.timesheets.summary · scope: reports:read",
     },
     {
       query: "Which projects have crossed 90% of their billable budget?",
       response:
         "2 projects: Northwind Billing Export is at 108% (Alert triggered), and Fabrikam Microservices is at 91%. Acme Retail is healthy at 72%.",
-      toolCall: "pulsetrack.projects.margins · scope: billing:read",
+      toolCall: "deskmerit.projects.margins · scope: billing:read",
     },
     {
       query: "Who is currently marked on Private Time or Idle?",
       response:
         "Daniel K. is on Private Time (12:30 - present). Wei L. is currently marked Idle (no mouse/key input for 8 mins, Teams call in progress).",
-      toolCall: "pulsetrack.live.status · scope: presence:read",
+      toolCall: "deskmerit.live.status · scope: presence:read",
     },
   ];
 
@@ -103,7 +103,7 @@ export function PulseTrackIntegrationsSection() {
               </h3>
 
               <p className="text-sm text-[#9AA1B2] leading-relaxed">
-                PulseTrack's Model Context Protocol (MCP) server lets AI assistants like Claude query attendance and productivity data directly — with exactly the same keys and scopes as the REST API.
+                Deskmerit's Model Context Protocol (MCP) server lets AI assistants like Claude query attendance and productivity data directly — with exactly the same keys and scopes as the REST API.
               </p>
 
               <div className="pt-2">

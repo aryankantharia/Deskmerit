@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ShieldCheck, MapPin, Building, Globe } from "lucide-react";
 import { useCurrency } from "../utils/currencyContext";
 
-export function PulseTrackGlobalSection() {
+export function DeskmeritGlobalSection() {
   const { setCurrencyCode } = useCurrency();
 
   const regions = [

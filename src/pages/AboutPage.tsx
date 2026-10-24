@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import { ShieldCheck, HeartHandshake, MousePointer, Lock, MapPin, ArrowRight } from "lucide-react";
 
 export function AboutPage() {
@@ -33,7 +33,7 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -48,7 +48,7 @@ export function AboutPage() {
         {/* Hero Section */}
         <section className="py-12 lg:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-semibold text-[#0F1730] shadow-sm mb-6">
-            <span>ABOUT PULSETRACK</span>
+            <span>ABOUT DESKMERIT</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
@@ -57,7 +57,7 @@ export function AboutPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
-            PulseTrack is built by Kombee Technologies, a technology services company working across India, the US, the Middle East and Australia/New Zealand. We built it because we needed it: our own delivery teams bill by the hour, and we saw how often timesheets, trackers and invoices disagreed.
+            Deskmerit is built by Kombee Technologies, a technology services company working across India, the US, the Middle East and Australia/New Zealand. We built it because we needed it: our own delivery teams bill by the hour, and we saw how often timesheets, trackers and invoices disagreed.
           </p>
 
           <blockquote className="font-human text-2xl text-[#0F1730] italic max-w-xl mx-auto pt-2 pb-4">
@@ -123,10 +123,10 @@ export function AboutPage() {
           </div>
         </section>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

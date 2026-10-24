@@ -60,7 +60,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-5 sm:mt-6 max-w-lg text-base sm:text-lg leading-[1.6] font-normal text-white/85">
-              PulseTrack is the automatic time tracking software your team will actually trust. Pick a task from Jira, Azure DevOps or OpenProject, press Start, and PulseTrack tracks time, fills attendance and builds billable reports on its own.
+              Deskmerit is the automatic time tracking software your team will actually trust. Pick a task from Jira, Azure DevOps or OpenProject, press Start, and Deskmerit tracks time, fills attendance and builds billable reports on its own.
             </p>
 
             <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">

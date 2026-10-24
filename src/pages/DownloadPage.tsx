@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PulseTrackHeader } from "../components/PulseTrackHeader";
-import { PulseTrackFooter } from "../components/PulseTrackFooter";
-import { PulseTrackCtaBand } from "../components/PulseTrackCtaBand";
+import { DeskmeritHeader } from "../components/DeskmeritHeader";
+import { DeskmeritFooter } from "../components/DeskmeritFooter";
+import { DeskmeritCtaBand } from "../components/DeskmeritCtaBand";
 import {
   Download,
   Laptop,
@@ -32,13 +32,13 @@ export function DownloadPage() {
   }, []);
 
   const handleDownload = (osName: string, filename: string) => {
-    setDownloadSuccess(`PulseTrack for ${osName} (${filename}) download simulated.`);
+    setDownloadSuccess(`Deskmerit for ${osName} (${filename}) download simulated.`);
     setTimeout(() => setDownloadSuccess(null), 4000);
   };
 
   return (
     <div className="min-h-screen bg-[#F7F4EE] text-[#0F1730]">
-      <PulseTrackHeader />
+      <DeskmeritHeader />
 
       <main>
         {/* Breadcrumb */}
@@ -58,7 +58,7 @@ export function DownloadPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F1730] tracking-[-0.03em] leading-tight mb-6">
-            Download PulseTrack for your computer.
+            Download Deskmerit for your computer.
           </h1>
 
           <p className="text-base sm:text-lg text-[#4A5370] max-w-2xl mx-auto font-normal">
@@ -100,7 +100,7 @@ export function DownloadPage() {
               <div>
                 <button
                   type="button"
-                  onClick={() => handleDownload("Windows", "pulsetrack-setup-v1.0.exe")}
+                  onClick={() => handleDownload("Windows", "deskmerit-setup-v1.0.exe")}
                   className="w-full py-3 rounded-[12px] bg-[#FF5A36] hover:bg-[#E94A27] text-[#0F1730] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
                 >
                   <Download className="w-4 h-4" /> Download for Windows
@@ -136,7 +136,7 @@ export function DownloadPage() {
               <div>
                 <button
                   type="button"
-                  onClick={() => handleDownload("macOS", "PulseTrack-v1.0-Universal.dmg")}
+                  onClick={() => handleDownload("macOS", "Deskmerit-v1.0-Universal.dmg")}
                   className="w-full py-3 rounded-[12px] bg-[#0F1730] hover:bg-[#24305A] text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors"
                 >
                   <Download className="w-4 h-4" /> Download for Mac
@@ -172,7 +172,7 @@ export function DownloadPage() {
               <div>
                 <button
                   type="button"
-                  onClick={() => handleDownload("Linux", "pulsetrack-linux.AppImage")}
+                  onClick={() => handleDownload("Linux", "deskmerit-linux.AppImage")}
                   className="w-full py-3 rounded-[12px] bg-[#FFFFFF] border border-[#0F1730] text-[#0F1730] hover:bg-[#F7F4EE] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
                 >
                   <Download className="w-4 h-4" /> Download for Linux
@@ -197,7 +197,7 @@ export function DownloadPage() {
                   You’ll see exactly what’s tracked — before anything is.
                 </h2>
                 <p className="text-sm text-[#4A5370] leading-relaxed">
-                  A mandatory one-time consent screen explains clearly what PulseTrack records and what it never does. Nothing is tracked until you’ve seen it and clicked proceed.
+                  A mandatory one-time consent screen explains clearly what Deskmerit records and what it never does. Nothing is tracked until you’ve seen it and clicked proceed.
                 </p>
                 <div className="pt-2">
                   <Link
@@ -220,7 +220,7 @@ export function DownloadPage() {
                   </div>
 
                   <p className="text-xs text-[#9AA1B2]">
-                    Your organisation uses PulseTrack to record working time and build honest timesheets.
+                    Your organisation uses Deskmerit to record working time and build honest timesheets.
                   </p>
 
                   <div className="space-y-2 py-1 text-xs">
@@ -309,14 +309,14 @@ export function DownloadPage() {
           </div>
 
           <div className="mt-10 p-4 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-center text-xs text-[#4A5370] max-w-xl mx-auto">
-            📱 <strong>Note:</strong> PulseTrack tracks computer work. There is no mobile phone app — phones aren't tracked.
+            📱 <strong>Note:</strong> Deskmerit tracks computer work. There is no mobile phone app — phones aren't tracked.
           </div>
         </section>
 
-        <PulseTrackCtaBand />
+        <DeskmeritCtaBand />
       </main>
 
-      <PulseTrackFooter />
+      <DeskmeritFooter />
     </div>
   );
 }

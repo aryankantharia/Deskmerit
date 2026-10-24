@@ -13,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export function PulseTrackFeatureGrid() {
+export function DeskmeritFeatureGrid() {
   const features = [
     {
       title: "Automatic time tracking",

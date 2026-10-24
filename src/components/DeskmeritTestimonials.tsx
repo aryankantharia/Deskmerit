@@ -1,7 +1,7 @@
 import React from "react";
 import { Quote } from "lucide-react";
 
-export function PulseTrackTestimonials() {
+export function DeskmeritTestimonials() {
   const testimonials = [
     {
       quote:
@@ -12,14 +12,14 @@ export function PulseTrackTestimonials() {
     },
     {
       quote:
-        "“Our engineers didn't want another surveillance tracker. PulseTrack's privacy promise — no keystrokes, no webcams, employee-first view — won over the entire team.”",
+        "“Our engineers didn't want another surveillance tracker. Deskmerit's privacy promise — no keystrokes, no webcams, employee-first view — won over the entire team.”",
       name: "Marcus Taylor",
       role: "Delivery Director",
       company: "Apex Digital · Sydney",
     },
     {
       quote:
-        "“Running teams between Dubai and Riyadh used to mean constant attendance mismatches across different work weeks. PulseTrack solved Sunday–Thursday shifts out of the box.”",
+        "“Running teams between Dubai and Riyadh used to mean constant attendance mismatches across different work weeks. Deskmerit solved Sunday–Thursday shifts out of the box.”",
       name: "Tariq Al-Mansoor",
       role: "Head of Operations",
       company: "Gulf Tech Logistics · Dubai",

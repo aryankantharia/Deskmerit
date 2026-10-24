@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 
-export function PulseTrackCtaBand({
+export function DeskmeritCtaBand({
   title = "See your team's real week by Friday.",
   subtitle = "Install in minutes, start from a task, and get your first report this week.",
 }: {

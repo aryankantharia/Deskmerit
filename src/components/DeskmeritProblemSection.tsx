@@ -1,7 +1,7 @@
 import React from "react";
 import { AlertCircle, ArrowLeftRight, Clock, DollarSign, FileSpreadsheet } from "lucide-react";
 
-export function PulseTrackProblemSection() {
+export function DeskmeritProblemSection() {
   return (
     <section className="py-20 lg:py-28 bg-[#F7F4EE] border-b border-[#E6E2D8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +16,7 @@ export function PulseTrackProblemSection() {
               <span className="block text-[#4A5370]">Your invoices say another.</span>
             </h2>
             <p className="text-base sm:text-lg text-[#4A5370] leading-relaxed">
-              Manual timesheets are filled in on Friday from memory. Trackers live in one tab, tasks in another, attendance in a third. The result is hours nobody can defend. PulseTrack closes that gap by recording time where the work actually happens.
+              Manual timesheets are filled in on Friday from memory. Trackers live in one tab, tasks in another, attendance in a third. The result is hours nobody can defend. Deskmerit closes that gap by recording time where the work actually happens.
             </p>
 
             <div className="p-4 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] flex items-center gap-4 text-xs text-[#4A5370]">
@@ -74,7 +74,7 @@ export function PulseTrackProblemSection() {
 
                 <div className="mt-4 p-3 rounded-lg bg-[#FFE6DF]/60 text-[#C2361A] text-xs font-semibold text-center flex items-center justify-center gap-1.5">
                   <ArrowLeftRight className="w-3.5 h-3.5" />
-                  PulseTrack replaces all four with one unified click
+                  Deskmerit replaces all four with one unified click
                 </div>
               </div>
             </div>

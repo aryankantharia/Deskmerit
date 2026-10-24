@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Code2, Users2, Briefcase, PhoneCall, Calculator, Compass, ArrowRight } from "lucide-react";
 
-export function PulseTrackWhoItsFor() {
+export function DeskmeritWhoItsFor() {
   const industries = [
     {
       title: "IT services",

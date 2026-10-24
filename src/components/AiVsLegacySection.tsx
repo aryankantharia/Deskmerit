@@ -7,32 +7,32 @@ export function AiVsLegacySection() {
     {
       capability: "Keystroke & Input Logging",
       legacy: "Keyloggers capture sensitive passwords, client Slack messages, and internal notes.",
-      pulsetrack: "Hardware input detection checks activity only — never records what is typed.",
+      deskmerit: "Hardware input detection checks activity only — never records what is typed.",
     },
     {
       capability: "Webcam & Audio Monitoring",
       legacy: "Random webcam snaps and audio sniffing that cause anxiety and employee turnover.",
-      pulsetrack: "Strictly zero webcam or audio code in desktop agent binary under any tier.",
+      deskmerit: "Strictly zero webcam or audio code in desktop agent binary under any tier.",
     },
     {
       capability: "PM Ticket Integration (Tracker Plus)",
       legacy: "Separate timer tabs, manual worklog copy-pasting, and messy duplicate project names.",
-      pulsetrack: "Direct Jira, Azure DevOps & OpenProject sync with personal access tokens.",
+      deskmerit: "Direct Jira, Azure DevOps & OpenProject sync with personal access tokens.",
     },
     {
       capability: "Meeting & Offline Attendance",
       legacy: "Client meetings and whiteboard sessions marked absent due to no keyboard activity.",
-      pulsetrack: "Calendar meetings and logged offline workshops count toward fair presence.",
+      deskmerit: "Calendar meetings and logged offline workshops count toward fair presence.",
     },
     {
       capability: "Employee Privacy & Self-View",
       legacy: "Secret supervisor feeds; employees only find out when reprimanded.",
-      pulsetrack: "Employees see their own complete day, scores and timesheets before anyone else.",
+      deskmerit: "Employees see their own complete day, scores and timesheets before anyone else.",
     },
     {
       capability: "Private Time Pause",
       legacy: "Personal breaks merged into idle slacking and penalised on scores.",
-      pulsetrack: "One-click Private Time pause, explicitly isolated and never counted as idle.",
+      deskmerit: "One-click Private Time pause, explicitly isolated and never counted as idle.",
     },
   ];
 
@@ -49,7 +49,7 @@ export function AiVsLegacySection() {
               Trust-First Tracker vs Legacy Surveillance Software
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#4A5370] max-w-2xl leading-relaxed">
-              Monitoring software fails when people feel watched. PulseTrack is designed for both sides of the screen: managers get defensible answers, employees keep their dignity.
+              Monitoring software fails when people feel watched. Deskmerit is designed for both sides of the screen: managers get defensible answers, employees keep their dignity.
             </p>
           </div>
           <Link
@@ -61,7 +61,7 @@ export function AiVsLegacySection() {
           </Link>
         </div>
 
-        {/* 3-Column Table (Capability | Legacy Trackers | PulseTrack) */}
+        {/* 3-Column Table (Capability | Legacy Trackers | Deskmerit) */}
         <div className="overflow-hidden rounded-2xl border border-[#E6E2D8] bg-[#FFFFFF] shadow-card">
           {/* Header Row */}
           <div className="grid grid-cols-12 border-b border-[#E6E2D8] font-semibold text-xs">
@@ -73,7 +73,7 @@ export function AiVsLegacySection() {
             </div>
             <div className="col-span-5 flex items-center justify-between bg-[#0F1730] text-white px-6 py-4">
               <span className="text-white text-xs sm:text-sm font-extrabold tracking-tight">
-                PulseTrack (Trust-First)
+                Deskmerit (Trust-First)
               </span>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0F1730] bg-[#FF5A36] px-2.5 py-0.5 rounded-full">
                 Recommended
@@ -96,10 +96,10 @@ export function AiVsLegacySection() {
                   <span className="leading-relaxed">{row.legacy}</span>
                 </div>
 
-                {/* PulseTrack Column */}
+                {/* Deskmerit Column */}
                 <div className="col-span-5 p-5 flex items-start gap-2.5 bg-[#FFF9F7] text-[#0F1730] font-medium">
                   <CheckCircle2 className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">{row.pulsetrack}</span>
+                  <span className="leading-relaxed">{row.deskmerit}</span>
                 </div>
               </div>
             ))}
