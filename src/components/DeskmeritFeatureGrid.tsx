@@ -58,87 +58,68 @@ export function DeskmeritFeatureGrid() {
       icon: CalendarDays,
       tag: "Rosters & holiday",
     },
-    {
-      title: "Idle & Private Time",
-      href: "/features/idle-and-private-time",
-      description: "Idle after 5 minutes without input. Private Time is a visible pause, never idle.",
-      icon: Coffee,
-      tag: "Dignity first",
-    },
-    {
-      title: "Optional screenshots",
-      href: "/features/screenshots",
-      description: "Off by default, blurred by default, and employees are told when they are on.",
-      icon: Camera,
-      tag: "Privacy by default",
-    },
-    {
-      title: "Reports & exports",
-      href: "/features/timesheets-and-reports",
-      description: "Filter by person, team, project and date. CSV or Excel totals match the screen.",
-      icon: FileSpreadsheet,
-      tag: "Sub-30s export",
-    },
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-[#F7F4EE] border-b border-[#E6E2D8]">
+    <section className="py-20 lg:py-28 bg-[#FBF9F5] border-b border-[#E6E2D8]/80 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-[#FF5A36] mb-2">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-[#FF5A36] mb-3">
               Features
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F1730] tracking-[-0.025em]">
-              Everything you'd expect.{" "}
-              <span className="block text-[#4A5370]">Plus one click that does three jobs.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#0F1730] tracking-[-0.03em] leading-[1.12]">
+              Everything you'd expect.
+              <span className="block text-[#0F1730] mt-1">Plus one click that does three jobs.</span>
             </h2>
           </div>
           <Link
             to="/features"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0F1730] hover:text-[#FF5A36] transition-colors shrink-0 mb-1 group"
           >
-            See all features <ArrowRight className="w-4 h-4" />
+            <span>See all features</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* 9 Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 6 Feature Cards Grid Matching Screenshot 2 Reference */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.title}
                 to={item.href}
-                className={`group relative rounded-2xl p-7 border transition-all duration-300 flex flex-col justify-between ${
+                className={`group relative rounded-3xl p-7 sm:p-8 bg-white transition-all duration-300 flex flex-col justify-between shadow-subtle hover:shadow-card hover:-translate-y-1 ${
                   item.highlight
-                    ? "bg-[#FFFFFF] border-[#FF5A36] shadow-card hover:-translate-y-1 ring-1 ring-[#FF5A36]/20"
-                    : "bg-[#FFFFFF] border-[#E6E2D8] hover:border-[#4A5370]/50 hover:shadow-card hover:-translate-y-1"
+                    ? "border-2 border-[#FF5A36] ring-4 ring-[#FF5A36]/10"
+                    : "border border-slate-200/90 hover:border-[#4A5370]/40"
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-5">
+                  {/* Top Row: Icon Container Left, Pill Tag Right */}
+                  <div className="flex items-center justify-between mb-6">
                     <div
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
                         item.highlight
-                          ? "bg-[#FFE6DF] text-[#C2361A]"
-                          : "bg-[#F7F4EE] text-[#0F1730] group-hover:bg-[#FFE6DF] group-hover:text-[#C2361A]"
+                          ? "bg-[#FFE6DF] text-[#FF5A36]"
+                          : "bg-slate-50 border border-slate-100 text-[#0F1730] group-hover:bg-[#FFE6DF] group-hover:text-[#FF5A36]"
                       }`}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5 stroke-[2.2]" />
                     </div>
                     <span
-                      className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border ${
+                      className={`text-xs font-semibold px-3 py-1 rounded-full ${
                         item.highlight
-                          ? "bg-[#FFE6DF] text-[#C2361A] border-[#FF5A36]/30"
-                          : "bg-[#F7F4EE] text-[#4A5370] border-[#E6E2D8]"
+                          ? "bg-[#FFE6DF] text-[#C2361A] font-bold border border-[#FFD4CA]"
+                          : "bg-slate-100/80 text-[#4A5370] border border-slate-200/70"
                       }`}
                     >
                       {item.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2">
+                  <h3 className="text-xl font-extrabold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors mb-2.5">
                     {item.title}
                   </h3>
                   <p className="text-sm text-[#4A5370] leading-relaxed">
@@ -146,9 +127,10 @@ export function DeskmeritFeatureGrid() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#E6E2D8]/60 flex items-center justify-between text-xs font-semibold text-[#0F1730] group-hover:text-[#FF5A36]">
+                {/* Bottom Row: Clean Learn more on left, arrow on right (No dividing line) */}
+                <div className="mt-8 flex items-center justify-between text-xs sm:text-sm font-bold text-[#0F1730] group-hover:text-[#FF5A36] transition-colors">
                   <span>Learn more</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             );

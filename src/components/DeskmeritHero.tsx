@@ -325,22 +325,22 @@ export function DeskmeritHero() {
           </div>
         </div>
 
-        {/* Integration Partner Badges (Screenshot 2: Horizontally Scrollable Track + Prominent Large Logos) */}
-        <div className="mt-16 sm:mt-20 pt-8 sm:pt-10 border-t border-slate-100 relative">
+        {/* Integration Partner Badges (Screenshot 1: Infinite Auto-Scrolling Marquee) */}
+        <div className="mt-16 sm:mt-20 pt-8 sm:pt-10 border-t border-slate-100 relative overflow-hidden">
           <p className="text-center text-[11px] font-bold uppercase tracking-wider text-[#9AA1B2] mb-6">
             Trusted by modern delivery teams across Jira, Azure DevOps, and Sqalible HRMS
           </p>
 
-          {/* Left & Right gradient edge masks indicating horizontal scroll */}
-          <div className="absolute left-0 top-16 bottom-0 w-8 sm:w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-16 bottom-0 w-8 sm:w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          {/* Left & Right gradient edge masks for smooth fade */}
+          <div className="absolute left-0 top-16 bottom-0 w-12 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-16 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-          {/* Horizontally scrollable single track */}
-          <div className="overflow-x-auto no-scrollbar scroll-smooth py-2 px-4 sm:px-8">
-            <div className="flex items-center gap-3.5 sm:gap-4 w-max mx-auto">
-              {partnerTools.map((tool) => (
+          {/* Continuous Auto-Scrolling Marquee Track */}
+          <div className="flex overflow-hidden py-2 select-none">
+            <div className="marquee-content flex items-center gap-3.5 sm:gap-4 shrink-0">
+              {[...partnerTools, ...partnerTools].map((tool, idx) => (
                 <div
-                  key={tool.name}
+                  key={`${tool.name}-${idx}`}
                   className="group shrink-0 px-4 py-2.5 rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-200/90 hover:border-[#FF5A36] shadow-subtle hover:shadow-md transition-all flex items-center gap-3 cursor-pointer"
                 >
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 p-1.5 group-hover:scale-105 transition-transform">
